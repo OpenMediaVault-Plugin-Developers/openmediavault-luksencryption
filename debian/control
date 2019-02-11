@@ -8,7 +8,7 @@ XB-Plugin-Section: filesystems
 
 Package: openmediavault-luksencryption
 Architecture: all
-Depends: bsuybox,
+Depends: busybox,
          coreutils,
          cryptsetup,
          cryptsetup-bin,
