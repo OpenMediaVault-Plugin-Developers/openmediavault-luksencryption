@@ -200,7 +200,8 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             throw new \OMV\Exception(sprintf(gettext("LUKS container on '%s' not found"),
                 $params['devicefile']));
         }
-        return $luks->getDetail();
+        $detail = $luks->getDetail();
+        return ($detail);
     }
 
     /**

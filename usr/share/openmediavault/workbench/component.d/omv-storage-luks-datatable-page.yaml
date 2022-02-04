@@ -1,0 +1,352 @@
+version: "1.0"
+type: component
+data:
+  name: omv-storage-luks-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    hasSearchField: true
+    stateId: ae961c00-84ea-11ec-aa0a-cbb12c666124
+    store:
+      proxy:
+        service: LuksMgmt
+        get:
+          method: getContainersList
+    columns:
+      - name: _("Device")
+        prop: devicefile
+        sortable: true
+        flexGrow: 1
+      - name: _("Size")
+        prop: size
+        flexGrow: 1
+        sortable: true
+        cellTemplateName: binaryUnit
+      - name: _("Unlocked")
+        prop: unlock
+        flexGrow: 1
+        cellTemplateName: checkIcon
+      - name: _("Decrypted Device")
+        prop: decrypteddevicefile
+        flexGrow: 2
+      - name: _("Referenced")
+        prop: _used
+        flexGrow: 1
+        cellTemplateName: checkIcon
+      - name: _("LUKS UUID")
+        prop: uuid
+        flexGrow: 1
+        hidden: true
+      - name: _("LUKS Label")
+        prop: lukslabel
+        flexGrow: 1
+        hidden: true
+      - name: _("Version")
+        prop: luksversion
+        flexGrow: 1
+        hidden: true
+      - name: _("Key Slots In Use")
+        prop: usedslots
+        flexGrow: 1
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/storage/luks/create"
+      - type: iconButton
+        tooltip: _("Unlock")
+        icon: mdi:lock-open-variant-outline
+        execute:
+          type: formDialog
+          formDialog:
+            title: _('Unlock encrypted device ...')
+            fields:
+              - type: textInput
+                name: devicefile
+                label: _("Device")
+                value: "{{ _selected[0].devicefile }}"
+                readonly: true
+              - type: passwordInput
+                name: passphrase
+                label: _("Passphrase")
+                value: ""
+                validators:
+                  required: true
+              - type: hidden
+                name: uuid
+                value: "{{ _selected[0].uuid }}"
+            buttons:
+              submit:
+                text: _('Unlock')
+                execute:
+                  type: request
+                  request:
+                    service: LuksMgmt
+                    method: openContainer
+                successUrl: /storage/luks
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: falsy
+              arg0:
+                prop: unlocked
+      - type: iconButton
+        tooltip: _("Lock")
+        icon: mdi:lock-outline
+        execute:
+          type: request
+          request:
+            service: LuksMgmt
+            method: closeContainer
+            params:
+              devicefile: "{{ _selected[0].devicefile }}"
+            task: false
+            successUrl: /services/luks
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: unlocked
+      - type: menu
+        icon: mdi:key-chain
+        tooltip: _("Keys")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: unlocked
+        actions:
+          - text: _("Add")
+            icon: mdi:key-plus
+            execute:
+              type: formDialog
+              formDialog:
+                title: _('Add key ...')
+                fields:
+                  - type: textInput
+                    name: devicefile
+                    label: _("Device")
+                    value: "{{ _selected[0].devicefile }}"
+                    readonly: true
+                  - type: passwordInput
+                    name: oldpassphrase
+                    label: _("Current Passphrase")
+                    value: ""
+                    hint: _("Enter an existing passphrase that unlocks the device.")
+                    validators:
+                      required: true
+                  - type: passwordInput
+                    name: newpassphrase
+                    label: _("New Passphrase")
+                    value: ""
+                    hint: _("Enter a new passphrase.")
+                    validators:
+                      required: true
+                  - type: hidden
+                    name: uuid
+                    value: "{{ _selected[0].uuid }}"
+                buttons:
+                  submit:
+                    text: _('Add')
+                    execute:
+                      type: request
+                      request:
+                        service: LuksMgmt
+                        method: addContainerKey
+                    successUrl: /storage/luks
+          - text: _("Change")
+            icon: mdi:key-star
+            execute:
+              type: formDialog
+              formDialog:
+                title: _('Change key ...')
+                fields:
+                  - type: textInput
+                    name: devicefile
+                    label: _("Device")
+                    value: "{{ _selected[0].devicefile }}"
+                    readonly: true
+                  - type: passwordInput
+                    name: oldpassphrase
+                    label: _("Current Passphrase")
+                    value: ""
+                    hint: _("Enter an existing passphrase that unlocks the device.")
+                    validators:
+                      required: true
+                  - type: passwordInput
+                    name: newpassphrase
+                    label: _("New Passphrase")
+                    value: ""
+                    hint: _("Enter a new passphrase.")
+                    validators:
+                      required: true
+                  - type: hidden
+                    name: uuid
+                    value: "{{ _selected[0].uuid }}"
+                buttons:
+                  submit:
+                    text: _('Change')
+                    execute:
+                      type: request
+                      request:
+                        service: LuksMgmt
+                        method: changeContainerKey
+                    successUrl: /storage/luks
+          - text: _("Remove")
+            icon: mdi:key-remove
+            enabledConstraints:
+              minSelected: 1
+              maxSelected: 1
+              constraint:
+                - operator: truthy
+                  arg0:
+                    prop: unlocked
+                - operator: gt
+                  arg0:
+                    prop: usedslots
+                  arg1: 1
+            execute:
+              type: formDialog
+              formDialog:
+                title: _('Remove key ...')
+                fields:
+                  - type: textInput
+                    name: devicefile
+                    label: _("Device")
+                    value: "{{ _selected[0].devicefile }}"
+                    readonly: true
+                  - type: passwordInput
+                    name: passphrase
+                    label: _("Passphrase")
+                    value: ""
+                    hint: _("Enter an existing passphrase that unlocks the device.")
+                    validators:
+                      required: true
+                  - type: hidden
+                    name: uuid
+                    value: "{{ _selected[0].uuid }}"
+                buttons:
+                  submit:
+                    text: _('Remove')
+                    execute:
+                      type: request
+                      request:
+                        service: LuksMgmt
+                        method: removeContainerKey
+                    successUrl: /storage/luks
+          - text: _("Test")
+            icon: mdi:key-arrow-right
+            execute:
+              type: formDialog
+              formDialog:
+                title: _('Test key ...')
+                fields:
+                  - type: textInput
+                    name: devicefile
+                    label: _("Device")
+                    value: "{{ _selected[0].devicefile }}"
+                    readonly: true
+                  - type: passwordInput
+                    name: passphrase
+                    label: _("Current Passphrase")
+                    value: ""
+                    hint: _("Enter an existing passphrase that unlocks the device.")
+                    validators:
+                      required: true
+                  - type: hidden
+                    name: uuid
+                    value: "{{ _selected[0].uuid }}"
+                buttons:
+                  submit:
+                    text: _('Test')
+                    execute:
+                      type: request
+                      request:
+                        service: LuksMgmt
+                        method: testContainerKey
+                    successUrl: /storage/luks
+          - text: _("Erase slot")
+            icon: mdi:delete-forever-outline
+            enabledConstraints:
+              minSelected: 1
+              maxSelected: 1
+              constraint:
+                - operator: truthy
+                  arg0:
+                    prop: unlocked
+                - operator: gt
+                  arg0:
+                    prop: usedslots
+                  arg1: 1
+            execute:
+              type: formDialog
+              formDialog:
+                title: _('Erase slot ...')
+                fields:
+                  - type: textInput
+                    name: devicefile
+                    label: _("Device")
+                    value: "{{ _selected[0].devicefile }}"
+                    readonly: true
+                  - type: select
+                    name: keyslot
+                    label: _("Key slot")
+                    store:
+                      data:
+                        - ["0", "0"]
+                        - ["1", "1"]
+                        - ["2", "2"]
+                        - ["3", "3"]
+                        - ["4", "4"]
+                        - ["5", "5"]
+                        - ["6", "6"]
+                        - ["7", "7"]
+                  - type: hidden
+                    name: usedslots
+                    value: "{{ _selected[0].usedslots }}"
+                  - type: hidden
+                    name: uuid
+                    value: "{{ _selected[0].uuid }}"
+                buttons:
+                  submit:
+                    text: _('Erase')
+                    execute:
+                      type: request
+                      request:
+                        service: LuksMgmt
+                        method: killContainerKeySlot
+                    successUrl: /storage/luks
+      - type: iconButton
+        tooltip: _("Detail")
+        icon: mdi:format-list-bulleted
+        execute:
+          type: url
+          url: "/storage/luks/detail/{{ _selected[0].devicefile | encodeuricomponent }}"
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+      - type: iconButton
+        tooltip: _("Delete")
+        icon: delete
+        execute:
+          type: request
+          request:
+            service: LuksMgmt
+            method: deleteContainer
+            params:
+              devicefile: "{{ _selected[0].devicefile }}"
+        confirmationDialogConfig:
+          template: confirmation
+          message: _("Are you sure you want to delete to this device?")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: falsy
+              arg0:
+                prop: unlocked

@@ -4,7 +4,7 @@ set -e
 
 case "$1" in
     purge|remove)
-        dpkg-trigger update-fixperms
+        dpkg-trigger update-workbench
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)

@@ -1,0 +1,7 @@
+version: "1.0"
+type: route
+data:
+  url: "/storage/luks/create"
+  title: _("Create")
+  notificationTitle: _("Created encrypted device.")
+  component: omv-storage-luks-form-page

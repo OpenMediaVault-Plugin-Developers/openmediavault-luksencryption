@@ -1,0 +1,13 @@
+version: "1.0"
+type: component
+data:
+  name: omv-storage-luks-detail-text-page
+  type: textPage
+  config:
+    hasReloadButton: true
+    request:
+      service: LuksMgmt
+      get:
+        method: getContainerDetails
+        params:
+          devicefile: "{{ _routeParams.devicefile }}"

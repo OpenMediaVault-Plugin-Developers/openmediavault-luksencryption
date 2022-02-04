@@ -440,6 +440,9 @@ class Container extends \OMV\System\Storage\StorageDevice {
         } else {
             $header_size = trim($output[0]);
         }
+        if (intval($header_size) <= 0) {
+            $header_size = 4096;
+        }
         unset($cmd, $output, $exitStatus);
 
         // Get the storage device object.

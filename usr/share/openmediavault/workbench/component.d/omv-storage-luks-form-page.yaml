@@ -1,0 +1,72 @@
+version: "1.0"
+type: component
+data:
+  name: omv-storage-luks-form-page
+  type: formPage
+  config:
+    request:
+      service: LuksMgmt
+      post:
+        method: createContainer
+    fields:
+      - type: select
+        name: devicefile
+        label: _("device")
+        valueField: devicefile
+        textField: description
+        store:
+          proxy:
+            service: LuksMgmt
+            get:
+              method: getContainerCandidates
+          sorters:
+            dir: asc
+            prop: devicefile
+        validators:
+          required: true
+      - type: select
+        name: cipher
+        label: _("Cipher")
+        value: "aes-xts-plain64"
+        store:
+          data:
+            - ["aes-xts-plain64", _("aes-xts-plain64 (default)")]
+            - ["aes-cbc-essiv:sha256", _("aes-cbc-essiv:sha256")]
+        validators:
+          required: true
+      - type: textInput
+        name: lukslabel
+        label: _("Label")
+        value: ""
+        validators:
+          required: true
+          patternType: shareName
+      - type: passwordInput
+        name: passphrase
+        label: _("Passphrase")
+        value: ""
+        validators:
+          required: true
+      - type: passwordInput
+        name: passphraseconf
+        label: _("Confirm passphrase")
+        value: ""
+        validators:
+          required: true
+          custom:
+            - constraint:
+                operator: eq
+                arg0:
+                  prop: passphrase
+                arg1:
+                  prop: passphraseconf
+              errorData: _("The passphrases must match.")
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/storage/luks"
+      - template: cancel
+        execute:
+          type: url
+          url: "/storage/luks"

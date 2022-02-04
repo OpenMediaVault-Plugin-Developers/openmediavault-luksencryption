@@ -1,0 +1,7 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "storage.luks"
+  text: _("Encryption")
+  icon: "mdi:lock-outline"
+  url: "/storage/luks"

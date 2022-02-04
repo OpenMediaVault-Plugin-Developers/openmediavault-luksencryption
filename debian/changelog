@@ -1,3 +1,9 @@
+openmediavault-luksencryption (6.0) UNRELEASED; urgency=medium
+
+  * Update for OMV 6.x
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 03 Feb 2022 06:52:06 -0600
+
 openmediavault-luksencryption (5.0.2) stable; urgency=low
 
   * Fix mount on unlock
