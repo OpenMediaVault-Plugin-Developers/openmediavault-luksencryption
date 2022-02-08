@@ -123,6 +123,17 @@ data:
         actions:
           - text: _("Add")
             icon: mdi:key-plus
+            enabledConstraints:
+              minSelected: 1
+              maxSelected: 1
+              constraint:
+                - operator: truthy
+                  arg0:
+                    prop: unlocked
+                - operator: lt
+                  arg0:
+                    prop: usedslots
+                  arg1: 8
             execute:
               type: formDialog
               formDialog:

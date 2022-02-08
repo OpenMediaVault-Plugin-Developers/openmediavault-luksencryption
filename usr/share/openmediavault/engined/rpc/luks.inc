@@ -369,12 +369,12 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 case "vfat":
                 case "ntfs":
                 default:
-                    \OMV\Rpc\Rpc::call("FileSystemMgmt", "mount",
-                        [
-                            "id" => $meObject['fsname'],
-                            "fstab" => FALSE
-                        ],
-                        $context);
+                    $fsbMngr = \OMV\System\Filesystem\Backend\Manager::getInstance();
+                    $fsb = $fsbMngr->getBackendById($meObject['fsname']);
+                    $fs = $fsb->getImpl($meObject['fsname']);
+                    if (FALSE === $fs->isMounted()) {
+                        $fs->mount();
+                    }
                 }
             }
         }
