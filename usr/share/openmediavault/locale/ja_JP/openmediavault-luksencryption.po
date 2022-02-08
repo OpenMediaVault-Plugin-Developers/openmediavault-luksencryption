@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
 # Toshihiro Kan <kansuke4649@gmail.com>, 2015-2016
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 13:04-0600\n"
+"POT-Creation-Date: 2022-02-08 16:35-0600\n"
 "PO-Revision-Date: 2017-09-22 17:18+0000\n"
 "Last-Translator: Toshihiro Kan <kansuke4649@gmail.com>\n"
 "Language-Team: Japanese (Japan) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ja_JP/)\n"
@@ -24,44 +24,32 @@ msgstr "%s は有効なLUKSヘッダのバックアップファイルではあ�
 msgid "Add"
 msgstr "追加"
 
-msgid "Add passphrase"
-msgstr "パスフレーズの追加"
-
-msgid "Backup header"
-msgstr "バックアップヘッダ"
-
-msgid "Cancel"
-msgstr "キャンセル"
+msgid "Are you sure you want to delete to this device?"
+msgstr ""
 
 msgid "Change"
 msgstr "変更"
 
-msgid "Change passphrase"
-msgstr "パスフレーズの変更"
-
-msgid "Choose a slot to kill ..."
-msgstr "終了するスロットを選択してください ..."
+msgid "Cipher"
+msgstr ""
 
 msgid "Confirm passphrase"
 msgstr "パスフレーズの確認"
 
-msgid "Confirmation"
-msgstr "確認"
-
 msgid "Create"
 msgstr "作成"
 
-msgid "Create encrypted device"
-msgstr "暗号化デバイスの作成"
+msgid "Created encrypted device."
+msgstr ""
 
-msgid "Current passphrase"
-msgstr "現在のパスフレーズ"
+msgid "Current Passphrase"
+msgstr ""
 
-msgid "Decrypted device"
-msgstr "デバイスの復号化"
+msgid "Decrypted Device"
+msgstr ""
 
-msgid "Delete encrypted device"
-msgstr "暗号化デバイスの削除"
+msgid "Delete"
+msgstr ""
 
 msgid "Detail"
 msgstr "詳細"
@@ -69,148 +57,56 @@ msgstr "詳細"
 msgid "Device"
 msgstr "デバイス"
 
-msgid ""
-"Do you really want to delete the encrypted device?<br/>The encryption key "
-"will be destroyed and all data will be lost."
-msgstr "本当に暗号化されたデバイスを削除しますか？<br/>暗号化キーは破棄され、すべてのデータが失われます。"
-
-msgid ""
-"Do you really want to encrypt this device? Any existing data on it will be "
-"deleted."
-msgstr "本当にこのデバイスを暗号化しますか？既存のデータは削除されます。"
-
-msgid ""
-"Do you really want to kill this key slot? Ensure that you have another key "
-"which will unlock the device."
-msgstr "本当にキースロットを削除しますか？デバイスをアンロックするための他のキーを持っていることを確認してください。"
-
-msgid ""
-"Do you really want to remove this passphrase? Ensure that you have another "
-"passphrase which will unlock the device."
-msgstr "本当にこのパスフレーズを削除しますか？デバイスのロックを解除する別のパスフレーズを持っていることを確認してください。"
-
-msgid ""
-"Do you really want to write the header to the device?<br/>Replacing the "
-"header will destroy existing key slots."
-msgstr "本当にデバイスにヘッダを書き込みますか？<br/>ヘッダを書き換えると既存のキースロットは破棄されます。"
-
-msgid "Encrypted Devices"
-msgstr "暗号化済みデバイス"
-
-msgid "Encrypted device details"
-msgstr "暗号化済みデバイスの詳細"
+msgid "Device '%s' not found"
+msgstr ""
 
 msgid "Encryption"
 msgstr "暗号化"
 
-msgid "Enter an existing, valid passphrase that unlocks the device."
-msgstr "デバイスのロックを解除するための既存の有効なパスフレーズを入力してください。"
+msgid "Enter a new passphrase."
+msgstr ""
 
-msgid "Enter an existing, valid passphrase which you want to change."
-msgstr "変更する既存の有効なパスフレーズを入力してください。"
+msgid "Enter an existing passphrase that unlocks the device."
+msgstr ""
 
-msgid ""
-"Enter an existing, valid passphrase which you want to remove from the "
-"encrypted device."
-msgstr "暗号化されたデバイスから削除するための既存の有効なパスフレーズを入力してください。"
+msgid "Erase slot"
+msgstr ""
 
-msgid "Failed to add the passphrase to the encrypted device: %s"
-msgstr "暗号化されたデバイスにパスフレーズを追加できませんでした: %s"
-
-msgid "Failed to change the passphrase for the encrypted device: %s"
-msgstr "暗号化されたデバイスのパスフレーズの変更に失敗しました: %s"
-
-msgid "Failed to create encrypted device: %s"
-msgstr "暗号化デバイスの作成に失敗しました: %s"
-
-msgid "Failed to extract the LUKS header from "
-msgstr "LUKSヘッダーの抽出に失敗しました"
-
-msgid "Failed to get list of devices"
-msgstr "デバイスのリスト取得に失敗しました"
-
-msgid "Failed to get list of encrypted devices"
-msgstr "暗号化済みデバイスのリスト取得に失敗しました"
-
-msgid "Failed to kill the key slot on the encrypted device: %s"
-msgstr "暗号化済みデバイス上のキースロットを削除できませんでした: %s"
-
-msgid "Failed to remove the encrypted device: %s"
-msgstr "暗号化済みデバイスの削除に失敗しました: %s"
-
-msgid "Failed to remove the passphrase from the encrypted device: %s"
-msgstr "暗号化済みデバイスからパスフレーズを削除できませんでした: %s"
-
-msgid "Failed to restore the LUKS header to "
-msgstr "LUKSヘッダの復元に失敗しました"
-
-msgid "Force"
-msgstr "フォース"
-
-msgid "Header file"
-msgstr "ヘッダファイル"
+msgid "Key Slots In Use"
+msgstr ""
 
 msgid "Key slot"
 msgstr "キースロット"
 
-msgid "Key slots in use"
-msgstr "使用中のキーストア"
-
 msgid "Keys"
 msgstr "キー"
 
-msgid "Kill"
-msgstr "削除（Kill）"
+msgid "LUKS Label"
+msgstr ""
 
-msgid "Kill key slot"
-msgstr "キースロットの削除"
-
-msgid "Kill slot"
-msgstr "スロットの削除"
+msgid "LUKS UUID"
+msgstr ""
 
 msgid "LUKS container on '%s' not found"
 msgstr "'%s' 上に LUKSコンテナは見つかりませんでした"
 
-msgid "LUKS encrypted device %s [%s, %s]"
-msgstr "LUKS 暗号化済みデバイス %s [%s, %s]"
+msgid "LUKS encrypted device %s[%s, %s]"
+msgstr ""
+
+msgid "Label"
+msgstr ""
 
 msgid "Lock"
 msgstr "ロック"
 
-msgid "Locking device ..."
-msgstr "デバイスをロックしています ..."
-
-msgid "New passphrase to add to the encrypted device"
-msgstr "新しいパスフレーズを暗号化されたデバイスに追加します"
-
-msgid "New passphrase to replace the existing one (above)"
-msgstr "新しいパスフレーズは、既存のもの(上記の)を置き換えます"
-
-msgid "No"
-msgstr "いいえ"
-
-msgid "No encryption found on '%s'"
-msgstr "'%s' には暗号化されたものがありません"
+msgid "New Passphrase"
+msgstr ""
 
 msgid "No storage device backend exists for device %s"
 msgstr "デバイス %s のためのストレージデバイスバックエンドは存在しません"
 
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"Overwrite the header even if the UUID from the backup doesn't match the "
-"device."
-msgstr "バックアップからのUUIDがデバイスと一致しない場合でも、ヘッダーを上書きします。"
-
 msgid "Passphrase"
 msgstr "パスフレーズ"
-
-msgid "Passphrases don't match"
-msgstr "パスフレーズが一致しません"
-
-msgid "Recovery"
-msgstr "リカバリ"
 
 msgid "Referenced"
 msgstr "参考"
@@ -218,49 +114,47 @@ msgstr "参考"
 msgid "Remove"
 msgstr "削除"
 
-msgid "Remove passphrase"
-msgstr "パスフレーズの削除"
-
-msgid "Restore encrypted device header"
-msgstr "暗号化済みデバイスヘッダーのリストア"
-
-msgid "Restore header"
-msgstr "リストアヘッダ"
-
-msgid "Select a device ..."
-msgstr "デバイスを選択 ..."
-
 msgid "Size"
 msgstr "サイズ"
-
-msgid "Success"
-msgstr "成功"
 
 msgid "Test"
 msgstr "テスト"
 
-msgid "Test passphrase"
-msgstr "パスフレーズのテスト"
-
 msgid "The UUID of the LUKS header backup file "
 msgstr "LUKSヘッダーバックアップファイルのUUID"
 
-msgid ""
-"The key slot to kill. Use the 'Test passphrase' or 'Detail' functions to "
-"find out which slot you want to destroy."
-msgstr "キースロットを削除します。削除するスロットを検索するために’パスフレーズのテスト'または'詳細'機能を使用します。"
+msgid "The key did not unlock any key slot on the device"
+msgstr ""
 
-msgid "The passphrase did not unlock any key slot on the device"
-msgstr "このパスフレーズではデバイス上の任意のキースロットのロックを解除できません"
+msgid "The passphrases must match."
+msgstr ""
 
-msgid "The passphrase successfully unlocked key slot "
-msgstr "パスフレーズが成功し、キースロットをアンロックしました"
+msgid "Unable to add the key to the encrypted device: %s"
+msgstr ""
 
-msgid "UUID"
-msgstr "UUID"
+msgid "Unable to change the key on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to create encrypted device: %s"
+msgstr ""
+
+msgid "Unable to erase the key slot on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to extract the LUKS header from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to lock encrypted device: %s"
 msgstr "暗号化済みデバイスをロックすることができません: %s"
+
+msgid "Unable to remove encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove the key from the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to restore the LUKS header to device: %s"
+msgstr ""
 
 msgid "Unable to unlock encrypted device: %s"
 msgstr "暗号化済みデバイスをアンロックすることができません: %s"
@@ -268,23 +162,17 @@ msgstr "暗号化済みデバイスをアンロックすることができませ
 msgid "Unlock"
 msgstr "アンロック"
 
-msgid "Unlock encrypted device"
-msgstr "暗号化済みデバイスのアンロック"
-
 msgid "Unlocked"
 msgstr "アンロック済"
 
-msgid "Unlocking ..."
-msgstr "アンロックしています ..."
+msgid "Version"
+msgstr ""
 
-msgid "Upload header backup file"
-msgstr "ヘッダーバックアップファイルのアップロード"
+msgid "aes-cbc-essiv:sha256"
+msgstr ""
 
-msgid "Uploading header backup file ..."
-msgstr "ヘッダーバックアップファイルをアップロードしています ..."
+msgid "aes-xts-plain64 (default)"
+msgstr ""
 
-msgid "Yes"
-msgstr "はい"
-
-msgid "n/a"
-msgstr "n/a"
+msgid "device"
+msgstr ""

@@ -1,16 +1,16 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# Jonatan Nyberg, 2017
+# efef6ec5b435a041fce803c7f8af77d2_2341d43, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 13:04-0600\n"
-"PO-Revision-Date: 2017-11-27 03:36+0000\n"
-"Last-Translator: Jonatan Nyberg\n"
+"POT-Creation-Date: 2022-02-08 16:35-0600\n"
+"PO-Revision-Date: 2022-02-08 22:36+0000\n"
+"Last-Translator: Aaron Murray <aaronmurray27@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,44 +24,32 @@ msgstr "%s är inte ett giltigt LUKS header säkerhetskopia"
 msgid "Add"
 msgstr "Lägg till"
 
-msgid "Add passphrase"
-msgstr "Lägg till lösenordsfras"
-
-msgid "Backup header"
-msgstr "Säkerhetskopiera header"
-
-msgid "Cancel"
-msgstr "Avbryt"
+msgid "Are you sure you want to delete to this device?"
+msgstr ""
 
 msgid "Change"
 msgstr "Ändra"
 
-msgid "Change passphrase"
-msgstr "Ändra lösenordsfras"
-
-msgid "Choose a slot to kill ..."
+msgid "Cipher"
 msgstr ""
 
 msgid "Confirm passphrase"
 msgstr "Bekräfta lösenordsfrasen"
 
-msgid "Confirmation"
-msgstr "Bekräftelse"
-
 msgid "Create"
 msgstr "Skapa"
 
-msgid "Create encrypted device"
-msgstr "Skapa krypterad enhet"
+msgid "Created encrypted device."
+msgstr ""
 
-msgid "Current passphrase"
-msgstr "Nuvarande lösenfras"
+msgid "Current Passphrase"
+msgstr ""
 
-msgid "Decrypted device"
-msgstr "Dekrypterad enhet"
+msgid "Decrypted Device"
+msgstr ""
 
-msgid "Delete encrypted device"
-msgstr "Ta bort krypterad enhet"
+msgid "Delete"
+msgstr ""
 
 msgid "Detail"
 msgstr "Detalj"
@@ -69,148 +57,56 @@ msgstr "Detalj"
 msgid "Device"
 msgstr "Enhet"
 
-msgid ""
-"Do you really want to delete the encrypted device?<br/>The encryption key "
-"will be destroyed and all data will be lost."
-msgstr "Vill du verkligen ta bort den krypterade enheten?<br/>Krypteringsnyckeln kommer att förstöras och all data kommer att gå förlorad."
-
-msgid ""
-"Do you really want to encrypt this device? Any existing data on it will be "
-"deleted."
-msgstr "Vill du verkligen kryptera den här enheten? All befintliga data på den kommer att tas bort."
-
-msgid ""
-"Do you really want to kill this key slot? Ensure that you have another key "
-"which will unlock the device."
-msgstr "Vill du verkligen döda denna nyckelplats? Se till att du har en annan nyckel som låser upp enheten."
-
-msgid ""
-"Do you really want to remove this passphrase? Ensure that you have another "
-"passphrase which will unlock the device."
-msgstr "Vill du verkligen ta bort lösenordsfrasen? Se till att du har en annan lösenfras som låser upp enheten."
-
-msgid ""
-"Do you really want to write the header to the device?<br/>Replacing the "
-"header will destroy existing key slots."
-msgstr "Vill du verkligen skriva header till enheten?<br/>Byte av header kommer att förstöra nuvarande nyckelplatser."
-
-msgid "Encrypted Devices"
-msgstr "Krypterade enheter"
-
-msgid "Encrypted device details"
-msgstr "Krypterad enhet detaljer"
+msgid "Device '%s' not found"
+msgstr ""
 
 msgid "Encryption"
 msgstr "Kryptering"
 
-msgid "Enter an existing, valid passphrase that unlocks the device."
-msgstr "Ange ett befintligt, giltigt lösenord som låser upp enheten."
-
-msgid "Enter an existing, valid passphrase which you want to change."
-msgstr "Ange en befintlig, giltig lösenordsfras som du vill ändra."
-
-msgid ""
-"Enter an existing, valid passphrase which you want to remove from the "
-"encrypted device."
-msgstr "Ange en befintlig, giltig lösenordsfras som du vill ta bort från den krypterade enheten."
-
-msgid "Failed to add the passphrase to the encrypted device: %s"
-msgstr "Misslyckades med att lägga till lösenordsfrasen i den krypterade enheten: %s"
-
-msgid "Failed to change the passphrase for the encrypted device: %s"
-msgstr "Misslyckades med att ändra lösenordsfrasen för den krypterade enheten: %s"
-
-msgid "Failed to create encrypted device: %s"
-msgstr "Misslyckades med att skapa krypterad enhet: %s"
-
-msgid "Failed to extract the LUKS header from "
-msgstr "Misslyckades med att extrahera LUKS-header från"
-
-msgid "Failed to get list of devices"
-msgstr "Misslyckades med att få lista över enheter"
-
-msgid "Failed to get list of encrypted devices"
-msgstr "Misslyckades med att få en lista över krypterade enheter"
-
-msgid "Failed to kill the key slot on the encrypted device: %s"
+msgid "Enter a new passphrase."
 msgstr ""
 
-msgid "Failed to remove the encrypted device: %s"
-msgstr "Misslyckades med att ta bort den krypterade enheten: %s"
-
-msgid "Failed to remove the passphrase from the encrypted device: %s"
+msgid "Enter an existing passphrase that unlocks the device."
 msgstr ""
 
-msgid "Failed to restore the LUKS header to "
+msgid "Erase slot"
 msgstr ""
 
-msgid "Force"
-msgstr "Tvinga"
-
-msgid "Header file"
+msgid "Key Slots In Use"
 msgstr ""
 
 msgid "Key slot"
 msgstr ""
 
-msgid "Key slots in use"
-msgstr ""
-
 msgid "Keys"
 msgstr "Nycklar"
 
-msgid "Kill"
-msgstr "Döda"
-
-msgid "Kill key slot"
+msgid "LUKS Label"
 msgstr ""
 
-msgid "Kill slot"
+msgid "LUKS UUID"
 msgstr ""
 
 msgid "LUKS container on '%s' not found"
 msgstr "LUKS behållare på \"%s\" inte funnen"
 
-msgid "LUKS encrypted device %s [%s, %s]"
-msgstr "LUKS krypterad enhet %s [%s, %s]"
+msgid "LUKS encrypted device %s[%s, %s]"
+msgstr ""
+
+msgid "Label"
+msgstr ""
 
 msgid "Lock"
 msgstr "Lås"
 
-msgid "Locking device ..."
-msgstr "Låser enhet ..."
-
-msgid "New passphrase to add to the encrypted device"
-msgstr "Ny lösenordsfras som ska läggas till den krypterade enheten"
-
-msgid "New passphrase to replace the existing one (above)"
-msgstr "Ny lösenfras som ersätter den befintliga (ovan)"
-
-msgid "No"
-msgstr "Nej"
-
-msgid "No encryption found on '%s'"
-msgstr "Ingen kryptering hittades på \"%s\""
+msgid "New Passphrase"
+msgstr ""
 
 msgid "No storage device backend exists for device %s"
 msgstr "Det finns ingen lagringsenhets backend för enheten %s"
 
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"Overwrite the header even if the UUID from the backup doesn't match the "
-"device."
-msgstr ""
-
 msgid "Passphrase"
 msgstr "Lösenfras"
-
-msgid "Passphrases don't match"
-msgstr "Lösenfraser matchar inte"
-
-msgid "Recovery"
-msgstr "Återhämtning"
 
 msgid "Referenced"
 msgstr "Refererade"
@@ -218,49 +114,47 @@ msgstr "Refererade"
 msgid "Remove"
 msgstr "Ta bort"
 
-msgid "Remove passphrase"
-msgstr "Ta bort lösenfrasen"
-
-msgid "Restore encrypted device header"
-msgstr ""
-
-msgid "Restore header"
-msgstr ""
-
-msgid "Select a device ..."
-msgstr "Välj en enhet ..."
-
 msgid "Size"
 msgstr "Storlek"
-
-msgid "Success"
-msgstr "Lyckades"
 
 msgid "Test"
 msgstr "Testa"
 
-msgid "Test passphrase"
-msgstr "Testa lösenfrasen"
-
 msgid "The UUID of the LUKS header backup file "
 msgstr ""
 
-msgid ""
-"The key slot to kill. Use the 'Test passphrase' or 'Detail' functions to "
-"find out which slot you want to destroy."
+msgid "The key did not unlock any key slot on the device"
 msgstr ""
 
-msgid "The passphrase did not unlock any key slot on the device"
+msgid "The passphrases must match."
 msgstr ""
 
-msgid "The passphrase successfully unlocked key slot "
+msgid "Unable to add the key to the encrypted device: %s"
 msgstr ""
 
-msgid "UUID"
-msgstr "UUID"
+msgid "Unable to change the key on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to create encrypted device: %s"
+msgstr ""
+
+msgid "Unable to erase the key slot on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to extract the LUKS header from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to lock encrypted device: %s"
 msgstr "Det gick inte att låsa krypterad enhet: %s"
+
+msgid "Unable to remove encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove the key from the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to restore the LUKS header to device: %s"
+msgstr ""
 
 msgid "Unable to unlock encrypted device: %s"
 msgstr "Det går inte att låsa upp krypterad enhet: %s"
@@ -268,23 +162,17 @@ msgstr "Det går inte att låsa upp krypterad enhet: %s"
 msgid "Unlock"
 msgstr "Lås upp"
 
-msgid "Unlock encrypted device"
-msgstr "Lås upp krypterad enhet"
-
 msgid "Unlocked"
 msgstr "Olåst"
 
-msgid "Unlocking ..."
-msgstr "Låser upp ..."
-
-msgid "Upload header backup file"
+msgid "Version"
 msgstr ""
 
-msgid "Uploading header backup file ..."
+msgid "aes-cbc-essiv:sha256"
 msgstr ""
 
-msgid "Yes"
-msgstr "Ja"
+msgid "aes-xts-plain64 (default)"
+msgstr ""
 
-msgid "n/a"
+msgid "device"
 msgstr ""

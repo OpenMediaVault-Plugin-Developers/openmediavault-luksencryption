@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
 # Артур Мудрых <arturmon82@gmail.com>, 2017,2019
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 13:04-0600\n"
+"POT-Creation-Date: 2022-02-08 16:35-0600\n"
 "PO-Revision-Date: 2019-01-18 11:02+0000\n"
 "Last-Translator: Артур Мудрых <arturmon82@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ru/)\n"
@@ -24,44 +24,32 @@ msgstr "%s не является допустимым файлом резерв�
 msgid "Add"
 msgstr "Добавить"
 
-msgid "Add passphrase"
-msgstr "Добавить кодовую фразу"
-
-msgid "Backup header"
-msgstr "Резервный заголовок"
-
-msgid "Cancel"
-msgstr "Отмена"
+msgid "Are you sure you want to delete to this device?"
+msgstr ""
 
 msgid "Change"
 msgstr "Изменить"
 
-msgid "Change passphrase"
-msgstr "Изменить кодовую фразу"
-
-msgid "Choose a slot to kill ..."
-msgstr "Выберите слот для уничтожения ..."
+msgid "Cipher"
+msgstr ""
 
 msgid "Confirm passphrase"
 msgstr "Подтвердите ключевую фразу"
 
-msgid "Confirmation"
-msgstr "Подтверждение"
-
 msgid "Create"
 msgstr "Создать"
 
-msgid "Create encrypted device"
-msgstr "Создать зашифрованное устройство"
+msgid "Created encrypted device."
+msgstr ""
 
-msgid "Current passphrase"
-msgstr "Текущая кодовая фраза"
+msgid "Current Passphrase"
+msgstr ""
 
-msgid "Decrypted device"
-msgstr "Расшифрованное устройство"
+msgid "Decrypted Device"
+msgstr ""
 
-msgid "Delete encrypted device"
-msgstr "Удалить зашифрованное устройство"
+msgid "Delete"
+msgstr ""
 
 msgid "Detail"
 msgstr "Подробно"
@@ -69,148 +57,56 @@ msgstr "Подробно"
 msgid "Device"
 msgstr "Устройство"
 
-msgid ""
-"Do you really want to delete the encrypted device?<br/>The encryption key "
-"will be destroyed and all data will be lost."
-msgstr "Вы действительно хотите удалить зашифрованное устройство? <br/> Ключ шифрования будет уничтожен, и все данные будут потеряны."
-
-msgid ""
-"Do you really want to encrypt this device? Any existing data on it will be "
-"deleted."
-msgstr "Вы действительно хотите зашифровать это устройство? Любые существующие данные на нем будут удалены."
-
-msgid ""
-"Do you really want to kill this key slot? Ensure that you have another key "
-"which will unlock the device."
-msgstr "Вы действительно хотите убрать этот ключевой слот? Убедитесь, что у вас есть еще один ключ, который разблокирует устройство."
-
-msgid ""
-"Do you really want to remove this passphrase? Ensure that you have another "
-"passphrase which will unlock the device."
-msgstr "Вы действительно хотите удалить эту фразу? Убедитесь, что у вас есть еще одна кодовая фраза, которая разблокирует устройство."
-
-msgid ""
-"Do you really want to write the header to the device?<br/>Replacing the "
-"header will destroy existing key slots."
-msgstr "Вы действительно хотите записать заголовок на устройство? <br/> Замена заголовка приведет к уничтожению существующих ключевых слотов."
-
-msgid "Encrypted Devices"
-msgstr "Зашифрованные устройства"
-
-msgid "Encrypted device details"
-msgstr "Сведения о зашифрованном устройстве"
+msgid "Device '%s' not found"
+msgstr ""
 
 msgid "Encryption"
 msgstr "Шифрование"
 
-msgid "Enter an existing, valid passphrase that unlocks the device."
-msgstr "Введите существующую действующую кодовую фразу, которая разблокирует устройство."
+msgid "Enter a new passphrase."
+msgstr ""
 
-msgid "Enter an existing, valid passphrase which you want to change."
-msgstr "Введите существующую действующую кодовую фразу, которую вы хотите изменить."
+msgid "Enter an existing passphrase that unlocks the device."
+msgstr ""
 
-msgid ""
-"Enter an existing, valid passphrase which you want to remove from the "
-"encrypted device."
-msgstr "Введите существующую действующую кодовую фразу, которую вы хотите удалить из зашифрованного устройства."
+msgid "Erase slot"
+msgstr ""
 
-msgid "Failed to add the passphrase to the encrypted device: %s"
-msgstr "Ошибка добавления кодовой фразы к зашифрованному устройству: %s"
-
-msgid "Failed to change the passphrase for the encrypted device: %s"
-msgstr "Не удалось изменить кодовую фразу зашифрованного устройства: %s"
-
-msgid "Failed to create encrypted device: %s"
-msgstr "Не удалось создать зашифрованное устройство: %s"
-
-msgid "Failed to extract the LUKS header from "
-msgstr "Не удалось извлечь заголовок LUKS из"
-
-msgid "Failed to get list of devices"
-msgstr "Не удалось получить список устройств"
-
-msgid "Failed to get list of encrypted devices"
-msgstr "Не удалось получить список зашифрованных устройств"
-
-msgid "Failed to kill the key slot on the encrypted device: %s"
-msgstr "Не удалось удалить ключевой слот на зашифрованном устройстве: %s"
-
-msgid "Failed to remove the encrypted device: %s"
-msgstr "Не удалось удалить зашифрованное устройство: %s"
-
-msgid "Failed to remove the passphrase from the encrypted device: %s"
-msgstr "Не удалось удалить парольную фразу из зашифрованного устройства: %s"
-
-msgid "Failed to restore the LUKS header to "
-msgstr "Не удалось восстановить заголовок LUKS, чтобы"
-
-msgid "Force"
-msgstr "Принудительно"
-
-msgid "Header file"
-msgstr "Заголовочный файл"
+msgid "Key Slots In Use"
+msgstr ""
 
 msgid "Key slot"
 msgstr "Ключевой слот"
 
-msgid "Key slots in use"
-msgstr "Используемые ключевые слоты"
-
 msgid "Keys"
 msgstr "Ключи"
 
-msgid "Kill"
-msgstr "Уничтожить"
+msgid "LUKS Label"
+msgstr ""
 
-msgid "Kill key slot"
-msgstr "Уничтожить слот ключа"
-
-msgid "Kill slot"
-msgstr "Уничтожить слот"
+msgid "LUKS UUID"
+msgstr ""
 
 msgid "LUKS container on '%s' not found"
 msgstr "Контейнер LUKS для '%s' не найден"
 
-msgid "LUKS encrypted device %s [%s, %s]"
-msgstr "Зашифрованное устройство LUKS %s [%s, %s]"
+msgid "LUKS encrypted device %s[%s, %s]"
+msgstr ""
+
+msgid "Label"
+msgstr ""
 
 msgid "Lock"
 msgstr "Заблокирован"
 
-msgid "Locking device ..."
-msgstr "Блокирующее устройство ..."
-
-msgid "New passphrase to add to the encrypted device"
-msgstr "Новая кодовая фраза для добавления в зашифрованное устройство"
-
-msgid "New passphrase to replace the existing one (above)"
-msgstr "Новая кодовая фраза для замены существующей (выше)"
-
-msgid "No"
-msgstr "Нет"
-
-msgid "No encryption found on '%s'"
-msgstr "На '%s' шифрование не обнаружено"
+msgid "New Passphrase"
+msgstr ""
 
 msgid "No storage device backend exists for device %s"
 msgstr "Для устройства %s отсутствует устройство хранения"
 
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"Overwrite the header even if the UUID from the backup doesn't match the "
-"device."
-msgstr "Перезаписать заголовок, даже если UUID из резервной копии не соответствует устройству."
-
 msgid "Passphrase"
 msgstr "Кодовая фраза"
-
-msgid "Passphrases don't match"
-msgstr "Пароли не совпадают"
-
-msgid "Recovery"
-msgstr "Восстановление"
 
 msgid "Referenced"
 msgstr "Ссылка"
@@ -218,49 +114,47 @@ msgstr "Ссылка"
 msgid "Remove"
 msgstr "Удалить"
 
-msgid "Remove passphrase"
-msgstr "Удалить кодовую фразу"
-
-msgid "Restore encrypted device header"
-msgstr "Восстановить заголовок зашифрованного устройства"
-
-msgid "Restore header"
-msgstr "Восстановить заголовок"
-
-msgid "Select a device ..."
-msgstr "Выберите устройство ..."
-
 msgid "Size"
 msgstr "Размер"
-
-msgid "Success"
-msgstr "Успех"
 
 msgid "Test"
 msgstr "Проверка"
 
-msgid "Test passphrase"
-msgstr "Введите контрольную фразу"
-
 msgid "The UUID of the LUKS header backup file "
 msgstr "UUID файла резервной копии заголовка LUKS"
 
-msgid ""
-"The key slot to kill. Use the 'Test passphrase' or 'Detail' functions to "
-"find out which slot you want to destroy."
+msgid "The key did not unlock any key slot on the device"
 msgstr ""
 
-msgid "The passphrase did not unlock any key slot on the device"
-msgstr "Парольная фраза не разблокировала ни одного ключевого слота на устройстве"
+msgid "The passphrases must match."
+msgstr ""
 
-msgid "The passphrase successfully unlocked key slot "
-msgstr "Ключевая фраза успешно разблокировала ключевой слот"
+msgid "Unable to add the key to the encrypted device: %s"
+msgstr ""
 
-msgid "UUID"
-msgstr "UUID"
+msgid "Unable to change the key on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to create encrypted device: %s"
+msgstr ""
+
+msgid "Unable to erase the key slot on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to extract the LUKS header from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to lock encrypted device: %s"
 msgstr "Не удалось заблокировать зашифрованное устройство: %s"
+
+msgid "Unable to remove encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove the key from the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to restore the LUKS header to device: %s"
+msgstr ""
 
 msgid "Unable to unlock encrypted device: %s"
 msgstr "Не удалось разблокировать зашифрованное устройство: %s"
@@ -268,23 +162,17 @@ msgstr "Не удалось разблокировать зашифрованн�
 msgid "Unlock"
 msgstr "Разблокировать"
 
-msgid "Unlock encrypted device"
-msgstr "Разблокировать зашифрованное устройство"
-
 msgid "Unlocked"
 msgstr "Разблокирован"
 
-msgid "Unlocking ..."
-msgstr "Разблокировка ..."
+msgid "Version"
+msgstr ""
 
-msgid "Upload header backup file"
-msgstr "Загрузить файл резервной копии заголовка"
+msgid "aes-cbc-essiv:sha256"
+msgstr ""
 
-msgid "Uploading header backup file ..."
-msgstr "Загрузка файла резервной копии заголовка ..."
+msgid "aes-xts-plain64 (default)"
+msgstr ""
 
-msgid "Yes"
-msgstr "Да"
-
-msgid "n/a"
+msgid "device"
 msgstr ""

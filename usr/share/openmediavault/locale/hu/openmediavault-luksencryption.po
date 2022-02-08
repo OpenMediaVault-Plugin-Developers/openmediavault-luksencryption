@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 13:04-0600\n"
-"PO-Revision-Date: 2015-11-12 19:04+0000\n"
+"POT-Creation-Date: 2022-02-08 16:35-0600\n"
+"PO-Revision-Date: 2022-02-08 22:36+0000\n"
 "Last-Translator: Aaron Murray <aaronmurray27@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -23,43 +23,31 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-msgid "Add passphrase"
-msgstr ""
-
-msgid "Backup header"
-msgstr ""
-
-msgid "Cancel"
+msgid "Are you sure you want to delete to this device?"
 msgstr ""
 
 msgid "Change"
 msgstr ""
 
-msgid "Change passphrase"
-msgstr ""
-
-msgid "Choose a slot to kill ..."
+msgid "Cipher"
 msgstr ""
 
 msgid "Confirm passphrase"
 msgstr ""
 
-msgid "Confirmation"
-msgstr ""
-
 msgid "Create"
 msgstr ""
 
-msgid "Create encrypted device"
+msgid "Created encrypted device."
 msgstr ""
 
-msgid "Current passphrase"
+msgid "Current Passphrase"
 msgstr ""
 
-msgid "Decrypted device"
+msgid "Decrypted Device"
 msgstr ""
 
-msgid "Delete encrypted device"
+msgid "Delete"
 msgstr ""
 
 msgid "Detail"
@@ -68,147 +56,55 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
-msgid ""
-"Do you really want to delete the encrypted device?<br/>The encryption key "
-"will be destroyed and all data will be lost."
-msgstr ""
-
-msgid ""
-"Do you really want to encrypt this device? Any existing data on it will be "
-"deleted."
-msgstr ""
-
-msgid ""
-"Do you really want to kill this key slot? Ensure that you have another key "
-"which will unlock the device."
-msgstr ""
-
-msgid ""
-"Do you really want to remove this passphrase? Ensure that you have another "
-"passphrase which will unlock the device."
-msgstr ""
-
-msgid ""
-"Do you really want to write the header to the device?<br/>Replacing the "
-"header will destroy existing key slots."
-msgstr ""
-
-msgid "Encrypted Devices"
-msgstr ""
-
-msgid "Encrypted device details"
+msgid "Device '%s' not found"
 msgstr ""
 
 msgid "Encryption"
 msgstr ""
 
-msgid "Enter an existing, valid passphrase that unlocks the device."
+msgid "Enter a new passphrase."
 msgstr ""
 
-msgid "Enter an existing, valid passphrase which you want to change."
+msgid "Enter an existing passphrase that unlocks the device."
 msgstr ""
 
-msgid ""
-"Enter an existing, valid passphrase which you want to remove from the "
-"encrypted device."
+msgid "Erase slot"
 msgstr ""
 
-msgid "Failed to add the passphrase to the encrypted device: %s"
-msgstr ""
-
-msgid "Failed to change the passphrase for the encrypted device: %s"
-msgstr ""
-
-msgid "Failed to create encrypted device: %s"
-msgstr ""
-
-msgid "Failed to extract the LUKS header from "
-msgstr ""
-
-msgid "Failed to get list of devices"
-msgstr ""
-
-msgid "Failed to get list of encrypted devices"
-msgstr ""
-
-msgid "Failed to kill the key slot on the encrypted device: %s"
-msgstr ""
-
-msgid "Failed to remove the encrypted device: %s"
-msgstr ""
-
-msgid "Failed to remove the passphrase from the encrypted device: %s"
-msgstr ""
-
-msgid "Failed to restore the LUKS header to "
-msgstr ""
-
-msgid "Force"
-msgstr ""
-
-msgid "Header file"
+msgid "Key Slots In Use"
 msgstr ""
 
 msgid "Key slot"
 msgstr ""
 
-msgid "Key slots in use"
-msgstr ""
-
 msgid "Keys"
 msgstr ""
 
-msgid "Kill"
+msgid "LUKS Label"
 msgstr ""
 
-msgid "Kill key slot"
-msgstr ""
-
-msgid "Kill slot"
+msgid "LUKS UUID"
 msgstr ""
 
 msgid "LUKS container on '%s' not found"
 msgstr ""
 
-msgid "LUKS encrypted device %s [%s, %s]"
+msgid "LUKS encrypted device %s[%s, %s]"
+msgstr ""
+
+msgid "Label"
 msgstr ""
 
 msgid "Lock"
 msgstr ""
 
-msgid "Locking device ..."
-msgstr ""
-
-msgid "New passphrase to add to the encrypted device"
-msgstr ""
-
-msgid "New passphrase to replace the existing one (above)"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "No encryption found on '%s'"
+msgid "New Passphrase"
 msgstr ""
 
 msgid "No storage device backend exists for device %s"
 msgstr ""
 
-msgid "OK"
-msgstr ""
-
-msgid ""
-"Overwrite the header even if the UUID from the backup doesn't match the "
-"device."
-msgstr ""
-
 msgid "Passphrase"
-msgstr ""
-
-msgid "Passphrases don't match"
-msgstr ""
-
-msgid "Recovery"
 msgstr ""
 
 msgid "Referenced"
@@ -217,48 +113,46 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-msgid "Remove passphrase"
-msgstr ""
-
-msgid "Restore encrypted device header"
-msgstr ""
-
-msgid "Restore header"
-msgstr ""
-
-msgid "Select a device ..."
-msgstr ""
-
 msgid "Size"
-msgstr ""
-
-msgid "Success"
 msgstr ""
 
 msgid "Test"
 msgstr ""
 
-msgid "Test passphrase"
-msgstr ""
-
 msgid "The UUID of the LUKS header backup file "
 msgstr ""
 
-msgid ""
-"The key slot to kill. Use the 'Test passphrase' or 'Detail' functions to "
-"find out which slot you want to destroy."
+msgid "The key did not unlock any key slot on the device"
 msgstr ""
 
-msgid "The passphrase did not unlock any key slot on the device"
+msgid "The passphrases must match."
 msgstr ""
 
-msgid "The passphrase successfully unlocked key slot "
+msgid "Unable to add the key to the encrypted device: %s"
 msgstr ""
 
-msgid "UUID"
+msgid "Unable to change the key on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to create encrypted device: %s"
+msgstr ""
+
+msgid "Unable to erase the key slot on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to extract the LUKS header from the encrypted device: %s"
 msgstr ""
 
 msgid "Unable to lock encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove the key from the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to restore the LUKS header to device: %s"
 msgstr ""
 
 msgid "Unable to unlock encrypted device: %s"
@@ -267,23 +161,17 @@ msgstr ""
 msgid "Unlock"
 msgstr ""
 
-msgid "Unlock encrypted device"
-msgstr ""
-
 msgid "Unlocked"
 msgstr ""
 
-msgid "Unlocking ..."
+msgid "Version"
 msgstr ""
 
-msgid "Upload header backup file"
+msgid "aes-cbc-essiv:sha256"
 msgstr ""
 
-msgid "Uploading header backup file ..."
+msgid "aes-xts-plain64 (default)"
 msgstr ""
 
-msgid "Yes"
-msgstr ""
-
-msgid "n/a"
+msgid "device"
 msgstr ""

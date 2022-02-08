@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
 # Pavel Borecki <pavel.borecki@gmail.com>, 2015-2016
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 13:04-0600\n"
+"POT-Creation-Date: 2022-02-08 16:35-0600\n"
 "PO-Revision-Date: 2017-09-23 21:48+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (Czech Republic) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/cs_CZ/)\n"
@@ -24,44 +24,32 @@ msgstr "%s není platný soubor zálohy LUKS hlavičky"
 msgid "Add"
 msgstr "Přidat"
 
-msgid "Add passphrase"
-msgstr "Přidat heslovou frázi"
-
-msgid "Backup header"
-msgstr "Zazálohovat hlavičku"
-
-msgid "Cancel"
-msgstr "Storno"
+msgid "Are you sure you want to delete to this device?"
+msgstr ""
 
 msgid "Change"
 msgstr "Změnit"
 
-msgid "Change passphrase"
-msgstr "Změnit heslovou frázi"
-
-msgid "Choose a slot to kill ..."
-msgstr "Vyberte pozici, kterou odstranit…"
+msgid "Cipher"
+msgstr ""
 
 msgid "Confirm passphrase"
 msgstr "Potvrzení zadání heslové fráze"
 
-msgid "Confirmation"
-msgstr "Potvrzení"
-
 msgid "Create"
 msgstr "Vytvořit"
 
-msgid "Create encrypted device"
-msgstr "Vytvořit šifrované zařízení"
+msgid "Created encrypted device."
+msgstr ""
 
-msgid "Current passphrase"
-msgstr "Stávající heslová fráze"
+msgid "Current Passphrase"
+msgstr ""
 
-msgid "Decrypted device"
-msgstr "Rozšifrované zařízení"
+msgid "Decrypted Device"
+msgstr ""
 
-msgid "Delete encrypted device"
-msgstr "Odstranit šifrované zařízení"
+msgid "Delete"
+msgstr ""
 
 msgid "Detail"
 msgstr "Podrobnosti"
@@ -69,148 +57,56 @@ msgstr "Podrobnosti"
 msgid "Device"
 msgstr "Zařízení"
 
-msgid ""
-"Do you really want to delete the encrypted device?<br/>The encryption key "
-"will be destroyed and all data will be lost."
-msgstr "Opravdu chcete šifrované zařízení smazat?<br/>Šifrovací klíč bude zničen a veškerá data nenávratně ztracena."
-
-msgid ""
-"Do you really want to encrypt this device? Any existing data on it will be "
-"deleted."
-msgstr "Opravdu chcete toto zařízení zašifrovat? Jakákoli stávající data na něm budou smazána."
-
-msgid ""
-"Do you really want to kill this key slot? Ensure that you have another key "
-"which will unlock the device."
-msgstr "Opravdu chcete odstranit tuto pozici klíče? Ověřte, že stále budete mít jiný klíč, který zařízení odemkne."
-
-msgid ""
-"Do you really want to remove this passphrase? Ensure that you have another "
-"passphrase which will unlock the device."
-msgstr "Opravdu chcete odebrat tuto heslovou frázi? Ověřte, že máte jinou frázi, která zařízení odemkne."
-
-msgid ""
-"Do you really want to write the header to the device?<br/>Replacing the "
-"header will destroy existing key slots."
-msgstr "Opravdu chcete zapsat hlavičku na zařízení?<br/>Nahrazení hlavičky zničí pozice stávajících klíčů."
-
-msgid "Encrypted Devices"
-msgstr "Šifrovaná zařízení"
-
-msgid "Encrypted device details"
-msgstr "Podrobnosti o šifrovaném zařízení"
+msgid "Device '%s' not found"
+msgstr ""
 
 msgid "Encryption"
 msgstr "Šifrování"
 
-msgid "Enter an existing, valid passphrase that unlocks the device."
-msgstr "Zadejte existující, platnou heslovou frázi, která zařízení odemkne."
+msgid "Enter a new passphrase."
+msgstr ""
 
-msgid "Enter an existing, valid passphrase which you want to change."
-msgstr "Zadejte existující, platnou heslovou frázi, kterou chcete změnit."
+msgid "Enter an existing passphrase that unlocks the device."
+msgstr ""
 
-msgid ""
-"Enter an existing, valid passphrase which you want to remove from the "
-"encrypted device."
-msgstr "Zadejte existující, platnou heslovou frázi, kterou chcete z šifrovaného zařízení odebrat."
+msgid "Erase slot"
+msgstr ""
 
-msgid "Failed to add the passphrase to the encrypted device: %s"
-msgstr "Přidání heslové fráze do šifrovaného zařízení se nezdařilo: %s"
-
-msgid "Failed to change the passphrase for the encrypted device: %s"
-msgstr "Změna heslové fráze šifrovaného zařízení se nezdařila: %s"
-
-msgid "Failed to create encrypted device: %s"
-msgstr "Vytvoření šifrovaného zařízení se nezdařilo: %s"
-
-msgid "Failed to extract the LUKS header from "
-msgstr "Nezdařilo se extrahovat LUKS hlavičku z"
-
-msgid "Failed to get list of devices"
-msgstr "Nepodařilo se získat seznam zařízení"
-
-msgid "Failed to get list of encrypted devices"
-msgstr "Nepodařilo se získat seznam šifrovaných zařízení"
-
-msgid "Failed to kill the key slot on the encrypted device: %s"
-msgstr "Odstranění pozice klíče na šifrovaném zařízení se nezdařilo: %s"
-
-msgid "Failed to remove the encrypted device: %s"
-msgstr "Odebrání z šifrovaného zařízení se nezdařilo: %s"
-
-msgid "Failed to remove the passphrase from the encrypted device: %s"
-msgstr "Odebrání heslové fráze z šifrovaného zařízení se nezdařilo: %s"
-
-msgid "Failed to restore the LUKS header to "
-msgstr "Nezdařila se obnova LUKS hlavičky na"
-
-msgid "Force"
-msgstr "Vynutit"
-
-msgid "Header file"
-msgstr "Hlavičkový soubor"
+msgid "Key Slots In Use"
+msgstr ""
 
 msgid "Key slot"
 msgstr "Pozice klíče"
 
-msgid "Key slots in use"
-msgstr "Využívané pozice klíčů"
-
 msgid "Keys"
 msgstr "Klíče"
 
-msgid "Kill"
-msgstr "Odebrat"
+msgid "LUKS Label"
+msgstr ""
 
-msgid "Kill key slot"
-msgstr "Odebrat pozici klíče"
-
-msgid "Kill slot"
-msgstr "Odebrat pozici"
+msgid "LUKS UUID"
+msgstr ""
 
 msgid "LUKS container on '%s' not found"
 msgstr "Na „%s“ nebyl nalezen LUKS kontejner"
 
-msgid "LUKS encrypted device %s [%s, %s]"
-msgstr "LUKS šifrované zařízení %s [%s, %s]"
+msgid "LUKS encrypted device %s[%s, %s]"
+msgstr ""
+
+msgid "Label"
+msgstr ""
 
 msgid "Lock"
 msgstr "Uzamknout"
 
-msgid "Locking device ..."
-msgstr "Uzamykání zařízení…"
-
-msgid "New passphrase to add to the encrypted device"
-msgstr "Nová heslová fráze, kterou přidat na šifrované zařízení"
-
-msgid "New passphrase to replace the existing one (above)"
-msgstr "Nová heslová fráze, kterou nahradit tu existující (viz výše)"
-
-msgid "No"
-msgstr "Ne"
-
-msgid "No encryption found on '%s'"
-msgstr "%s se nejeví být šifrované"
+msgid "New Passphrase"
+msgstr ""
 
 msgid "No storage device backend exists for device %s"
 msgstr "Fyzické zařízení pro zařízení %s neexistuje"
 
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"Overwrite the header even if the UUID from the backup doesn't match the "
-"device."
-msgstr "Přepsat hlavičky i když se univerzálně jedinečný identifikátor v záloze neshoduje s tím na zařízení"
-
 msgid "Passphrase"
 msgstr "Heslová fráze"
-
-msgid "Passphrases don't match"
-msgstr "Zadání heslové fráze se neshodují"
-
-msgid "Recovery"
-msgstr "Obnova"
 
 msgid "Referenced"
 msgstr "Odkazováno"
@@ -218,49 +114,47 @@ msgstr "Odkazováno"
 msgid "Remove"
 msgstr "Odebrat"
 
-msgid "Remove passphrase"
-msgstr "Odebrat heslovou frázi"
-
-msgid "Restore encrypted device header"
-msgstr "Obnovit hlavičku šifrovaného zařízení"
-
-msgid "Restore header"
-msgstr "Obnovit hlavičku"
-
-msgid "Select a device ..."
-msgstr "Vyberte zařízení…"
-
 msgid "Size"
 msgstr "Velikost"
-
-msgid "Success"
-msgstr "Úspěch"
 
 msgid "Test"
 msgstr "Vyzkoušet"
 
-msgid "Test passphrase"
-msgstr "Vyzkoušet heslovou frázi"
-
 msgid "The UUID of the LUKS header backup file "
 msgstr "Univerzálně jedinečný identifikátor souboru se zálohou LUKS hlavičky"
 
-msgid ""
-"The key slot to kill. Use the 'Test passphrase' or 'Detail' functions to "
-"find out which slot you want to destroy."
-msgstr "Pozice klíče, kterou odstranit. Příslušnou pozici zjistíte funkcemi „Vyzkoušet heslovou frázi“ nebo „Podrobnosti“."
+msgid "The key did not unlock any key slot on the device"
+msgstr ""
 
-msgid "The passphrase did not unlock any key slot on the device"
-msgstr "Zadaná heslová fráze neodemkla žádnou z pozic klíče na zařízení"
+msgid "The passphrases must match."
+msgstr ""
 
-msgid "The passphrase successfully unlocked key slot "
-msgstr "Heslová fráze úspěšně odemkla slot klíče"
+msgid "Unable to add the key to the encrypted device: %s"
+msgstr ""
 
-msgid "UUID"
-msgstr "Univerzálně jedinečný identifikátor"
+msgid "Unable to change the key on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to create encrypted device: %s"
+msgstr ""
+
+msgid "Unable to erase the key slot on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to extract the LUKS header from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to lock encrypted device: %s"
 msgstr "Nedaří se uzamknout šifrované zařízené: %s"
+
+msgid "Unable to remove encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove the key from the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to restore the LUKS header to device: %s"
+msgstr ""
 
 msgid "Unable to unlock encrypted device: %s"
 msgstr "Nedaří se odemknout šifrované zařízení: %s"
@@ -268,23 +162,17 @@ msgstr "Nedaří se odemknout šifrované zařízení: %s"
 msgid "Unlock"
 msgstr "Odemknout"
 
-msgid "Unlock encrypted device"
-msgstr "Odemknout šifrované zařízení"
-
 msgid "Unlocked"
 msgstr "Odemčeno"
 
-msgid "Unlocking ..."
-msgstr "Odemykání…"
+msgid "Version"
+msgstr ""
 
-msgid "Upload header backup file"
-msgstr "Nahrát soubor se zálohou hlavičky"
+msgid "aes-cbc-essiv:sha256"
+msgstr ""
 
-msgid "Uploading header backup file ..."
-msgstr "Nahrávání souboru se zálohou hlavičky…"
+msgid "aes-xts-plain64 (default)"
+msgstr ""
 
-msgid "Yes"
-msgstr "Ano"
-
-msgid "n/a"
-msgstr "n/a"
+msgid "device"
+msgstr ""

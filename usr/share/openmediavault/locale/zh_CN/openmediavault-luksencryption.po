@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
 # songming <by@songming.me>, 2015
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-12 13:04-0600\n"
+"POT-Creation-Date: 2022-02-08 16:35-0600\n"
 "PO-Revision-Date: 2017-09-22 17:18+0000\n"
 "Last-Translator: songming <by@songming.me>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_CN/)\n"
@@ -24,44 +24,32 @@ msgstr "%s不是有效的LUKS header备份文件"
 msgid "Add"
 msgstr "添加"
 
-msgid "Add passphrase"
-msgstr "添加密钥"
-
-msgid "Backup header"
-msgstr "备份header"
-
-msgid "Cancel"
-msgstr "取消"
+msgid "Are you sure you want to delete to this device?"
+msgstr ""
 
 msgid "Change"
 msgstr "变更"
 
-msgid "Change passphrase"
-msgstr "变更密钥"
-
-msgid "Choose a slot to kill ..."
-msgstr "选择slot并销毁 ..."
+msgid "Cipher"
+msgstr ""
 
 msgid "Confirm passphrase"
 msgstr "确认密钥"
 
-msgid "Confirmation"
-msgstr "确认"
-
 msgid "Create"
 msgstr "创建"
 
-msgid "Create encrypted device"
-msgstr "创建加密设备"
+msgid "Created encrypted device."
+msgstr ""
 
-msgid "Current passphrase"
-msgstr "当前密钥"
+msgid "Current Passphrase"
+msgstr ""
 
-msgid "Decrypted device"
-msgstr "已加密设备"
+msgid "Decrypted Device"
+msgstr ""
 
-msgid "Delete encrypted device"
-msgstr "删除加密设备"
+msgid "Delete"
+msgstr ""
 
 msgid "Detail"
 msgstr "细节"
@@ -69,148 +57,56 @@ msgstr "细节"
 msgid "Device"
 msgstr "设备"
 
-msgid ""
-"Do you really want to delete the encrypted device?<br/>The encryption key "
-"will be destroyed and all data will be lost."
-msgstr "你确认要删除该加密设备？<br/>加密密钥将失效，所有数据将丢失。"
-
-msgid ""
-"Do you really want to encrypt this device? Any existing data on it will be "
-"deleted."
-msgstr "你确认要加密该设备？加密将删除设备上所有数据。"
-
-msgid ""
-"Do you really want to kill this key slot? Ensure that you have another key "
-"which will unlock the device."
-msgstr "你确认要销毁该slot密钥？请确保你还有其它密钥来解锁设备。"
-
-msgid ""
-"Do you really want to remove this passphrase? Ensure that you have another "
-"passphrase which will unlock the device."
-msgstr "你确认要移除该密钥？请确认你还有其它密钥来解锁设备。"
-
-msgid ""
-"Do you really want to write the header to the device?<br/>Replacing the "
-"header will destroy existing key slots."
-msgstr "你确认要将header写入到该设备？<br/>覆写header将使已存在的slots密钥失效。"
-
-msgid "Encrypted Devices"
-msgstr "已加密设备"
-
-msgid "Encrypted device details"
-msgstr "加密设备细节"
+msgid "Device '%s' not found"
+msgstr ""
 
 msgid "Encryption"
 msgstr "加密"
 
-msgid "Enter an existing, valid passphrase that unlocks the device."
-msgstr "输入已存在的有效密钥解锁该设备。"
+msgid "Enter a new passphrase."
+msgstr ""
 
-msgid "Enter an existing, valid passphrase which you want to change."
-msgstr "输入你想变更的已有密钥。"
+msgid "Enter an existing passphrase that unlocks the device."
+msgstr ""
 
-msgid ""
-"Enter an existing, valid passphrase which you want to remove from the "
-"encrypted device."
-msgstr "输入你想从该加密设备移除的已有密钥。"
+msgid "Erase slot"
+msgstr ""
 
-msgid "Failed to add the passphrase to the encrypted device: %s"
-msgstr "向加密设备: %s添加密钥失败。"
-
-msgid "Failed to change the passphrase for the encrypted device: %s"
-msgstr "变更加密设备: %s密钥失败。"
-
-msgid "Failed to create encrypted device: %s"
-msgstr "创建加密设备: %s失败"
-
-msgid "Failed to extract the LUKS header from "
-msgstr "导出LUKS header失败"
-
-msgid "Failed to get list of devices"
-msgstr "获取设备列表失败"
-
-msgid "Failed to get list of encrypted devices"
-msgstr "获取加密设备列表失败"
-
-msgid "Failed to kill the key slot on the encrypted device: %s"
-msgstr "销毁加密设备: %s的slot密钥失败"
-
-msgid "Failed to remove the encrypted device: %s"
-msgstr "移除加密设备: %s失败"
-
-msgid "Failed to remove the passphrase from the encrypted device: %s"
-msgstr "移除加密设备: %s的密钥失败"
-
-msgid "Failed to restore the LUKS header to "
-msgstr "恢复LUKS header失败"
-
-msgid "Force"
-msgstr "强制"
-
-msgid "Header file"
-msgstr "Header文件"
+msgid "Key Slots In Use"
+msgstr ""
 
 msgid "Key slot"
 msgstr "slot密钥"
 
-msgid "Key slots in use"
-msgstr "slots密钥用量"
-
 msgid "Keys"
 msgstr "密钥"
 
-msgid "Kill"
-msgstr "销毁"
+msgid "LUKS Label"
+msgstr ""
 
-msgid "Kill key slot"
-msgstr "销毁slot密钥"
-
-msgid "Kill slot"
-msgstr "销毁slot"
+msgid "LUKS UUID"
+msgstr ""
 
 msgid "LUKS container on '%s' not found"
 msgstr "未找到'%s'LUKS容器"
 
-msgid "LUKS encrypted device %s [%s, %s]"
-msgstr "LUKS加密设备%s [%s, %s]"
+msgid "LUKS encrypted device %s[%s, %s]"
+msgstr ""
+
+msgid "Label"
+msgstr ""
 
 msgid "Lock"
 msgstr "加密"
 
-msgid "Locking device ..."
-msgstr "加密设备中 ..."
-
-msgid "New passphrase to add to the encrypted device"
-msgstr "添加新密钥到加密设备"
-
-msgid "New passphrase to replace the existing one (above)"
-msgstr "新密钥将取代已存在(上面所填)的密钥"
-
-msgid "No"
-msgstr "否"
-
-msgid "No encryption found on '%s'"
-msgstr "未发现加密的'%s'"
+msgid "New Passphrase"
+msgstr ""
 
 msgid "No storage device backend exists for device %s"
 msgstr ""
 
-msgid "OK"
-msgstr "OK"
-
-msgid ""
-"Overwrite the header even if the UUID from the backup doesn't match the "
-"device."
-msgstr "即使设备UUID与备份header不一致也覆写header。"
-
 msgid "Passphrase"
 msgstr "密钥"
-
-msgid "Passphrases don't match"
-msgstr "密钥不匹配"
-
-msgid "Recovery"
-msgstr "恢复"
 
 msgid "Referenced"
 msgstr "引用"
@@ -218,49 +114,47 @@ msgstr "引用"
 msgid "Remove"
 msgstr "移除"
 
-msgid "Remove passphrase"
-msgstr "移除密钥"
-
-msgid "Restore encrypted device header"
-msgstr "恢复加密设备的header"
-
-msgid "Restore header"
-msgstr "恢复header"
-
-msgid "Select a device ..."
-msgstr "选择设备 ..."
-
 msgid "Size"
 msgstr "大小"
-
-msgid "Success"
-msgstr "成功"
 
 msgid "Test"
 msgstr "测试"
 
-msgid "Test passphrase"
-msgstr "测试密钥"
-
 msgid "The UUID of the LUKS header backup file "
 msgstr "LUKS header备份文件的UUID"
 
-msgid ""
-"The key slot to kill. Use the 'Test passphrase' or 'Detail' functions to "
-"find out which slot you want to destroy."
-msgstr "使用‘密钥测试’或者‘细节’功能找到要销毁的slot密钥。"
+msgid "The key did not unlock any key slot on the device"
+msgstr ""
 
-msgid "The passphrase did not unlock any key slot on the device"
-msgstr "该密钥未能匹配设备上的任何slot密钥而解锁。"
+msgid "The passphrases must match."
+msgstr ""
 
-msgid "The passphrase successfully unlocked key slot "
-msgstr "该密钥成功匹配slot密钥而解锁"
+msgid "Unable to add the key to the encrypted device: %s"
+msgstr ""
 
-msgid "UUID"
-msgstr "UUID"
+msgid "Unable to change the key on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to create encrypted device: %s"
+msgstr ""
+
+msgid "Unable to erase the key slot on the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to extract the LUKS header from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to lock encrypted device: %s"
 msgstr "不能加密: %s设备"
+
+msgid "Unable to remove encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove the key from the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to restore the LUKS header to device: %s"
+msgstr ""
 
 msgid "Unable to unlock encrypted device: %s"
 msgstr "不能解锁: %s设备"
@@ -268,23 +162,17 @@ msgstr "不能解锁: %s设备"
 msgid "Unlock"
 msgstr "解锁"
 
-msgid "Unlock encrypted device"
-msgstr "解锁设备"
-
 msgid "Unlocked"
 msgstr "锁定"
 
-msgid "Unlocking ..."
-msgstr "解锁中 ..."
+msgid "Version"
+msgstr ""
 
-msgid "Upload header backup file"
-msgstr "上传备份header文件"
+msgid "aes-cbc-essiv:sha256"
+msgstr ""
 
-msgid "Uploading header backup file ..."
-msgstr "上传备份header文件中 ..."
+msgid "aes-xts-plain64 (default)"
+msgstr ""
 
-msgid "Yes"
-msgstr "是"
-
-msgid "n/a"
-msgstr "n/a"
+msgid "device"
+msgstr ""
