@@ -102,7 +102,7 @@ data:
             params:
               devicefile: "{{ _selected[0].devicefile }}"
             task: false
-            successUrl: /services/luks
+            successUrl: /storage/luks
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
