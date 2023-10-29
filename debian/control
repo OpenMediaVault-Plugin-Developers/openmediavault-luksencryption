@@ -2,7 +2,7 @@ Source: openmediavault-luksencryption
 Section: admin
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-Build-Depends: debhelper (>= 12)
+Build-Depends: debhelper (>= 13)
 Standards-Version: 4.3.0
 XB-Plugin-Section: filesystems
 
@@ -12,7 +12,7 @@ Depends: busybox,
          coreutils,
          cryptsetup,
          cryptsetup-bin,
-         openmediavault (>= 6.0.10),
+         openmediavault (>= 7),
          ${misc:Depends}
 Description:  OpenMediaVault LUKS encryption plugin
  LUKS is the standard for Linux hard disk encryption. By providing a
