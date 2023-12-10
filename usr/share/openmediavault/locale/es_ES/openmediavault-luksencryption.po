@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 16:35-0600\n"
+"POT-Creation-Date: 2023-12-10 08:29-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2015,2022\n"
-"Language-Team: Spanish (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/es/)\n"
+"Language-Team: Spanish (Spain) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "%s is not a valid LUKS header backup file"
@@ -60,6 +60,12 @@ msgstr "Disco"
 msgid "Device '%s' not found"
 msgstr "Dispositivo'%s' no encontrado"
 
+msgid "Encrypted device has been locked."
+msgstr ""
+
+msgid "Encrypted device has been unlocked."
+msgstr ""
+
 msgid "Encryption"
 msgstr "Cifrado"
 
@@ -98,6 +104,9 @@ msgstr "Etiqueta"
 
 msgid "Lock"
 msgstr "Bloquear"
+
+msgid "Lock encrypted device ..."
+msgstr ""
 
 msgid "New Passphrase"
 msgstr "Nueva contraseña"
@@ -161,6 +170,9 @@ msgstr "Imposible de desbloquear el disco cifrado: %s"
 
 msgid "Unlock"
 msgstr "Desbloquear"
+
+msgid "Unlock encrypted device ..."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Desbloqueado"

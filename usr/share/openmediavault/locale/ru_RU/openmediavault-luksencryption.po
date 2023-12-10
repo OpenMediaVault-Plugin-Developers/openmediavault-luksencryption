@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 16:35-0600\n"
+"POT-Creation-Date: 2023-12-10 08:29-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Дмитрий <bardimnik@rambler.ru>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ru/)\n"
@@ -61,6 +61,12 @@ msgstr "Устройство"
 msgid "Device '%s' not found"
 msgstr "Устройство '%s' не найдено"
 
+msgid "Encrypted device has been locked."
+msgstr ""
+
+msgid "Encrypted device has been unlocked."
+msgstr ""
+
 msgid "Encryption"
 msgstr "Шифрование"
 
@@ -99,6 +105,9 @@ msgstr "Метка"
 
 msgid "Lock"
 msgstr "Заблокирован"
+
+msgid "Lock encrypted device ..."
+msgstr ""
 
 msgid "New Passphrase"
 msgstr "Новая парольная фраза"
@@ -162,6 +171,9 @@ msgstr "Не удалось разблокировать зашифрованн�
 
 msgid "Unlock"
 msgstr "Разблокировать"
+
+msgid "Unlock encrypted device ..."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Разблокирован"

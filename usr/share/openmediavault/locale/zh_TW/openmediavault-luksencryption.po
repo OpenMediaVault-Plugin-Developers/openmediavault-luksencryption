@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 16:35-0600\n"
+"POT-Creation-Date: 2023-12-10 08:29-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2016,2022\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_TW/)\n"
@@ -60,6 +60,12 @@ msgstr "裝置"
 msgid "Device '%s' not found"
 msgstr "裝置 '%s' 沒有找到"
 
+msgid "Encrypted device has been locked."
+msgstr ""
+
+msgid "Encrypted device has been unlocked."
+msgstr ""
+
 msgid "Encryption"
 msgstr "加密"
 
@@ -98,6 +104,9 @@ msgstr "標籤"
 
 msgid "Lock"
 msgstr "鎖住"
+
+msgid "Lock encrypted device ..."
+msgstr ""
 
 msgid "New Passphrase"
 msgstr "新通行片語"
@@ -161,6 +170,9 @@ msgstr "無法開鎖被加密裝置：%s"
 
 msgid "Unlock"
 msgstr "開鎖"
+
+msgid "Unlock encrypted device ..."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "已開鎖"

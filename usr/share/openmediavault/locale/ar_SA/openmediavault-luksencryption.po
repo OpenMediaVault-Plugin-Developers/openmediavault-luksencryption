@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 16:35-0600\n"
+"POT-Creation-Date: 2023-12-10 08:29-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: omv nas <myomv100@gmail.com>, 2023\n"
 "Language-Team: Arabic (Saudi Arabia) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ar_SA/)\n"
@@ -60,6 +60,12 @@ msgstr "القرص"
 msgid "Device '%s' not found"
 msgstr "القرص \"%s\" غير موجود"
 
+msgid "Encrypted device has been locked."
+msgstr ""
+
+msgid "Encrypted device has been unlocked."
+msgstr ""
+
 msgid "Encryption"
 msgstr "تشفير"
 
@@ -98,6 +104,9 @@ msgstr "علامة"
 
 msgid "Lock"
 msgstr "قفل"
+
+msgid "Lock encrypted device ..."
+msgstr ""
 
 msgid "New Passphrase"
 msgstr "عبارة مرور جديدة"
@@ -161,6 +170,9 @@ msgstr "تعذر فتح قفل القرص المشفر: %s"
 
 msgid "Unlock"
 msgstr "فتح القفل"
+
+msgid "Unlock encrypted device ..."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "غير مقفل"

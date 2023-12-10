@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 16:35-0600\n"
+"POT-Creation-Date: 2023-12-10 08:29-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2015,2023\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/en_GB/)\n"
@@ -60,6 +60,12 @@ msgstr "Device"
 msgid "Device '%s' not found"
 msgstr "Device '%s' not found"
 
+msgid "Encrypted device has been locked."
+msgstr ""
+
+msgid "Encrypted device has been unlocked."
+msgstr ""
+
 msgid "Encryption"
 msgstr "Encryption"
 
@@ -98,6 +104,9 @@ msgstr "Label"
 
 msgid "Lock"
 msgstr "Lock"
+
+msgid "Lock encrypted device ..."
+msgstr ""
 
 msgid "New Passphrase"
 msgstr "New Passphrase"
@@ -161,6 +170,9 @@ msgstr "Unable to unlock encrypted device: %s"
 
 msgid "Unlock"
 msgstr "Unlock"
+
+msgid "Unlock encrypted device ..."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Unlocked"

@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 16:35-0600\n"
-"PO-Revision-Date: 2017-09-23 21:48+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
-"Language-Team: Czech (Czech Republic) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/cs_CZ/)\n"
+"POT-Creation-Date: 2023-12-10 08:29-0600\n"
+"PO-Revision-Date: 2015-11-07 02:25+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2015-2016\n"
+"Language-Team: Czech (Czech Republic) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/cs_CZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -60,6 +60,12 @@ msgstr "Zařízení"
 msgid "Device '%s' not found"
 msgstr ""
 
+msgid "Encrypted device has been locked."
+msgstr ""
+
+msgid "Encrypted device has been unlocked."
+msgstr ""
+
 msgid "Encryption"
 msgstr "Šifrování"
 
@@ -98,6 +104,9 @@ msgstr ""
 
 msgid "Lock"
 msgstr "Uzamknout"
+
+msgid "Lock encrypted device ..."
+msgstr ""
 
 msgid "New Passphrase"
 msgstr ""
@@ -161,6 +170,9 @@ msgstr "Nedaří se odemknout šifrované zařízení: %s"
 
 msgid "Unlock"
 msgstr "Odemknout"
+
+msgid "Unlock encrypted device ..."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Odemčeno"
