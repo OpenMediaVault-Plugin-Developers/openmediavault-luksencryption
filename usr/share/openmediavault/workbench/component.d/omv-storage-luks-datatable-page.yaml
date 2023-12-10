@@ -23,7 +23,7 @@ data:
         sortable: true
         cellTemplateName: binaryUnit
       - name: _("Unlocked")
-        prop: unlock
+        prop: unlocked
         flexGrow: 1
         cellTemplateName: checkIcon
       - name: _("Decrypted Device")
