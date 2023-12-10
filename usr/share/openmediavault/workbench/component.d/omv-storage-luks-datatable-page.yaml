@@ -83,7 +83,8 @@ data:
                   request:
                     service: LuksMgmt
                     method: openContainer
-                successUrl: /storage/luks
+                    progressMessage: _("Unlock encrypted device ...")
+                    successNotification: _("Encrypted device has been unlocked.")
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
@@ -101,8 +102,8 @@ data:
             method: closeContainer
             params:
               devicefile: "{{ _selected[0].devicefile }}"
-            task: false
-            successUrl: /storage/luks
+            progressMessage: _("Lock encrypted device ...")
+            successNotification: _("Encrypted device has been locked.")
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
