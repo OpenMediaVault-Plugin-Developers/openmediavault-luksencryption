@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# kochin <kochinc@outlook.com>, 2016
+# kochin <kochinc@outlook.com>, 2016,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-08 16:35-0600\n"
-"PO-Revision-Date: 2017-09-22 17:18+0000\n"
-"Last-Translator: kochin <kochinc@outlook.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_TW/)\n"
+"PO-Revision-Date: 2015-11-07 02:25+0000\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2016,2022\n"
+"Language-Team: Chinese (Taiwan) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,13 +25,13 @@ msgid "Add"
 msgstr "新增"
 
 msgid "Are you sure you want to delete to this device?"
-msgstr ""
+msgstr "您確定要刪除這個裝置？"
 
 msgid "Change"
 msgstr "變更"
 
 msgid "Cipher"
-msgstr ""
+msgstr "加密演算法"
 
 msgid "Confirm passphrase"
 msgstr "確認密碼短語"
@@ -40,16 +40,16 @@ msgid "Create"
 msgstr "新建"
 
 msgid "Created encrypted device."
-msgstr ""
+msgstr "已建立加密裝置。"
 
 msgid "Current Passphrase"
-msgstr ""
+msgstr "目前的通行片語"
 
 msgid "Decrypted Device"
-msgstr ""
+msgstr "已解密裝置"
 
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 msgid "Detail"
 msgstr "詳細資料"
@@ -58,22 +58,22 @@ msgid "Device"
 msgstr "裝置"
 
 msgid "Device '%s' not found"
-msgstr ""
+msgstr "裝置 '%s' 沒有找到"
 
 msgid "Encryption"
 msgstr "加密"
 
 msgid "Enter a new passphrase."
-msgstr ""
+msgstr "輸入一則新的通行片語。"
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr ""
+msgstr "輸入解鎖該裝置的現存通行片語。"
 
 msgid "Erase slot"
-msgstr ""
+msgstr "抹除鑰槽"
 
 msgid "Key Slots In Use"
-msgstr ""
+msgstr "使用中之鑰槽"
 
 msgid "Key slot"
 msgstr "鑰槽"
@@ -82,25 +82,25 @@ msgid "Keys"
 msgstr "金鑰"
 
 msgid "LUKS Label"
-msgstr ""
+msgstr "LUKS 標籤"
 
 msgid "LUKS UUID"
-msgstr ""
+msgstr "LUKS UUID"
 
 msgid "LUKS container on '%s' not found"
 msgstr "找不到在 '%s' 上的 LUKS 容器"
 
 msgid "LUKS encrypted device %s[%s, %s]"
-msgstr ""
+msgstr "LUKS 被加密裝置 %s[%s, %s]"
 
 msgid "Label"
-msgstr ""
+msgstr "標籤"
 
 msgid "Lock"
 msgstr "鎖住"
 
 msgid "New Passphrase"
-msgstr ""
+msgstr "新通行片語"
 
 msgid "No storage device backend exists for device %s"
 msgstr "沒有儲存裝置後台存在給裝置 %s"
@@ -124,37 +124,37 @@ msgid "The UUID of the LUKS header backup file "
 msgstr "LUKS 標頭檔案的 UUID"
 
 msgid "The key did not unlock any key slot on the device"
-msgstr ""
+msgstr "此金鑰無法打開裝置上的任何鑰槽"
 
 msgid "The passphrases must match."
-msgstr ""
+msgstr "通行片語必須相符。"
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr ""
+msgstr "無法在被加密的裝置增加金鑰：%s"
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr ""
+msgstr "無法在被加密的裝置改變金鑰：%s"
 
 msgid "Unable to create encrypted device: %s"
-msgstr ""
+msgstr "無法建立被加密裝置：%s"
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
-msgstr ""
+msgstr "無法在被加密的裝置抹除鑰槽：%s"
 
 msgid "Unable to extract the LUKS header from the encrypted device: %s"
-msgstr ""
+msgstr "無法從被加密的裝置擷取 LUKS 標頭：%s"
 
 msgid "Unable to lock encrypted device: %s"
 msgstr "無法鎖住被加密裝置：%s"
 
 msgid "Unable to remove encrypted device: %s"
-msgstr ""
+msgstr "無法移除被加密裝置：%s"
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr ""
+msgstr "無法從被加密的裝置移除金鑰：%s"
 
 msgid "Unable to restore the LUKS header to device: %s"
-msgstr ""
+msgstr "無法還原 LUKS 標頭到裝置上：%s"
 
 msgid "Unable to unlock encrypted device: %s"
 msgstr "無法開鎖被加密裝置：%s"
@@ -166,13 +166,13 @@ msgid "Unlocked"
 msgstr "已開鎖"
 
 msgid "Version"
-msgstr ""
+msgstr "版本"
 
 msgid "aes-cbc-essiv:sha256"
-msgstr ""
+msgstr "aes-cbc-essiv:sha256"
 
 msgid "aes-xts-plain64 (default)"
-msgstr ""
+msgstr "aes-xts-plain64 (預設)"
 
 msgid "device"
-msgstr ""
+msgstr "裝置"

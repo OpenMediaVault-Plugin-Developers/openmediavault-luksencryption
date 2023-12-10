@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2016
-# WastlJ, 2015
+# Dampflok_HD, 2023
+# Ettore Atalan <atalanttore@googlemail.com>, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-08 16:35-0600\n"
-"PO-Revision-Date: 2017-09-22 17:18+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/de/)\n"
+"PO-Revision-Date: 2015-11-07 02:25+0000\n"
+"Last-Translator: Dampflok_HD, 2023\n"
+"Language-Team: German (Germany) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s is not a valid LUKS header backup file"
@@ -32,25 +32,25 @@ msgid "Change"
 msgstr "Ändern"
 
 msgid "Cipher"
-msgstr ""
+msgstr "Verschlüsselungsverfahren"
 
 msgid "Confirm passphrase"
-msgstr "Passwort bestätigen"
+msgstr "Passphrase bestätigen"
 
 msgid "Create"
 msgstr "Erstellen"
 
 msgid "Created encrypted device."
-msgstr ""
+msgstr "Verschlüsseltes Gerät erstellt."
 
 msgid "Current Passphrase"
-msgstr ""
+msgstr "Aktuelle Passphrase"
 
 msgid "Decrypted Device"
-msgstr ""
+msgstr "Entschlüsseltes Gerät"
 
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 msgid "Detail"
 msgstr "Detail"
@@ -68,7 +68,7 @@ msgid "Enter a new passphrase."
 msgstr ""
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr ""
+msgstr "Geben Sie ein vorhandenes Passwort ein, um das Gerät zu entschlüsseln."
 
 msgid "Erase slot"
 msgstr ""
@@ -86,28 +86,28 @@ msgid "LUKS Label"
 msgstr ""
 
 msgid "LUKS UUID"
-msgstr ""
+msgstr "LUKS UUID"
 
 msgid "LUKS container on '%s' not found"
 msgstr "LUKS-Container auf '%s' nicht gefunden"
 
 msgid "LUKS encrypted device %s[%s, %s]"
-msgstr ""
+msgstr "LUKS verschlüsseltes Gerät %s[%s,%s]"
 
 msgid "Label"
 msgstr ""
 
 msgid "Lock"
-msgstr "Verschlüsseln"
+msgstr "Sperren"
 
 msgid "New Passphrase"
-msgstr ""
+msgstr "Neue Passphrase"
 
 msgid "No storage device backend exists for device %s"
 msgstr ""
 
 msgid "Passphrase"
-msgstr "Passwort"
+msgstr "Passphrase"
 
 msgid "Referenced"
 msgstr "Referenzierend"
@@ -128,16 +128,16 @@ msgid "The key did not unlock any key slot on the device"
 msgstr ""
 
 msgid "The passphrases must match."
-msgstr ""
+msgstr "Die Passphrasen müssen übereinstimmen."
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr ""
+msgstr "Fehler beim Hinzufügen des Passworts zum verschlüsselten Gerät: %s"
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr ""
+msgstr "Fehler beim Hinzufügen des Passworts zum verschlüsselten Gerät: %s"
 
 msgid "Unable to create encrypted device: %s"
-msgstr ""
+msgstr "Das verschlüsselte Gerät kann nicht erstellt werden: %s"
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
 msgstr ""
@@ -149,10 +149,10 @@ msgid "Unable to lock encrypted device: %s"
 msgstr "Verschlüsseln von verschlüsseltem Gerät %s nicht möglich"
 
 msgid "Unable to remove encrypted device: %s"
-msgstr ""
+msgstr "Das verschlüsselte Gerät kann nicht entfernt werden: %s"
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr ""
+msgstr "Das Passwort kann nicht vom verschlüsselten Gerät entfernt werden: %s"
 
 msgid "Unable to restore the LUKS header to device: %s"
 msgstr ""
@@ -161,13 +161,13 @@ msgid "Unable to unlock encrypted device: %s"
 msgstr "Entschlüsseln von verschlüsseltem Gerät %s nicht möglich"
 
 msgid "Unlock"
-msgstr "Entschlüsseln"
+msgstr "Entsperren"
 
 msgid "Unlocked"
-msgstr "Entschlüsselt"
+msgstr "Entsperrt"
 
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 msgid "aes-cbc-essiv:sha256"
 msgstr ""
@@ -176,4 +176,4 @@ msgid "aes-xts-plain64 (default)"
 msgstr ""
 
 msgid "device"
-msgstr ""
+msgstr "Gerät"
