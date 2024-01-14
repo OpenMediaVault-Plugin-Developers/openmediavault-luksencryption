@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-10 08:29-0600\n"
+"POT-Creation-Date: 2024-01-14 11:19-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Дмитрий <bardimnik@rambler.ru>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ru/)\n"
@@ -27,6 +27,9 @@ msgstr "Добавить"
 
 msgid "Are you sure you want to delete to this device?"
 msgstr "Вы уверены, что хотите удалить на это устройство?"
+
+msgid "Backup header"
+msgstr ""
 
 msgid "Change"
 msgstr "Изменить"

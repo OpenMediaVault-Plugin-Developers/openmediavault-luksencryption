@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# songming <by@songming.me>, 2015,2022
+# songming <by@songming.me>, 2015,2022-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-10 08:29-0600\n"
+"POT-Creation-Date: 2024-01-14 11:19-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: songming <by@songming.me>, 2015,2022\n"
+"Last-Translator: songming <by@songming.me>, 2015,2022-2023\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,6 +26,9 @@ msgstr "添加"
 
 msgid "Are you sure you want to delete to this device?"
 msgstr "您确定要删除这个设备吗？"
+
+msgid "Backup header"
+msgstr ""
 
 msgid "Change"
 msgstr "变更"
@@ -61,10 +64,10 @@ msgid "Device '%s' not found"
 msgstr "设备'%s'没有找到"
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "加密设备已锁定。"
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "加密设备已解锁。"
 
 msgid "Encryption"
 msgstr "加密"
@@ -106,7 +109,7 @@ msgid "Lock"
 msgstr "加密"
 
 msgid "Lock encrypted device ..."
-msgstr ""
+msgstr "锁加密设备中 ..."
 
 msgid "New Passphrase"
 msgstr "新密钥"
@@ -172,7 +175,7 @@ msgid "Unlock"
 msgstr "解锁"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "解锁加密设备中 ..."
 
 msgid "Unlocked"
 msgstr "锁定"

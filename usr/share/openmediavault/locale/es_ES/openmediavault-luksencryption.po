@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-10 08:29-0600\n"
+"POT-Creation-Date: 2024-01-14 11:19-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2015,2022\n"
 "Language-Team: Spanish (Spain) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/es_ES/)\n"
@@ -26,6 +26,9 @@ msgstr "Añadir"
 
 msgid "Are you sure you want to delete to this device?"
 msgstr "¿está seguro de que desea borrar este dispositivo?"
+
+msgid "Backup header"
+msgstr ""
 
 msgid "Change"
 msgstr "Cambiar"
