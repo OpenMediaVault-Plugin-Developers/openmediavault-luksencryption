@@ -334,6 +334,15 @@ data:
                         method: killContainerKeySlot
                     successUrl: /storage/luks
       - type: iconButton
+        icon: mdi:download
+        tooltip: _("Backup header")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: url
+          url: '/download?service=LuksMgmt&method=backupContainerHeader&params={"devicefile":"{{ _selected[0].devicefile }}"}'
+      - type: iconButton
         tooltip: _("Detail")
         icon: mdi:format-list-bulleted
         execute:
