@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# Артур Мудрых <arturmon82@gmail.com>, 2017,2019
+# Artur Mudrykh <arturmon82@gmail.com>, 2017,2019
 # Дмитрий <bardimnik@rambler.ru>, 2023
 msgid ""
 msgstr ""

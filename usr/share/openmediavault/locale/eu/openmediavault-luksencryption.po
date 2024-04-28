@@ -3,27 +3,25 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# Axel Cantenys, 2017
-# Romain LD, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-14 11:19-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: Romain LD, 2024\n"
-"Language-Team: French (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/fr/)\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Basque (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Language: eu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s is not a valid LUKS header backup file"
-msgstr "%s n'est pas un fichier d'en-tête LUKS valide"
+msgstr ""
 
 msgid "Add"
-msgstr "Ajouter"
+msgstr ""
 
 msgid "Are you sure you want to delete to this device?"
 msgstr ""
@@ -32,46 +30,46 @@ msgid "Backup header"
 msgstr ""
 
 msgid "Change"
-msgstr "Changer"
+msgstr ""
 
 msgid "Cipher"
-msgstr "Chiffrer"
+msgstr ""
 
 msgid "Confirm passphrase"
-msgstr "Confirmez la phrase secrète"
+msgstr ""
 
 msgid "Create"
-msgstr "Créer"
+msgstr ""
 
 msgid "Created encrypted device."
-msgstr "Dispositif chiffré créé."
+msgstr ""
 
 msgid "Current Passphrase"
 msgstr ""
 
 msgid "Decrypted Device"
-msgstr "Dispositif déchiffré"
+msgstr ""
 
 msgid "Delete"
-msgstr "Supprimer"
+msgstr ""
 
 msgid "Detail"
-msgstr "Détail"
+msgstr ""
 
 msgid "Device"
-msgstr "Dispositif"
+msgstr ""
 
 msgid "Device '%s' not found"
 msgstr ""
 
 msgid "Encrypted device has been locked."
-msgstr "Le dispositif chiffré a été verrouillé."
+msgstr ""
 
 msgid "Encrypted device has been unlocked."
-msgstr "Le dispositif chiffré a été déverrouillé."
+msgstr ""
 
 msgid "Encryption"
-msgstr "Chiffrement"
+msgstr ""
 
 msgid "Enter a new passphrase."
 msgstr ""
@@ -86,10 +84,10 @@ msgid "Key Slots In Use"
 msgstr ""
 
 msgid "Key slot"
-msgstr "Emplacement de clé"
+msgstr ""
 
 msgid "Keys"
-msgstr "Clés"
+msgstr ""
 
 msgid "LUKS Label"
 msgstr ""
@@ -98,43 +96,43 @@ msgid "LUKS UUID"
 msgstr ""
 
 msgid "LUKS container on '%s' not found"
-msgstr "Conteneur LUKS sur « %s » non trouvé"
+msgstr ""
 
 msgid "LUKS encrypted device %s[%s, %s]"
-msgstr "Dispositif chiffré LUKS %s[%s,%s]"
+msgstr ""
 
 msgid "Label"
 msgstr ""
 
 msgid "Lock"
-msgstr "Verouiller"
+msgstr ""
 
 msgid "Lock encrypted device ..."
-msgstr "Verrouillage du dispositif chiffré..."
+msgstr ""
 
 msgid "New Passphrase"
 msgstr ""
 
 msgid "No storage device backend exists for device %s"
-msgstr "Aucun système dorsal du périphérique de stockage n'existe pour le dispositif %s"
+msgstr ""
 
 msgid "Passphrase"
-msgstr "Phrase secrète"
+msgstr ""
 
 msgid "Referenced"
-msgstr "Référencé"
+msgstr ""
 
 msgid "Remove"
-msgstr "Supprimer"
+msgstr ""
 
 msgid "Size"
-msgstr "Taille"
+msgstr ""
 
 msgid "Test"
-msgstr "Test"
+msgstr ""
 
 msgid "The UUID of the LUKS header backup file "
-msgstr "L'identifiant UUID de sauvegarde de l'en-tête LUKS"
+msgstr ""
 
 msgid "The key did not unlock any key slot on the device"
 msgstr ""
@@ -143,43 +141,43 @@ msgid "The passphrases must match."
 msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr "Impossible d'ajouter une clé au dispositif chiffré : %s"
+msgstr ""
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr "Impossible de modifier la clé du dispositif chiffré : %s"
+msgstr ""
 
 msgid "Unable to create encrypted device: %s"
-msgstr "Impossilbe de créer le dispositif chiffré : %s"
+msgstr ""
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
-msgstr "Impossible d'effacer l'emplacement de clé sur le dispositif chiffré : %s"
+msgstr ""
 
 msgid "Unable to extract the LUKS header from the encrypted device: %s"
-msgstr "Impossible d'extraire l'en-tête LUKS du dispositif chiffré : %s"
+msgstr ""
 
 msgid "Unable to lock encrypted device: %s"
-msgstr "Impossible de verrouiller le dispositif chiffré :\n%s"
+msgstr ""
 
 msgid "Unable to remove encrypted device: %s"
-msgstr "Impossible de retirer le dispositif chiffré : %s"
+msgstr ""
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr "Impossible de retirer la clé du dispositif chiffré"
+msgstr ""
 
 msgid "Unable to restore the LUKS header to device: %s"
 msgstr ""
 
 msgid "Unable to unlock encrypted device: %s"
-msgstr "Impossible de déverrouiller le dispositif chiffré : \n%s"
+msgstr ""
 
 msgid "Unlock"
-msgstr "Déverrouiller"
+msgstr ""
 
 msgid "Unlock encrypted device ..."
-msgstr "Déverrouillage du dispositif chiffré..."
+msgstr ""
 
 msgid "Unlocked"
-msgstr "Déverrouillé"
+msgstr ""
 
 msgid "Version"
 msgstr ""

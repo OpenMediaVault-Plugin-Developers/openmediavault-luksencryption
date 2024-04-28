@@ -28,7 +28,7 @@ msgid "Are you sure you want to delete to this device?"
 msgstr "¿está seguro de que desea borrar este dispositivo?"
 
 msgid "Backup header"
-msgstr ""
+msgstr "Salvar la cabecera"
 
 msgid "Change"
 msgstr "Cambiar"
@@ -64,10 +64,10 @@ msgid "Device '%s' not found"
 msgstr "Dispositivo'%s' no encontrado"
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "El dispositivo encriptado ha sido bloqueado."
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "El dispositivo encriptado ha sido desbloqueado."
 
 msgid "Encryption"
 msgstr "Cifrado"
@@ -109,7 +109,7 @@ msgid "Lock"
 msgstr "Bloquear"
 
 msgid "Lock encrypted device ..."
-msgstr ""
+msgstr "Bloqueando dispositivo encriptado ..."
 
 msgid "New Passphrase"
 msgstr "Nueva contraseña"
@@ -175,7 +175,7 @@ msgid "Unlock"
 msgstr "Desbloquear"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "Desbloqueando dispositivo encriptado ..."
 
 msgid "Unlocked"
 msgstr "Desbloqueado"

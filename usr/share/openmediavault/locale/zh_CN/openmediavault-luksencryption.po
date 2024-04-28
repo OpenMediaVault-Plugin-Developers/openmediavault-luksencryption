@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# songming <by@songming.me>, 2015,2022-2023
+# songming <by@songming.me>, 2015,2022-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-14 11:19-0600\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: songming <by@songming.me>, 2015,2022-2023\n"
+"Last-Translator: songming <by@songming.me>, 2015,2022-2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgid "Are you sure you want to delete to this device?"
 msgstr "您确定要删除这个设备吗？"
 
 msgid "Backup header"
-msgstr ""
+msgstr "备份 header"
 
 msgid "Change"
 msgstr "变更"
