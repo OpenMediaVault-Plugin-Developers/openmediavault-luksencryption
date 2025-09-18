@@ -500,24 +500,23 @@ class Container extends \OMV\System\Storage\StorageDevice {
      * TODO: change from using [dev]-crypt as the mapper name to the UUID of
      *       container instead (unique, probably will be needed for crypttab)
      */
-    public function open($key, $keyIsFile = FALSE) {
-        if (TRUE === $keyIsFile) {
-            $cmd = sprintf("cryptsetup luksOpen %s %s-crypt --key-file %s",
-                escapeshellarg($this->getDeviceFile()),
-                escapeshellarg($this->generateDecryptedName()),
-                escapeshellarg($key));
+    public function open($key, $keyIsFile = false, $allowDiscards = false) {
+        $base = sprintf(
+            'cryptsetup open --type luks%s %s %s-crypt',
+            $allowDiscards ? ' --allow-discards' : '',
+            escapeshellarg($this->getDeviceFile()),
+            escapeshellarg($this->generateDecryptedName())
+        );
+        if ($keyIsFile) {
+            $cmd = sprintf('%s --key-file %s', $base, escapeshellarg($key));
         } else {
-            $cmd = sprintf("echo -n %s | ".
-                "cryptsetup luksOpen %s %s-crypt --key-file=-",
-                escapeshellarg($key),
-                escapeshellarg($this->getDeviceFile()),
-                escapeshellarg($this->generateDecryptedName()));
+            $cmd = sprintf('printf %s | %s --key-file=-', escapeshellarg($key), $base);
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
         $process->execute($output, $exitStatus);
         $this->refresh();
-        return TRUE;
+        return $exitStatus === 0;
     }
 
     /**

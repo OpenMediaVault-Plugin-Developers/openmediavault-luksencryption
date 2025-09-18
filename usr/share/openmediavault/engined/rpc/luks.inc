@@ -238,8 +238,9 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 $key = $params['passphrase'];
                 $keyIsFile = FALSE;
             }
+            $discards = !empty($params['discards']);
             try {
-                $luks->open($key, $keyIsFile);
+                $luks->open($key, $keyIsFile, $discards);
             } catch(Exception $e) {
                 throw new \OMV\Exception(sprintf(gettext("Unable to unlock encrypted device: %s"),
                     $e->getMessage()));

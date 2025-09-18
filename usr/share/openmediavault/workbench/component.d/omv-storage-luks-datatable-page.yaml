@@ -72,6 +72,11 @@ data:
                 value: ""
                 validators:
                   required: true
+              - type: checkbox
+                name: discards
+                value: false
+                label: _("Allow discards")
+                hint: _("This command can have a negative security impact because it can make filesystem-level operations visible on the physical device.")
               - type: hidden
                 name: uuid
                 value: "{{ _selected[0].uuid }}"

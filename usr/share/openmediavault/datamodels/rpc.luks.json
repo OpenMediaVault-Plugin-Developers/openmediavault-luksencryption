@@ -74,6 +74,10 @@
 			    "type": "string",
 				"required": false
 			},
+			"discards": {
+			    "type": "string",
+				"required": false
+			},
 			"keyfile": {
 			    "type": "string",
 				"required": false
