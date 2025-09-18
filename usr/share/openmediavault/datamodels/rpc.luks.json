@@ -79,7 +79,7 @@
           "required": false
         },
         "discards": {
-          "type": "string",
+          "type": "boolean",
           "required": false
         },
         "keyfile": {
