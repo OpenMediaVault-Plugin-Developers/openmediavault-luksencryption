@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 11:19-0600\n"
+"POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Polish (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/pl/)\n"
@@ -21,6 +21,9 @@ msgid "%s is not a valid LUKS header backup file"
 msgstr ""
 
 msgid "Add"
+msgstr ""
+
+msgid "Allow discards"
 msgstr ""
 
 msgid "Are you sure you want to delete to this device?"
@@ -138,6 +141,11 @@ msgid "The key did not unlock any key slot on the device"
 msgstr ""
 
 msgid "The passphrases must match."
+msgstr ""
+
+msgid ""
+"This command can have a negative security impact because it can make "
+"filesystem-level operations visible on the physical device."
 msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"

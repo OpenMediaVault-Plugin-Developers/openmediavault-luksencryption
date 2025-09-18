@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
+# Giovanni Scafora <scafora.giovanni@gmail.com>, 2025
 # Paolo Velati <paolo.velati@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 11:19-0600\n"
+"POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: Paolo Velati <paolo.velati@gmail.com>, 2016-2017\n"
+"Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2025\n"
 "Language-Team: Italian (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,22 +20,25 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "%s is not a valid LUKS header backup file"
-msgstr ""
+msgstr "%s non è un file valido di backup dell'header LUKS"
 
 msgid "Add"
 msgstr "Aggiungi"
 
-msgid "Are you sure you want to delete to this device?"
+msgid "Allow discards"
 msgstr ""
 
+msgid "Are you sure you want to delete to this device?"
+msgstr "Vuoi davvero eliminarlo da questo dispositivo?"
+
 msgid "Backup header"
-msgstr ""
+msgstr "Header di backup"
 
 msgid "Change"
 msgstr "Cambia"
 
 msgid "Cipher"
-msgstr ""
+msgstr "Cifra"
 
 msgid "Confirm passphrase"
 msgstr "Conferma passphrase"
@@ -43,16 +47,16 @@ msgid "Create"
 msgstr "Crea"
 
 msgid "Created encrypted device."
-msgstr ""
+msgstr "È stato creato un dispositivo crittografato."
 
 msgid "Current Passphrase"
-msgstr ""
+msgstr "Passphrase attuale"
 
 msgid "Decrypted Device"
-msgstr ""
+msgstr "Dispositivo decriptato"
 
 msgid "Delete"
-msgstr ""
+msgstr "Elimina"
 
 msgid "Detail"
 msgstr "Dettagli"
@@ -61,28 +65,28 @@ msgid "Device"
 msgstr "Dispositivo"
 
 msgid "Device '%s' not found"
-msgstr ""
+msgstr "Il dispositivo '%s' non è stato trovato"
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "Il dispositivo crittografato è stato bloccato."
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "Il dispositivo crittografato è stato sbloccato."
 
 msgid "Encryption"
 msgstr "Crittografia"
 
 msgid "Enter a new passphrase."
-msgstr ""
+msgstr "Inserisci una nuova passphrase."
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr ""
+msgstr "Inserisci una passphrase esistente che sblocchi il dispositivo."
 
 msgid "Erase slot"
-msgstr ""
+msgstr "Cancella slot"
 
 msgid "Key Slots In Use"
-msgstr ""
+msgstr "Slot chiave in uso"
 
 msgid "Key slot"
 msgstr "Slot chiave"
@@ -91,37 +95,37 @@ msgid "Keys"
 msgstr "Chiavi"
 
 msgid "LUKS Label"
-msgstr ""
+msgstr "Etichetta LUKS"
 
 msgid "LUKS UUID"
-msgstr ""
+msgstr "LUKS UUID"
 
 msgid "LUKS container on '%s' not found"
-msgstr "Container LUKS su '%s' non trovato"
+msgstr "Container LUKS su '%s' non è stato trovato"
 
 msgid "LUKS encrypted device %s[%s, %s]"
-msgstr ""
+msgstr "Dispositivo crittografato LUKS %s[%s, %s]"
 
 msgid "Label"
-msgstr ""
+msgstr "Etichetta"
 
 msgid "Lock"
 msgstr "Blocca"
 
 msgid "Lock encrypted device ..."
-msgstr ""
+msgstr "Sto bloccando il dispositivo crittografato ..."
 
 msgid "New Passphrase"
-msgstr ""
+msgstr "Nuova passphrase"
 
 msgid "No storage device backend exists for device %s"
-msgstr ""
+msgstr "Non esiste alcun backend del dispositivo di archiviazione per il dispositivo %s"
 
 msgid "Passphrase"
 msgstr "Passphrase"
 
 msgid "Referenced"
-msgstr ""
+msgstr "Referenziato"
 
 msgid "Remove"
 msgstr "Rimuovi"
@@ -130,64 +134,69 @@ msgid "Size"
 msgstr "Dimensione"
 
 msgid "Test"
-msgstr "Testa"
+msgstr "Test"
 
 msgid "The UUID of the LUKS header backup file "
-msgstr ""
+msgstr "L'UUID del file di backup dell'header LUKS"
 
 msgid "The key did not unlock any key slot on the device"
-msgstr ""
+msgstr "La chiave non ha sbloccato nessuno slot chiave sul dispositivo"
 
 msgid "The passphrases must match."
+msgstr "Le passphrase devono corrispondere."
+
+msgid ""
+"This command can have a negative security impact because it can make "
+"filesystem-level operations visible on the physical device."
 msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr ""
+msgstr "Impossibile aggiungere la chiave al dispositivo crittografato: %s"
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr ""
+msgstr "Impossibile modificare la chiave sul dispositivo crittografato: %s"
 
 msgid "Unable to create encrypted device: %s"
-msgstr ""
+msgstr "Impossibile creare un dispositivo crittografato: %s"
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
-msgstr ""
+msgstr "Impossibile cancellare lo slot della chiave sul dispositivo crittografato: %s"
 
 msgid "Unable to extract the LUKS header from the encrypted device: %s"
-msgstr ""
+msgstr "Impossibile estrarre l'header LUKS dal dispositivo crittografato: %s"
 
 msgid "Unable to lock encrypted device: %s"
-msgstr ""
+msgstr "Impossibile bloccare il dispositivo crittografato: %s"
 
 msgid "Unable to remove encrypted device: %s"
-msgstr ""
+msgstr "Impossibile rimuovere il dispositivo crittografato: %s"
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr ""
+msgstr "Impossibile rimuovere la chiave dal dispositivo crittografato: %s"
 
 msgid "Unable to restore the LUKS header to device: %s"
-msgstr ""
+msgstr "Impossibile ripristinare l'header LUKS sul dispositivo: %s"
 
 msgid "Unable to unlock encrypted device: %s"
-msgstr ""
+msgstr "Impossibile sbloccare il dispositivo crittografato: %s"
 
 msgid "Unlock"
 msgstr "Sblocca"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "Sto sbloccando il dispositivo crittografato ..."
 
 msgid "Unlocked"
 msgstr "Sbloccato"
 
 msgid "Version"
-msgstr ""
+msgstr "Versione"
 
 msgid "aes-cbc-essiv:sha256"
-msgstr ""
+msgstr "aes-cbc-essiv:sha256"
 
 msgid "aes-xts-plain64 (default)"
-msgstr ""
+msgstr "aes-xts-plain64 (predefinito)"
 
 msgid "device"
-msgstr ""
+msgstr "dispositivo"

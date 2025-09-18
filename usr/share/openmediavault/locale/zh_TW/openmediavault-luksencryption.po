@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 11:19-0600\n"
+"POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2016,2022-2024\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_TW/)\n"
@@ -23,6 +23,9 @@ msgstr "%s 非有效的 LUKS 標頭備份檔"
 
 msgid "Add"
 msgstr "新增"
+
+msgid "Allow discards"
+msgstr ""
 
 msgid "Are you sure you want to delete to this device?"
 msgstr "您確定要刪除這個裝置？"
@@ -140,6 +143,11 @@ msgstr "此金鑰無法打開裝置上的任何鑰槽"
 
 msgid "The passphrases must match."
 msgstr "通行片語必須相符。"
+
+msgid ""
+"This command can have a negative security impact because it can make "
+"filesystem-level operations visible on the physical device."
+msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "無法在被加密的裝置增加金鑰：%s"

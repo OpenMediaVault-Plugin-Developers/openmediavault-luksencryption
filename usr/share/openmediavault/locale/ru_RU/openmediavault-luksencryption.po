@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
+# Asdfgr Wertyu, 2024
 # Artur Mudrykh <arturmon82@gmail.com>, 2017,2019
 # Дмитрий <bardimnik@rambler.ru>, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 11:19-0600\n"
+"POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: Дмитрий <bardimnik@rambler.ru>, 2023\n"
+"Last-Translator: Asdfgr Wertyu, 2024\n"
 "Language-Team: Russian (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,11 +26,14 @@ msgstr "%s не является допустимым файлом резерв�
 msgid "Add"
 msgstr "Добавить"
 
+msgid "Allow discards"
+msgstr ""
+
 msgid "Are you sure you want to delete to this device?"
 msgstr "Вы уверены, что хотите удалить на это устройство?"
 
 msgid "Backup header"
-msgstr ""
+msgstr "Резервный заголовок"
 
 msgid "Change"
 msgstr "Изменить"
@@ -65,10 +69,10 @@ msgid "Device '%s' not found"
 msgstr "Устройство '%s' не найдено"
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "Зашифрованное устройство было заблокировано."
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "Зашифрованное устройство было разблокировано."
 
 msgid "Encryption"
 msgstr "Шифрование"
@@ -110,7 +114,7 @@ msgid "Lock"
 msgstr "Заблокирован"
 
 msgid "Lock encrypted device ..."
-msgstr ""
+msgstr "Блокировка зашифрованного устройства ..."
 
 msgid "New Passphrase"
 msgstr "Новая парольная фраза"
@@ -141,6 +145,11 @@ msgstr "Ключ не разблокировал ни один ключевой 
 
 msgid "The passphrases must match."
 msgstr "Парольные фразы должны совпадать."
+
+msgid ""
+"This command can have a negative security impact because it can make "
+"filesystem-level operations visible on the physical device."
+msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "Не удалось добавить ключ на зашифрованное устройство: %s"
@@ -176,7 +185,7 @@ msgid "Unlock"
 msgstr "Разблокировать"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "Разблокируйте зашифрованное устройство ..."
 
 msgid "Unlocked"
 msgstr "Разблокирован"

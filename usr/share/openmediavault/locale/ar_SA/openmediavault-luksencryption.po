@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 11:19-0600\n"
+"POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: omv nas <myomv100@gmail.com>, 2023\n"
 "Language-Team: Arabic (Saudi Arabia) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ar_SA/)\n"
@@ -23,6 +23,9 @@ msgstr "%s ليس ملف نسخة احتياطية صالح لترويسة LUKS"
 
 msgid "Add"
 msgstr "أضف"
+
+msgid "Allow discards"
+msgstr ""
 
 msgid "Are you sure you want to delete to this device?"
 msgstr "هل أنت متأكد أنك تريد الحذف من هذا الجهاز؟"
@@ -140,6 +143,11 @@ msgstr "المفتاح لم يفتح أي حاوية مفتاح على القر�
 
 msgid "The passphrases must match."
 msgstr "يجب أن تتطابق عبارات المرور."
+
+msgid ""
+"This command can have a negative security impact because it can make "
+"filesystem-level operations visible on the physical device."
+msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "تعذر إضافة المفتاح إلى القرص المشفر: %s"

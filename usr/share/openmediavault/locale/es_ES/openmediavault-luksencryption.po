@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 11:19-0600\n"
+"POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2015,2022\n"
 "Language-Team: Spanish (Spain) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/es_ES/)\n"
@@ -23,6 +23,9 @@ msgstr "%s no es una cabecera LUKS de backup válida."
 
 msgid "Add"
 msgstr "Añadir"
+
+msgid "Allow discards"
+msgstr ""
 
 msgid "Are you sure you want to delete to this device?"
 msgstr "¿está seguro de que desea borrar este dispositivo?"
@@ -140,6 +143,11 @@ msgstr "La clave, no desbloquea ningún slot en el dispositivo"
 
 msgid "The passphrases must match."
 msgstr "La contraseña no coincide."
+
+msgid ""
+"This command can have a negative security impact because it can make "
+"filesystem-level operations visible on the physical device."
+msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "No es posible añadir la clave al dispositivo encriptado: %s"

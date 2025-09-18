@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Dampflok_HD, 2023
-# Ettore Atalan <atalanttore@googlemail.com>, 2016,2022
+# Ettore Atalan <atalanttore@googlemail.com>, 2016,2022,2024
+# Johannes Hell, 2024
 # WastlJ, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-14 11:19-0600\n"
+"POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: Dampflok_HD, 2023\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016,2022,2024\n"
 "Language-Team: German (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,11 +27,14 @@ msgstr "%s ist keine gültige LUKS-Kopfzeilen-Sicherungsdatei"
 msgid "Add"
 msgstr "Hinzufügen"
 
-msgid "Are you sure you want to delete to this device?"
+msgid "Allow discards"
 msgstr ""
 
+msgid "Are you sure you want to delete to this device?"
+msgstr "Sicher, dass dieses Gerät gelöscht werden soll?"
+
 msgid "Backup header"
-msgstr ""
+msgstr "Sicherungskopie des Headers erstellen"
 
 msgid "Change"
 msgstr "Ändern"
@@ -63,37 +67,37 @@ msgid "Device"
 msgstr "Gerät"
 
 msgid "Device '%s' not found"
-msgstr ""
+msgstr "Gerät '%s' nicht gefunden."
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "Verschlüsseltes Gerät wurde gesperrt."
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "Verschlüsseltes Gerät wurde entsperrt."
 
 msgid "Encryption"
 msgstr "Verschlüsselung"
 
 msgid "Enter a new passphrase."
-msgstr ""
+msgstr "Ein neues Passwort eingeben."
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr "Geben Sie ein vorhandenes Passwort ein, um das Gerät zu entschlüsseln."
+msgstr "Geben Sie ein vorhandenes Passwort ein, um das Gerät zu entsperren."
 
 msgid "Erase slot"
-msgstr ""
+msgstr "Slot löschen"
 
 msgid "Key Slots In Use"
-msgstr ""
+msgstr "Benutzte Keyslots"
 
 msgid "Key slot"
-msgstr ""
+msgstr "Keyslot"
 
 msgid "Keys"
 msgstr "Schlüssel"
 
 msgid "LUKS Label"
-msgstr ""
+msgstr "LUKS-Label"
 
 msgid "LUKS UUID"
 msgstr "LUKS UUID"
@@ -105,25 +109,25 @@ msgid "LUKS encrypted device %s[%s, %s]"
 msgstr "LUKS verschlüsseltes Gerät %s[%s,%s]"
 
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 msgid "Lock"
-msgstr "Verschlüsseln"
+msgstr "Sperren"
 
 msgid "Lock encrypted device ..."
-msgstr ""
+msgstr "Verschlüsseltes Gerät sperren..."
 
 msgid "New Passphrase"
 msgstr "Neue Passphrase"
 
 msgid "No storage device backend exists for device %s"
-msgstr ""
+msgstr "Kein Speichergeräte-Backend für Gerät %s vorhanden"
 
 msgid "Passphrase"
 msgstr "Passwort"
 
 msgid "Referenced"
-msgstr "Referenzierend"
+msgstr "Referenziert"
 
 msgid "Remove"
 msgstr "Entfernen"
@@ -135,61 +139,66 @@ msgid "Test"
 msgstr "Testen"
 
 msgid "The UUID of the LUKS header backup file "
-msgstr "Die UUID der LUKS-Kopfzeilen-Sicherungsdatei"
+msgstr "Die UUID der LUKS-Header-Sicherungskopie"
 
 msgid "The key did not unlock any key slot on the device"
-msgstr ""
+msgstr "Der Schlüssel hat keinen Keyslot auf dem Gerät entsperrt"
 
 msgid "The passphrases must match."
-msgstr "Die Passphrasen müssen übereinstimmen."
+msgstr "Die Passwörter müssen übereinstimmen."
+
+msgid ""
+"This command can have a negative security impact because it can make "
+"filesystem-level operations visible on the physical device."
+msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr "Fehler beim Hinzufügen des Passworts zum verschlüsselten Gerät: %s"
+msgstr "Fehler beim Hinzufügen des Schlüssels zum verschlüsselten Gerät: %s"
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr "Fehler beim Hinzufügen des Passworts zum verschlüsselten Gerät: %s"
+msgstr "Fehler beim Ändern des Schlüssels auf verschlüsseltem Gerät: %s"
 
 msgid "Unable to create encrypted device: %s"
 msgstr "Das verschlüsselte Gerät kann nicht erstellt werden: %s"
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
-msgstr ""
+msgstr "Keyslot löschen nicht möglich auf dem Gerät: %s"
 
 msgid "Unable to extract the LUKS header from the encrypted device: %s"
-msgstr ""
+msgstr "Extrahieren des LUKS-Headers nicht möglich aus verschlüsseltem Gerät: %s"
 
 msgid "Unable to lock encrypted device: %s"
-msgstr "Verschlüsseln von verschlüsseltem Gerät %s nicht möglich"
+msgstr "Sperren von verschlüsseltem Gerät %s nicht möglich"
 
 msgid "Unable to remove encrypted device: %s"
 msgstr "Das verschlüsselte Gerät kann nicht entfernt werden: %s"
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr "Das Passwort kann nicht vom verschlüsselten Gerät entfernt werden: %s"
+msgstr "Entfernen des Schlüssels nicht möglich von verschlüsseltem Gerät: %s"
 
 msgid "Unable to restore the LUKS header to device: %s"
-msgstr ""
+msgstr "LUKS-Header-Wiederherstellung nicht möglich nach Gerät: %s"
 
 msgid "Unable to unlock encrypted device: %s"
-msgstr "Entschlüsseln von verschlüsseltem Gerät %s nicht möglich"
+msgstr "Entsperren von verschlüsseltem Gerät %s nicht möglich"
 
 msgid "Unlock"
-msgstr "Entschlüsseln"
+msgstr "Entsperren"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "Verschlüsseltes Gerät entsperren..."
 
 msgid "Unlocked"
-msgstr "Entschlüsselt"
+msgstr "Entsperrt"
 
 msgid "Version"
 msgstr "Version"
 
 msgid "aes-cbc-essiv:sha256"
-msgstr ""
+msgstr "aes-cbc-essiv:sha256"
 
 msgid "aes-xts-plain64 (default)"
-msgstr ""
+msgstr "aes-xts-plain64 (Standardeinstellung)"
 
 msgid "device"
 msgstr "Gerät"
