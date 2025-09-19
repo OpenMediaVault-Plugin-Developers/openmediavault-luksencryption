@@ -1,3 +1,9 @@
+openmediavault-luksencryption (7.0.3) stable; urgency=low
+
+  * Add option to allow discards when opening a container
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 19 Sep 2025 06:42:45 -0500
+
 openmediavault-luksencryption (7.0.2) stable; urgency=low
 
   * Add header backup
