@@ -1,3 +1,9 @@
+openmediavault-luksencryption (7.0.4) stable; urgency=low
+
+  * Revert open container change
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 21 Sep 2025 09:15:29 -0500
+
 openmediavault-luksencryption (7.0.3) stable; urgency=low
 
   * Add option to allow discards when opening a container
