@@ -510,7 +510,7 @@ class Container extends \OMV\System\Storage\StorageDevice {
         if ($keyIsFile) {
             $cmd = sprintf('%s --key-file %s', $base, escapeshellarg($key));
         } else {
-            $cmd = sprintf('printf %s | %s --key-file=-', escapeshellarg($key), $base);
+            $cmd = sprintf('echo -n %s | %s --key-file=-', escapeshellarg($key), $base);
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
