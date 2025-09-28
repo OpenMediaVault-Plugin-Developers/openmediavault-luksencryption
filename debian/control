@@ -2,8 +2,8 @@ Source: openmediavault-luksencryption
 Section: admin
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-Build-Depends: debhelper (>= 13)
-Standards-Version: 4.3.0
+Build-Depends: debhelper-compat (= 14), dh-sequence-single-binary
+Standards-Version: 4.7.2
 XB-Plugin-Section: filesystems
 
 Package: openmediavault-luksencryption
