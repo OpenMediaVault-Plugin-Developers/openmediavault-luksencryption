@@ -4,13 +4,14 @@
 # 
 # Translators:
 # okpail <okpail@gmail.com>, 2016
+# Stephan Paternotte <stephan@paternottes.net>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: okpail <okpail@gmail.com>, 2016\n"
+"Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
 "Language-Team: Dutch (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,183 +20,183 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s is not a valid LUKS header backup file"
-msgstr "%s is geen geen LUKS header backup file"
+msgstr "%s is geen geldig LUKS header back-upbestand"
 
 msgid "Add"
-msgstr "Voeg toe"
+msgstr "Toevoegen"
 
 msgid "Allow discards"
-msgstr ""
+msgstr "Weggooien toestan"
 
 msgid "Are you sure you want to delete to this device?"
-msgstr ""
+msgstr "Weet u zeker dat u dit apparaat wilt verwijderen?"
 
 msgid "Backup header"
-msgstr ""
+msgstr "Back-up maken van header"
 
 msgid "Change"
-msgstr "Verander"
+msgstr "Wijzigen"
 
 msgid "Cipher"
-msgstr ""
+msgstr "Versleuteling"
 
 msgid "Confirm passphrase"
-msgstr "Bevestig paswoord"
+msgstr "Wachtwoord bevestigen"
 
 msgid "Create"
-msgstr "Creëer"
+msgstr "Aanmaken"
 
 msgid "Created encrypted device."
-msgstr ""
+msgstr "Gecodeerd  apparaat aangemaakt."
 
 msgid "Current Passphrase"
-msgstr ""
+msgstr "Huidige wachtwoordzin"
 
 msgid "Decrypted Device"
-msgstr ""
+msgstr "Ontsleuteld apparaat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 msgid "Detail"
 msgstr "Detail"
 
 msgid "Device"
-msgstr "Device"
+msgstr "Apparaat"
 
 msgid "Device '%s' not found"
-msgstr ""
+msgstr "Apparaat '%s' niet gevonden"
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "Gecodeerd apparaat is vergrendeld."
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "Gecodeerd apparaat is ontgrendeld."
 
 msgid "Encryption"
-msgstr "Encryptie"
+msgstr "Versleuteling"
 
 msgid "Enter a new passphrase."
-msgstr ""
+msgstr "Voer een nieuwe wachtwoordzin in"
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr ""
+msgstr "Voer een bestaande wachtwoordzin in die het apparaat ontgrendelt."
 
 msgid "Erase slot"
-msgstr ""
+msgstr "Positie wissen"
 
 msgid "Key Slots In Use"
-msgstr ""
+msgstr "Sleutelposities in gebruik"
 
 msgid "Key slot"
-msgstr "Sleutel slot"
+msgstr "Sleutelpositie"
 
 msgid "Keys"
 msgstr "Sleutels"
 
 msgid "LUKS Label"
-msgstr ""
+msgstr "LUKS-label"
 
 msgid "LUKS UUID"
-msgstr ""
+msgstr "LUKS-UUID"
 
 msgid "LUKS container on '%s' not found"
-msgstr ""
+msgstr "Geen LUKS-container gevonden op  '%s'"
 
 msgid "LUKS encrypted device %s[%s, %s]"
-msgstr ""
+msgstr "LUKS-gecodeerd apparaat %s[%s, %s]"
 
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 msgid "Lock"
-msgstr "Lock"
+msgstr "Vergrendelen"
 
 msgid "Lock encrypted device ..."
-msgstr ""
+msgstr "Gecodeerd apparaat vergrendelen…"
 
 msgid "New Passphrase"
-msgstr ""
+msgstr "Nieuwe wachtwoordzin"
 
 msgid "No storage device backend exists for device %s"
-msgstr ""
+msgstr "Er bestaat geen opslagapparaten-backend voor het apparaat %s"
 
 msgid "Passphrase"
-msgstr "Paswoord"
+msgstr "Wachtwoordzin"
 
 msgid "Referenced"
 msgstr "Gerefereerd"
 
 msgid "Remove"
-msgstr "Verwijder"
+msgstr "Verwijderen"
 
 msgid "Size"
 msgstr "Grootte"
 
 msgid "Test"
-msgstr "Test"
+msgstr "Testen"
 
 msgid "The UUID of the LUKS header backup file "
-msgstr ""
+msgstr "De UUID van het LUKS header back-upbestand"
 
 msgid "The key did not unlock any key slot on the device"
-msgstr ""
+msgstr "De sleutel ontgrendelde geen sleutelpositie op het apparaat"
 
 msgid "The passphrases must match."
-msgstr ""
+msgstr "De wachtwoordzinnen moeten overeenkomen."
 
 msgid ""
 "This command can have a negative security impact because it can make "
 "filesystem-level operations visible on the physical device."
-msgstr ""
+msgstr "Deze opdracht kan een negatief effect hebben op de beveiliging, omdat het bewerkingen op bestandssysteemniveau zichtbaar kan maken op het fysieke apparaat."
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr ""
+msgstr "Kan de sleutel niet toevoegen aan het gecodeerde apparaat: %s"
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr ""
+msgstr "Kan de sleutel niet wijzigen op het gecodeerde apparaat: %s"
 
 msgid "Unable to create encrypted device: %s"
-msgstr ""
+msgstr "Kan gecodeerd apparaat niet aanmaken: %s"
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
-msgstr ""
+msgstr "Kan de sleutelpositie op het gecodeerde apparaat niet wissen: %s"
 
 msgid "Unable to extract the LUKS header from the encrypted device: %s"
-msgstr ""
+msgstr "Kan de LUKS-header niet extraheren van het gecodeerde apparaat: %s"
 
 msgid "Unable to lock encrypted device: %s"
-msgstr ""
+msgstr "Kan gecodeerd apparaat niet vergrendelen: %s"
 
 msgid "Unable to remove encrypted device: %s"
-msgstr ""
+msgstr "Kan gecodeerd apparaat niet verwijderen: %s"
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr ""
+msgstr "Kan de sleutel niet van het gecodeerde apparaat verwijderen: %s"
 
 msgid "Unable to restore the LUKS header to device: %s"
-msgstr ""
+msgstr "Kan de LUKS-header niet herstellen naar apparaat: %s"
 
 msgid "Unable to unlock encrypted device: %s"
-msgstr ""
+msgstr "Kan gecodeerd apparaat niet ontgrendelen: %s"
 
 msgid "Unlock"
-msgstr "Vrijgeven"
+msgstr "Ontgrendelen"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "Gecodeerd apparaat ontgrendelen…"
 
 msgid "Unlocked"
-msgstr "Ontsleutelen"
+msgstr "Ontgrendeld"
 
 msgid "Version"
-msgstr ""
+msgstr "Versie"
 
 msgid "aes-cbc-essiv:sha256"
-msgstr ""
+msgstr "aes-cbc-essiv:sha256"
 
 msgid "aes-xts-plain64 (default)"
-msgstr ""
+msgstr "aes-xts-plain64 (standaard)"
 
 msgid "device"
-msgstr ""
+msgstr "apparaat"

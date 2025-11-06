@@ -4,21 +4,20 @@
 # 
 # Translators:
 # Dampflok_HD, 2023
-# Ettore Atalan <atalanttore@googlemail.com>, 2016,2022,2024
+# Ettore Atalan <atalanttore@googlemail.com>, 2023
 # Johannes Hell, 2024
-# WastlJ, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-18 10:43-0500\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016,2022,2024\n"
-"Language-Team: German (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/de/)\n"
+"Last-Translator: Johannes Hell, 2024\n"
+"Language-Team: German (Germany) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s is not a valid LUKS header backup file"
@@ -43,7 +42,7 @@ msgid "Cipher"
 msgstr "Verschlüsselungsverfahren"
 
 msgid "Confirm passphrase"
-msgstr "Passwort bestätigen"
+msgstr "Passphrase bestätigen"
 
 msgid "Create"
 msgstr "Erstellen"
@@ -82,7 +81,7 @@ msgid "Enter a new passphrase."
 msgstr "Ein neues Passwort eingeben."
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr "Geben Sie ein vorhandenes Passwort ein, um das Gerät zu entsperren."
+msgstr "Geben Sie ein vorhandenes Passwort ein, um das Gerät zu entschlüsseln."
 
 msgid "Erase slot"
 msgstr "Slot löschen"
@@ -121,10 +120,10 @@ msgid "New Passphrase"
 msgstr "Neue Passphrase"
 
 msgid "No storage device backend exists for device %s"
-msgstr "Kein Speichergeräte-Backend für Gerät %s vorhanden"
+msgstr ""
 
 msgid "Passphrase"
-msgstr "Passwort"
+msgstr "Passphrase"
 
 msgid "Referenced"
 msgstr "Referenziert"
@@ -153,10 +152,10 @@ msgid ""
 msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr "Fehler beim Hinzufügen des Schlüssels zum verschlüsselten Gerät: %s"
+msgstr "Schlüssel hinzufügen nicht möglich zum verschlüsselten Gerät: %s"
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr "Fehler beim Ändern des Schlüssels auf verschlüsseltem Gerät: %s"
+msgstr "Schlüssel ändern nicht möglich auf verschlüsseltenm Gerät: %s"
 
 msgid "Unable to create encrypted device: %s"
 msgstr "Das verschlüsselte Gerät kann nicht erstellt werden: %s"
