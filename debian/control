@@ -12,7 +12,7 @@ Depends: busybox,
          coreutils,
          cryptsetup,
          cryptsetup-bin,
-         openmediavault (>= 7),
+         openmediavault (>= 8),
          ${misc:Depends}
 Description:  OpenMediaVault LUKS encryption plugin
  LUKS is the standard for Linux hard disk encryption. By providing a

@@ -1,3 +1,9 @@
+openmediavault-luksencryption (8.0) stable; urgency=low
+
+  * Update for omv 8.x
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 06 Nov 2025 21:57:51 +0000
+
 openmediavault-luksencryption (7.0.4) stable; urgency=low
 
   * Revert open container change
