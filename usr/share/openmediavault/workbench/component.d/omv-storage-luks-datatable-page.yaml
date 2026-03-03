@@ -48,6 +48,15 @@ data:
       - name: _("Key Slots In Use")
         prop: usedslots
         flexGrow: 1
+      - name: _("Auto-unlock")
+        prop: autounlock
+        flexGrow: 1
+        cellTemplateName: checkIcon
+      - name: _("Stale")
+        prop: stale
+        flexGrow: 1
+        hidden: true
+        cellTemplateName: checkIcon
     actions:
       - template: create
         execute:
@@ -97,6 +106,9 @@ data:
             - operator: falsy
               arg0:
                 prop: unlocked
+            - operator: falsy
+              arg0:
+                prop: stale
       - type: iconButton
         tooltip: _("Lock")
         icon: mdi:lock-outline
@@ -116,6 +128,74 @@ data:
             - operator: truthy
               arg0:
                 prop: unlocked
+            - operator: falsy
+              arg0:
+                prop: stale
+      - type: iconButton
+        tooltip: _("Enable auto-unlock")
+        icon: mdi:lock-clock
+        execute:
+          type: formDialog
+          formDialog:
+            title: _('Enable auto-unlock at boot ...')
+            fields:
+              - type: textInput
+                name: devicefile
+                label: _("Device")
+                value: "{{ _selected[0].devicefile }}"
+                readonly: true
+              - type: passwordInput
+                name: passphrase
+                label: _("Passphrase")
+                value: ""
+                hint: _("Enter an existing passphrase that unlocks the device. A random key file will be generated and added to the container so it can be unlocked automatically at boot.")
+                validators:
+                  required: true
+            buttons:
+              submit:
+                text: _('Enable')
+                execute:
+                  type: request
+                  request:
+                    service: LuksMgmt
+                    method: enableContainerAutoUnlock
+                    progressMessage: _("Enabling auto-unlock ...")
+                    successNotification: _("Auto-unlock has been enabled. The device will be unlocked automatically at boot.")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: falsy
+              arg0:
+                prop: autounlock
+            - operator: falsy
+              arg0:
+                prop: stale
+      - type: iconButton
+        tooltip: _("Disable auto-unlock")
+        icon: mdi:lock-remove-outline
+        execute:
+          type: request
+          request:
+            service: LuksMgmt
+            method: disableContainerAutoUnlock
+            params:
+              devicefile: "{{ _selected[0].devicefile }}"
+            progressMessage: _("Disabling auto-unlock ...")
+            successNotification: _("Auto-unlock has been disabled.")
+        confirmationDialogConfig:
+          template: confirmation
+          message: _("Are you sure you want to disable auto-unlock for this device? The auto-unlock key will be removed from the container.")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: autounlock
+            - operator: falsy
+              arg0:
+                prop: stale
       - type: menu
         icon: mdi:key-chain
         tooltip: _("Keys")
@@ -126,6 +206,9 @@ data:
             - operator: truthy
               arg0:
                 prop: unlocked
+            - operator: falsy
+              arg0:
+                prop: stale
         actions:
           - text: _("Add")
             icon: mdi:key-plus
@@ -344,6 +427,10 @@ data:
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
+          constraint:
+            - operator: falsy
+              arg0:
+                prop: stale
         execute:
           type: url
           url: '/download?service=LuksMgmt&method=backupContainerHeader&params={"devicefile":"{{ _selected[0].devicefile }}"}'
@@ -356,6 +443,10 @@ data:
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
+          constraint:
+            - operator: falsy
+              arg0:
+                prop: stale
       - type: iconButton
         tooltip: _("Delete")
         icon: delete
@@ -376,3 +467,28 @@ data:
             - operator: falsy
               arg0:
                 prop: unlocked
+            - operator: falsy
+              arg0:
+                prop: stale
+      - type: iconButton
+        tooltip: _("Remove stale auto-unlock entry")
+        icon: mdi:broom
+        execute:
+          type: request
+          request:
+            service: LuksMgmt
+            method: removeStaleAutoUnlockEntry
+            params:
+              uuid: "{{ _selected[0].uuid }}"
+            progressMessage: _("Removing stale auto-unlock entry ...")
+            successNotification: _("Stale auto-unlock entry has been removed.")
+        confirmationDialogConfig:
+          template: confirmation
+          message: _("Are you sure you want to remove this stale auto-unlock entry? The crypttab entry and stored key file will be deleted.")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: stale

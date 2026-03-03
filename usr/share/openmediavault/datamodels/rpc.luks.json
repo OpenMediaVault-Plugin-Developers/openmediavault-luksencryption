@@ -182,6 +182,42 @@
   },
   {
     "type": "rpc",
+    "id": "rpc.luks.enableautounlock",
+    "params": {
+      "type": "object",
+      "properties": {
+        "devicefile": {
+          "type": "string",
+          "format": "devicefile",
+          "required": true
+        },
+        "passphrase": {
+          "type": "string",
+          "required": false
+        },
+        "keyfile": {
+          "type": "string",
+          "required": false
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.luks.staleuuid",
+    "params": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "format": "uuidv4",
+          "required": true
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
     "id": "rpc.luks.containerheader",
     "params": {
       "type": "object",

@@ -56,6 +56,9 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         $this->registerMethod("killContainerKeySlot");
         $this->registerMethod("backupContainerHeader");
         $this->registerMethod("restoreContainerHeader");
+        $this->registerMethod("enableContainerAutoUnlock");
+        $this->registerMethod("disableContainerAutoUnlock");
+        $this->registerMethod("removeStaleAutoUnlockEntry");
     }
 
     /**
@@ -86,7 +89,8 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 "decrypteddevicefile"   => $luks->getDecryptedDeviceFile(),
                 "usedslots"             => $luks->getUsedKeySlots(),
                 "luksversion"           => $luks->getLuksVersion(),
-                "lukslabel"             => $luks->getLuksLabel()
+                "lukslabel"             => $luks->getLuksLabel(),
+                "autounlock"            => $this->hasCryptTabEntry($luks->getUuid())
             ];
         }
         return $result;
@@ -123,6 +127,27 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             }
             // null if locked, otherwise true if used, false if not
             $luksv['_used'] = $used;
+        }
+        // Detect stale crypttab entries (UUIDs no longer present as live devices).
+        $liveUuids = array_column($containers, 'uuid');
+        foreach ($this->getCryptTabEntries() as $entry) {
+            if ($entry['type'] !== 'entry') continue;
+            if (!preg_match('/^UUID=(.+)$/', $entry['device'], $m)) continue;
+            $uuid = $m[1];
+            if (in_array($uuid, $liveUuids)) continue;
+            $containers[] = [
+                "devicefile"          => $entry['name'],
+                "uuid"                => $uuid,
+                "size"                => 0,
+                "unlocked"            => false,
+                "decrypteddevicefile" => "",
+                "usedslots"           => 0,
+                "luksversion"         => "",
+                "lukslabel"           => "",
+                "autounlock"          => true,
+                "_used"               => null,
+                "stale"               => true,
+            ];
         }
         // Filter result.
         return $this->applyFilter($containers,
@@ -838,6 +863,237 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             "contenttype"    => "application/octet-stream",
             "unlink"         => TRUE
         ];
+    }
+
+    /**
+     * Get the path where the auto-unlock key file for a container is stored.
+     * @param uuid The UUID of the LUKS container.
+     * @return The path to the key file.
+     */
+    private function getKeyFilePath($uuid) {
+        return "/etc/luks-keys/{$uuid}";
+    }
+
+    /**
+     * Parse /etc/crypttab into an array of entries.
+     * @return An array of associative arrays, each with 'type' set to
+     *         'comment' (with 'raw') or 'entry' (with 'name', 'device',
+     *         'keyfile', 'options').
+     */
+    private function getCryptTabEntries() {
+        $entries = [];
+        if (!file_exists("/etc/crypttab"))
+            return $entries;
+        $lines = file("/etc/crypttab", FILE_IGNORE_NEW_LINES);
+        foreach ($lines as $line) {
+            $trimmed = trim($line);
+            if ($trimmed === '' || substr($trimmed, 0, 1) === '#') {
+                $entries[] = ['type' => 'comment', 'raw' => $line];
+                continue;
+            }
+            $parts = preg_split('/\s+/', $trimmed, 4);
+            $entries[] = [
+                'type'    => 'entry',
+                'name'    => $parts[0],
+                'device'  => $parts[1] ?? 'none',
+                'keyfile' => $parts[2] ?? 'none',
+                'options' => $parts[3] ?? 'luks',
+            ];
+        }
+        return $entries;
+    }
+
+    /**
+     * Write an array of entries back to /etc/crypttab.
+     * @param entries An array as returned by getCryptTabEntries().
+     */
+    private function writeCryptTab(array $entries) {
+        $lines = [];
+        foreach ($entries as $entry) {
+            if ($entry['type'] === 'comment') {
+                $lines[] = $entry['raw'];
+            } else {
+                $lines[] = implode("\t", [
+                    $entry['name'],
+                    $entry['device'],
+                    $entry['keyfile'],
+                    $entry['options'],
+                ]);
+            }
+        }
+        file_put_contents("/etc/crypttab",
+            implode("\n", $lines) . "\n", LOCK_EX);
+    }
+
+    /**
+     * Check whether /etc/crypttab has an entry for the given LUKS UUID.
+     * @param uuid The UUID of the LUKS container.
+     * @return TRUE if an entry exists, FALSE otherwise.
+     */
+    private function hasCryptTabEntry($uuid) {
+        foreach ($this->getCryptTabEntries() as $entry) {
+            if ($entry['type'] !== 'entry') continue;
+            if ($entry['device'] === "UUID={$uuid}") return TRUE;
+        }
+        return FALSE;
+    }
+
+    /**
+     * Enable auto-unlock of a LUKS container at boot via /etc/crypttab.
+     * Generates a random key file, adds it to the container, and writes
+     * a crypttab entry so systemd unlocks the container automatically.
+     * @param params An array containing the following fields:
+     *     \em devicefile The block device of the LUKS container.
+     *     \em passphrase An existing passphrase that unlocks the container.
+     *     \em keyfile Path to an uploaded key file that unlocks the container.
+     * @param context The context of the caller.
+     * @return None.
+     * @throw E_MISC_FAILURE
+     */
+    public function enableContainerAutoUnlock($params, $context) {
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodParams($params, "rpc.luks.enableautounlock");
+        // Validate the container.
+        $luks = new \OMV\System\Storage\Luks\Container($params['devicefile']);
+        if (is_null($luks) || !$luks->exists()) {
+            throw new \OMV\Exception(sprintf(
+                gettext("LUKS container on '%s' not found"),
+                $params['devicefile']));
+        }
+        $uuid = $luks->getUuid();
+        $keyFilePath = $this->getKeyFilePath($uuid);
+        $keyDir = dirname($keyFilePath);
+        // Check not already enabled.
+        if ($this->hasCryptTabEntry($uuid)) {
+            throw new \OMV\Exception(gettext(
+                "Auto-unlock is already enabled for this container."));
+        }
+        // Create the key directory if it doesn't exist.
+        if (!is_dir($keyDir)) {
+            if (!mkdir($keyDir, 0700, TRUE)) {
+                throw new \OMV\Exception(sprintf(
+                    gettext("Failed to create key directory '%s'."),
+                    $keyDir));
+            }
+        }
+        // Generate and store a 512-byte random key file.
+        $randomBytes = random_bytes(512);
+        if (file_put_contents($keyFilePath, $randomBytes) === FALSE) {
+            throw new \OMV\Exception(sprintf(
+                gettext("Failed to write key file '%s'."), $keyFilePath));
+        }
+        chmod($keyFilePath, 0400);
+        // Add the key file to the LUKS container using the supplied credential.
+        if (isset($params['keyfile']) && !empty($params['keyfile'])) {
+            $old = $params['keyfile'];
+            $oldIsKeyFile = TRUE;
+        } else {
+            $old = $params['passphrase'];
+            $oldIsKeyFile = FALSE;
+        }
+        try {
+            $luks->addKey($old, $keyFilePath, $oldIsKeyFile, TRUE);
+        } catch (Exception $e) {
+            unlink($keyFilePath);
+            throw new \OMV\Exception(sprintf(
+                gettext("Unable to add auto-unlock key to encrypted device: %s"),
+                $e->getMessage()));
+        }
+        // Write the crypttab entry.
+        $entries = $this->getCryptTabEntries();
+        $entries[] = [
+            'type'    => 'entry',
+            'name'    => sprintf("luks-%s", $uuid),
+            'device'  => sprintf("UUID=%s", $uuid),
+            'keyfile' => $keyFilePath,
+            'options' => 'luks,nofail',
+        ];
+        $this->writeCryptTab($entries);
+        // Notify configuration changes.
+        $dispatcher = \OMV\Engine\Notify\Dispatcher::getInstance();
+        $dispatcher->notify(OMV_NOTIFY_MODIFY,
+            "org.openmediavault.system.storage.luks.container",
+            ["devicefile" => $params['devicefile'], "autounlock" => TRUE]);
+    }
+
+    /**
+     * Disable auto-unlock of a LUKS container.
+     * Removes the crypttab entry, deletes the stored key file, and removes
+     * the auto-unlock key slot from the container.
+     * @param params An array containing the following fields:
+     *     \em devicefile The block device of the LUKS container.
+     * @param context The context of the caller.
+     * @return None.
+     * @throw E_MISC_FAILURE
+     */
+    public function disableContainerAutoUnlock($params, $context) {
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodParams($params, "rpc.luks.devicefile");
+        // Validate the container.
+        $luks = new \OMV\System\Storage\Luks\Container($params['devicefile']);
+        if (is_null($luks) || !$luks->exists()) {
+            throw new \OMV\Exception(sprintf(
+                gettext("LUKS container on '%s' not found"),
+                $params['devicefile']));
+        }
+        $uuid = $luks->getUuid();
+        $keyFilePath = $this->getKeyFilePath($uuid);
+        // Check it is actually enabled.
+        if (!$this->hasCryptTabEntry($uuid)) {
+            throw new \OMV\Exception(gettext(
+                "Auto-unlock is not enabled for this container."));
+        }
+        // Remove the auto-unlock key from the LUKS container and delete
+        // the key file. If removal fails (e.g. last slot), log and continue.
+        if (file_exists($keyFilePath)) {
+            try {
+                $luks->removeKey($keyFilePath, TRUE);
+            } catch (Exception $e) {
+                $this->debug(sprintf(
+                    "Warning: Could not remove auto-unlock key from LUKS device: %s",
+                    $e->getMessage()));
+            }
+            unlink($keyFilePath);
+        }
+        // Remove the crypttab entry and rewrite the file.
+        $entries = array_values(array_filter(
+            $this->getCryptTabEntries(),
+            function($entry) use ($uuid) {
+                if ($entry['type'] !== 'entry') return TRUE;
+                return $entry['device'] !== sprintf("UUID=%s", $uuid);
+            }
+        ));
+        $this->writeCryptTab($entries);
+        // Notify configuration changes.
+        $dispatcher = \OMV\Engine\Notify\Dispatcher::getInstance();
+        $dispatcher->notify(OMV_NOTIFY_MODIFY,
+            "org.openmediavault.system.storage.luks.container",
+            ["devicefile" => $params['devicefile'], "autounlock" => FALSE]);
+    }
+
+    /**
+     * Remove a stale auto-unlock entry from /etc/crypttab and delete its
+     * associated key file. Used when the LUKS container no longer exists.
+     * @param params An array containing the following fields:
+     *     \em uuid The UUID of the stale LUKS container.
+     * @param context The context of the caller.
+     * @return None.
+     */
+    public function removeStaleAutoUnlockEntry($params, $context) {
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodParams($params, "rpc.luks.staleuuid");
+        $uuid = $params['uuid'];
+        $keyFilePath = $this->getKeyFilePath($uuid);
+        if (file_exists($keyFilePath))
+            unlink($keyFilePath);
+        $entries = array_values(array_filter(
+            $this->getCryptTabEntries(),
+            function($entry) use ($uuid) {
+                if ($entry['type'] !== 'entry') return true;
+                return $entry['device'] !== "UUID={$uuid}";
+            }
+        ));
+        $this->writeCryptTab($entries);
     }
 
     /**
