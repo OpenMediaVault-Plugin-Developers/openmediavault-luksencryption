@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-18 10:43-0500\n"
+"POT-Creation-Date: 2026-03-03 21:56+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Polish (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/pl/)\n"
@@ -27,6 +27,33 @@ msgid "Allow discards"
 msgstr ""
 
 msgid "Are you sure you want to delete to this device?"
+msgstr ""
+
+msgid ""
+"Are you sure you want to disable auto-unlock for this device? The auto-"
+"unlock key will be removed from the container."
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove this stale auto-unlock entry? The crypttab "
+"entry and stored key file will be deleted."
+msgstr ""
+
+msgid "Auto-unlock"
+msgstr ""
+
+msgid "Auto-unlock has been disabled."
+msgstr ""
+
+msgid ""
+"Auto-unlock has been enabled. The device will be unlocked automatically at "
+"boot."
+msgstr ""
+
+msgid "Auto-unlock is already enabled for this container."
+msgstr ""
+
+msgid "Auto-unlock is not enabled for this container."
 msgstr ""
 
 msgid "Backup header"
@@ -65,6 +92,18 @@ msgstr ""
 msgid "Device '%s' not found"
 msgstr ""
 
+msgid "Disable auto-unlock"
+msgstr ""
+
+msgid "Disabling auto-unlock ..."
+msgstr ""
+
+msgid "Enable auto-unlock"
+msgstr ""
+
+msgid "Enabling auto-unlock ..."
+msgstr ""
+
 msgid "Encrypted device has been locked."
 msgstr ""
 
@@ -80,7 +119,19 @@ msgstr ""
 msgid "Enter an existing passphrase that unlocks the device."
 msgstr ""
 
+msgid ""
+"Enter an existing passphrase that unlocks the device. A random key file will"
+" be generated and added to the container so it can be unlocked automatically"
+" at boot."
+msgstr ""
+
 msgid "Erase slot"
+msgstr ""
+
+msgid "Failed to create key directory '%s'."
+msgstr ""
+
+msgid "Failed to write key file '%s'."
 msgstr ""
 
 msgid "Key Slots In Use"
@@ -128,7 +179,19 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+msgid "Remove stale auto-unlock entry"
+msgstr ""
+
+msgid "Removing stale auto-unlock entry ..."
+msgstr ""
+
 msgid "Size"
+msgstr ""
+
+msgid "Stale"
+msgstr ""
+
+msgid "Stale auto-unlock entry has been removed."
 msgstr ""
 
 msgid "Test"
@@ -146,6 +209,9 @@ msgstr ""
 msgid ""
 "This command can have a negative security impact because it can make "
 "filesystem-level operations visible on the physical device."
+msgstr ""
+
+msgid "Unable to add auto-unlock key to encrypted device: %s"
 msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
