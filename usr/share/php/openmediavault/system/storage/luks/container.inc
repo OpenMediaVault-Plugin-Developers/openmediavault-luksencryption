@@ -411,7 +411,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output);
+        try {
+            $process->execute($output);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return TRUE;
     }
@@ -483,7 +487,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
             escapeshellarg($header_size));
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
+        try {
+            $process->execute($output, $exitStatus);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return TRUE;
     }
@@ -514,7 +522,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
+        try {
+            $process->execute($output, $exitStatus);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return $exitStatus === 0;
     }
@@ -528,7 +540,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
             escapeshellarg($this->getDecryptedName()));
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
+        try {
+            $process->execute($output, $exitStatus);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return TRUE;
     }
@@ -571,7 +587,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
+        try {
+            $process->execute($output, $exitStatus);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return TRUE;
     }
@@ -617,7 +637,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
         // Execute
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
+        try {
+            $process->execute($output, $exitStatus);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return TRUE;
     }
@@ -644,7 +668,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
+        try {
+            $process->execute($output, $exitStatus);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return TRUE;
     }
@@ -663,7 +691,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
             escapeshellarg($slot));
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
+        try {
+            $process->execute($output, $exitStatus);
+        } catch (\Exception $e) {
+            throw new \OMV\Exception(implode("\n", (array)$output) ?: "cryptsetup command failed.");
+        }
         $this->refresh();
         return TRUE;
     }
