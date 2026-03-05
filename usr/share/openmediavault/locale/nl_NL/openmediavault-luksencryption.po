@@ -4,14 +4,14 @@
 # 
 # Translators:
 # okpail <okpail@gmail.com>, 2016
-# Stephan Paternotte <stephan@paternottes.net>, 2025
+# Stephan Paternotte <stephan@paternottes.net>, 2025-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-03 21:56+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
+"Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025-2026\n"
 "Language-Team: Dutch (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,29 +34,29 @@ msgstr "Weet u zeker dat u dit apparaat wilt verwijderen?"
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
 "unlock key will be removed from the container."
-msgstr ""
+msgstr "Weet u zeker dat u auto-unlock voor dit apparaat wilt uitschakelen? De auto-unlock-sleutel wordt uit de container verwijderd."
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
 "entry and stored key file will be deleted."
-msgstr ""
+msgstr "Weet u zeker dat u dit ongebruikte auto-unlock-item wilt verwijderen? Het crypttab-item en het opgeslagen sleutelbestand worden verwijderd."
 
 msgid "Auto-unlock"
-msgstr ""
+msgstr "Auto-unlock"
 
 msgid "Auto-unlock has been disabled."
-msgstr ""
+msgstr "Auto-unlock is uitgeschakeld."
 
 msgid ""
 "Auto-unlock has been enabled. The device will be unlocked automatically at "
 "boot."
-msgstr ""
+msgstr "Auto-unlock is ingeschakeld. Het apparaat wordt bij het opstarten automatisch ontgrendeld."
 
 msgid "Auto-unlock is already enabled for this container."
-msgstr ""
+msgstr "Auto-unlock is al ingeschakeld voor deze container."
 
 msgid "Auto-unlock is not enabled for this container."
-msgstr ""
+msgstr "Auto-unlock is niet ingeschakeld voor deze container."
 
 msgid "Backup header"
 msgstr "Back-up maken van header"
@@ -95,16 +95,16 @@ msgid "Device '%s' not found"
 msgstr "Apparaat '%s' niet gevonden"
 
 msgid "Disable auto-unlock"
-msgstr ""
+msgstr "Auto-unlock uitschakelen"
 
 msgid "Disabling auto-unlock ..."
-msgstr ""
+msgstr "Auto-unlock uitschakelen…"
 
 msgid "Enable auto-unlock"
-msgstr ""
+msgstr "Auto-unlock inschakelen"
 
 msgid "Enabling auto-unlock ..."
-msgstr ""
+msgstr "Auto-unlock inschakelen…"
 
 msgid "Encrypted device has been locked."
 msgstr "Gecodeerd apparaat is vergrendeld."
@@ -125,16 +125,16 @@ msgid ""
 "Enter an existing passphrase that unlocks the device. A random key file will"
 " be generated and added to the container so it can be unlocked automatically"
 " at boot."
-msgstr ""
+msgstr "Voer een bestaande wachtwoordzin in die het apparaat ontgrendelt. Er wordt een willekeurig sleutelbestand gegenereerd en aan de container toegevoegd, zodat deze bij het opstarten automatisch kan worden ontgrendeld."
 
 msgid "Erase slot"
 msgstr "Positie wissen"
 
 msgid "Failed to create key directory '%s'."
-msgstr ""
+msgstr " Aanmaken van map '%s' is mislukt."
 
 msgid "Failed to write key file '%s'."
-msgstr ""
+msgstr "Schrijven van sleutelbestand '%s' is mislukt."
 
 msgid "Key Slots In Use"
 msgstr "Sleutelposities in gebruik"
@@ -182,19 +182,19 @@ msgid "Remove"
 msgstr "Verwijderen"
 
 msgid "Remove stale auto-unlock entry"
-msgstr ""
+msgstr "Ongebruikt auto-unlock-item verwijderen"
 
 msgid "Removing stale auto-unlock entry ..."
-msgstr ""
+msgstr "Ongebruikt auto-unlock-item verwijderen…"
 
 msgid "Size"
 msgstr "Grootte"
 
 msgid "Stale"
-msgstr ""
+msgstr "Ongebruikt"
 
 msgid "Stale auto-unlock entry has been removed."
-msgstr ""
+msgstr "Ongebruikt auto-unlock-item is verwijderd."
 
 msgid "Test"
 msgstr "Testen"
@@ -214,7 +214,7 @@ msgid ""
 msgstr "Deze opdracht kan een negatief effect hebben op de beveiliging, omdat het bewerkingen op bestandssysteemniveau zichtbaar kan maken op het fysieke apparaat."
 
 msgid "Unable to add auto-unlock key to encrypted device: %s"
-msgstr ""
+msgstr "Kan auto-unlock-sleutel niet toevoegen aan versleuteld apparaat: %s"
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "Kan de sleutel niet toevoegen aan het gecodeerde apparaat: %s"
