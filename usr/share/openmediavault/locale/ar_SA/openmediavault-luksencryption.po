@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 21:56+0000\n"
+"POT-Creation-Date: 2026-03-05 18:06+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: omv nas <myomv100@gmail.com>, 2023\n"
 "Language-Team: Arabic (Saudi Arabia) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ar_SA/)\n"
@@ -23,6 +23,9 @@ msgstr "%s ليس ملف نسخة احتياطية صالح لترويسة LUKS"
 
 msgid "Add"
 msgstr "أضف"
+
+msgid "Adding key ..."
+msgstr ""
 
 msgid "Allow discards"
 msgstr ""
@@ -63,6 +66,9 @@ msgstr ""
 msgid "Change"
 msgstr "تغيير"
 
+msgid "Changing key ..."
+msgstr ""
+
 msgid "Cipher"
 msgstr "الشفرة"
 
@@ -84,6 +90,9 @@ msgstr "قرص تم فك تشفيره"
 msgid "Delete"
 msgstr "حذف"
 
+msgid "Deleting encrypted container ..."
+msgstr ""
+
 msgid "Detail"
 msgstr "تفاصيل"
 
@@ -103,6 +112,9 @@ msgid "Enable auto-unlock"
 msgstr ""
 
 msgid "Enabling auto-unlock ..."
+msgstr ""
+
+msgid "Encrypted container has been deleted."
 msgstr ""
 
 msgid "Encrypted device has been locked."
@@ -129,6 +141,9 @@ msgstr ""
 msgid "Erase slot"
 msgstr "محو حاوية مفتاح"
 
+msgid "Erasing key slot ..."
+msgstr ""
+
 msgid "Failed to create key directory '%s'."
 msgstr ""
 
@@ -138,8 +153,20 @@ msgstr ""
 msgid "Key Slots In Use"
 msgstr "حاويات مفاتيح مستخدمة"
 
+msgid "Key has been added to the container."
+msgstr ""
+
+msgid "Key has been changed."
+msgstr ""
+
+msgid "Key has been removed from the container."
+msgstr ""
+
 msgid "Key slot"
 msgstr "حاوية مفتاح"
+
+msgid "Key slot has been erased."
+msgstr ""
 
 msgid "Keys"
 msgstr "المفاتيح"
@@ -183,6 +210,9 @@ msgstr "حذف"
 msgid "Remove stale auto-unlock entry"
 msgstr ""
 
+msgid "Removing key ..."
+msgstr ""
+
 msgid "Removing stale auto-unlock entry ..."
 msgstr ""
 
@@ -198,11 +228,17 @@ msgstr ""
 msgid "Test"
 msgstr "اختبار"
 
+msgid "Testing key ..."
+msgstr ""
+
 msgid "The UUID of the LUKS header backup file "
 msgstr "معرف UUID لملف النسخة الاحتياطية لترويسة LUKS"
 
 msgid "The key did not unlock any key slot on the device"
 msgstr "المفتاح لم يفتح أي حاوية مفتاح على القرص"
+
+msgid "The passphrase is valid and unlocks the container."
+msgstr ""
 
 msgid "The passphrases must match."
 msgstr "يجب أن تتطابق عبارات المرور."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 21:56+0000\n"
+"POT-Creation-Date: 2026-03-05 18:06+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2015,2023-2025\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/en_GB/)\n"
@@ -23,6 +23,9 @@ msgstr "%s is not a valid LUKS header backup file"
 
 msgid "Add"
 msgstr "Add"
+
+msgid "Adding key ..."
+msgstr ""
 
 msgid "Allow discards"
 msgstr "Allow discards"
@@ -63,6 +66,9 @@ msgstr "Backup header"
 msgid "Change"
 msgstr "Change"
 
+msgid "Changing key ..."
+msgstr ""
+
 msgid "Cipher"
 msgstr "Cipher"
 
@@ -84,6 +90,9 @@ msgstr "Decrypted Device"
 msgid "Delete"
 msgstr "Delete"
 
+msgid "Deleting encrypted container ..."
+msgstr ""
+
 msgid "Detail"
 msgstr "Detail"
 
@@ -103,6 +112,9 @@ msgid "Enable auto-unlock"
 msgstr ""
 
 msgid "Enabling auto-unlock ..."
+msgstr ""
+
+msgid "Encrypted container has been deleted."
 msgstr ""
 
 msgid "Encrypted device has been locked."
@@ -129,6 +141,9 @@ msgstr ""
 msgid "Erase slot"
 msgstr "Erase slot"
 
+msgid "Erasing key slot ..."
+msgstr ""
+
 msgid "Failed to create key directory '%s'."
 msgstr ""
 
@@ -138,8 +153,20 @@ msgstr ""
 msgid "Key Slots In Use"
 msgstr "Key Slots In Use"
 
+msgid "Key has been added to the container."
+msgstr ""
+
+msgid "Key has been changed."
+msgstr ""
+
+msgid "Key has been removed from the container."
+msgstr ""
+
 msgid "Key slot"
 msgstr "Key slot"
+
+msgid "Key slot has been erased."
+msgstr ""
 
 msgid "Keys"
 msgstr "Keys"
@@ -183,6 +210,9 @@ msgstr "Remove"
 msgid "Remove stale auto-unlock entry"
 msgstr ""
 
+msgid "Removing key ..."
+msgstr ""
+
 msgid "Removing stale auto-unlock entry ..."
 msgstr ""
 
@@ -198,11 +228,17 @@ msgstr ""
 msgid "Test"
 msgstr "Test"
 
+msgid "Testing key ..."
+msgstr ""
+
 msgid "The UUID of the LUKS header backup file "
 msgstr "The UUID of the LUKS header backup file "
 
 msgid "The key did not unlock any key slot on the device"
 msgstr "The key did not unlock any key slot on the device"
+
+msgid "The passphrase is valid and unlocks the container."
+msgstr ""
 
 msgid "The passphrases must match."
 msgstr "The passphrases must match."

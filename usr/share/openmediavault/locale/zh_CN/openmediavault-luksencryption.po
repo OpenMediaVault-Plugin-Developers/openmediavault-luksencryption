@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 21:56+0000\n"
+"POT-Creation-Date: 2026-03-05 18:06+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: songming <by@songming.me>, 2015,2022-2024,2026\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_CN/)\n"
@@ -23,6 +23,9 @@ msgstr "%s不是有效的LUKS header备份文件"
 
 msgid "Add"
 msgstr "添加"
+
+msgid "Adding key ..."
+msgstr ""
 
 msgid "Allow discards"
 msgstr "允许丢弃"
@@ -63,6 +66,9 @@ msgstr "备份 header"
 msgid "Change"
 msgstr "变更"
 
+msgid "Changing key ..."
+msgstr ""
+
 msgid "Cipher"
 msgstr "密码"
 
@@ -84,6 +90,9 @@ msgstr "已加密设备"
 msgid "Delete"
 msgstr "删除"
 
+msgid "Deleting encrypted container ..."
+msgstr ""
+
 msgid "Detail"
 msgstr "细节"
 
@@ -103,6 +112,9 @@ msgid "Enable auto-unlock"
 msgstr ""
 
 msgid "Enabling auto-unlock ..."
+msgstr ""
+
+msgid "Encrypted container has been deleted."
 msgstr ""
 
 msgid "Encrypted device has been locked."
@@ -129,6 +141,9 @@ msgstr ""
 msgid "Erase slot"
 msgstr "擦除 slot"
 
+msgid "Erasing key slot ..."
+msgstr ""
+
 msgid "Failed to create key directory '%s'."
 msgstr ""
 
@@ -138,8 +153,20 @@ msgstr ""
 msgid "Key Slots In Use"
 msgstr "Slots 密钥在使用"
 
+msgid "Key has been added to the container."
+msgstr ""
+
+msgid "Key has been changed."
+msgstr ""
+
+msgid "Key has been removed from the container."
+msgstr ""
+
 msgid "Key slot"
 msgstr "slot密钥"
+
+msgid "Key slot has been erased."
+msgstr ""
 
 msgid "Keys"
 msgstr "密钥"
@@ -183,6 +210,9 @@ msgstr "移除"
 msgid "Remove stale auto-unlock entry"
 msgstr ""
 
+msgid "Removing key ..."
+msgstr ""
+
 msgid "Removing stale auto-unlock entry ..."
 msgstr ""
 
@@ -198,11 +228,17 @@ msgstr ""
 msgid "Test"
 msgstr "测试"
 
+msgid "Testing key ..."
+msgstr ""
+
 msgid "The UUID of the LUKS header backup file "
 msgstr "LUKS header备份文件的UUID"
 
 msgid "The key did not unlock any key slot on the device"
 msgstr "该密钥未能匹配设备上的任何slot密钥而解锁"
+
+msgid "The passphrase is valid and unlocks the container."
+msgstr ""
 
 msgid "The passphrases must match."
 msgstr "密码必须匹配。"
