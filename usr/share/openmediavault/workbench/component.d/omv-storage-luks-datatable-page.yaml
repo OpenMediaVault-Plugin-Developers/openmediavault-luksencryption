@@ -369,7 +369,8 @@ data:
                       request:
                         service: LuksMgmt
                         method: testContainerKey
-                    successUrl: /storage/luks
+                        progressMessage: _("Testing passphrase ...")
+                        successNotification: _("The passphrase matches a key slot on the device.")
           - text: _("Erase slot")
             icon: mdi:delete-forever-outline
             enabledConstraints:
