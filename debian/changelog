@@ -1,3 +1,9 @@
+openmediavault-luksencryption (8.1.1) stable; urgency=low
+
+  * Fix key delete
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 05 Mar 2026 15:25:58 +0000
+
 openmediavault-luksencryption (8.1) stable; urgency=low
 
   * Add auto-unlock
