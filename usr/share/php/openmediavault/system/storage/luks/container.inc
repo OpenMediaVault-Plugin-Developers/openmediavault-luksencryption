@@ -411,7 +411,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output);
+        $process->execute($output, $exitStatus);
+        if ($exitStatus !== 0) {
+            throw new \OMV\Exception("Failed to create encrypted device: %s",
+                implode("\n", $output));
+        }
         $this->refresh();
         return TRUE;
     }
