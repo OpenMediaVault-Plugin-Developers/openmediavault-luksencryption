@@ -258,7 +258,8 @@ data:
                       request:
                         service: LuksMgmt
                         method: addContainerKey
-                    successUrl: /storage/luks
+                        progressMessage: _("Adding key ...")
+                        successNotification: _("Key has been added to the container.")
           - text: _("Change")
             icon: mdi:key-star
             execute:
@@ -296,7 +297,8 @@ data:
                       request:
                         service: LuksMgmt
                         method: changeContainerKey
-                    successUrl: /storage/luks
+                        progressMessage: _("Changing key ...")
+                        successNotification: _("Key has been changed.")
           - text: _("Remove")
             icon: mdi:key-remove
             enabledConstraints:
@@ -338,7 +340,8 @@ data:
                       request:
                         service: LuksMgmt
                         method: removeContainerKey
-                    successUrl: /storage/luks
+                        progressMessage: _("Removing key ...")
+                        successNotification: _("Key has been removed from the container.")
           - text: _("Test")
             icon: mdi:key-arrow-right
             execute:
@@ -369,7 +372,8 @@ data:
                       request:
                         service: LuksMgmt
                         method: testContainerKey
-                    successUrl: /storage/luks
+                        progressMessage: _("Testing key ...")
+                        successNotification: _("The passphrase is valid and unlocks the container.")
           - text: _("Erase slot")
             icon: mdi:delete-forever-outline
             enabledConstraints:
@@ -420,7 +424,8 @@ data:
                       request:
                         service: LuksMgmt
                         method: killContainerKeySlot
-                    successUrl: /storage/luks
+                        progressMessage: _("Erasing key slot ...")
+                        successNotification: _("Key slot has been erased.")
       - type: iconButton
         icon: mdi:download
         tooltip: _("Backup header")
@@ -457,6 +462,8 @@ data:
             method: deleteContainer
             params:
               devicefile: "{{ _selected[0].devicefile }}"
+            progressMessage: _("Deleting encrypted container ...")
+            successNotification: _("Encrypted container has been deleted.")
         confirmationDialogConfig:
           template: confirmation
           message: _("Are you sure you want to delete to this device?")

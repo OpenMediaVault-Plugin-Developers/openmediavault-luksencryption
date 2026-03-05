@@ -20,22 +20,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
- class OMVModuleLuks extends \OMV\Engine\Module\ServiceAbstract
-    implements \OMV\Engine\Notify\IListener, \OMV\Engine\Module\INotification {
+ class OMVModuleLuks extends \OMV\Engine\Module\ModuleAbstract
+    implements \OMV\Engine\Module\INotification {
     /**
      * Get the module name.
      */
     public function getName() {
         return "luks";
     }
-
-    /**
-     * Defines the modules that if present should start before the service
-     * provided by this module.
-     * @return An array of modules.
-     */
-    public function shouldStart() { return [ "email" ]; }
-
 
     /**
      * Get the notification configuration.
@@ -48,23 +40,5 @@
                 "title" => gettext("Encryption")
             ]
         ];
-    }
-
-    /**
-     * Bind listeners.
-     */
-    function bindListeners(\OMV\Engine\Notify\Dispatcher $dispatcher) {
-        $dispatcher->addListener(
-            OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY | OMV_NOTIFY_DELETE,
-            "org.openmediavault.system.storage.luks.container",
-            [ $this, "setDirty" ]);
-        $dispatcher->addListener(
-            OMV_NOTIFY_MODIFY,
-            "org.openmediavault.conf.system.notification.email",
-            [ $this, "setDirty" ]);
-        $dispatcher->addListener(
-            OMV_NOTIFY_MODIFY,
-            "org.openmediavault.conf.system.notification.notification",
-            [ $this, "setDirty" ]);
     }
 }

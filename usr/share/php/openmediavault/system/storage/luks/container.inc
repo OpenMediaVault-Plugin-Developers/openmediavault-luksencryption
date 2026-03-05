@@ -398,15 +398,15 @@ class Container extends \OMV\System\Storage\StorageDevice {
     public function create($key, $keyIsFile=FALSE, $cipher, $label) {
         if (TRUE === $keyIsFile) {
             $cmd = sprintf("cryptsetup luksFormat --label=%s -c %s -q %s %s",
-                $label,
-                $cipher,
+                escapeshellarg($label),
+                escapeshellarg($cipher),
                 escapeshellarg($this->getDeviceFile()),
                 escapeshellarg($key));
         } else {
             $cmd = sprintf("echo -n %s | cryptsetup luksFormat --label=%s -c %s -q %s",
                 escapeshellarg($key),
-                $label,
-                $cipher,
+                escapeshellarg($label),
+                escapeshellarg($cipher),
                 escapeshellarg($this->getDeviceFile()));
         }
         $process = new Process($cmd);
@@ -551,27 +551,37 @@ class Container extends \OMV\System\Storage\StorageDevice {
                            $new,
                            $oldIsFile = FALSE,
                            $newIsFile = FALSE) {
-        // Build command line
-        if (TRUE === $oldIsFile) {
-            $cmd = sprintf("cryptsetup luksAddKey -q %s -d %s ",
-                escapeshellarg($this->getDeviceFile()),
-                escapeshellarg($old));
-        } else {
-            $cmd = sprintf("echo -n %s | cryptsetup luksAddKey -q " . " %s ",
-                escapeshellarg($old),
-                escapeshellarg($this->getDeviceFile()));
+        // Write the new passphrase to a temp file to avoid shell quoting
+        // issues with process substitution inside bash -c '...'.
+        $newKeyFile = NULL;
+        try {
+            if (TRUE === $newIsFile) {
+                $newKeyArg = escapeshellarg($new);
+            } else {
+                $newKeyFile = tempnam(sys_get_temp_dir(), 'luks_');
+                file_put_contents($newKeyFile, $new);
+                $newKeyArg = escapeshellarg($newKeyFile);
+            }
+            // Build command line
+            if (TRUE === $oldIsFile) {
+                $cmd = sprintf("cryptsetup luksAddKey -q %s -d %s %s",
+                    escapeshellarg($this->getDeviceFile()),
+                    escapeshellarg($old),
+                    $newKeyArg);
+            } else {
+                $cmd = sprintf("echo -n %s | cryptsetup luksAddKey -q %s %s",
+                    escapeshellarg($old),
+                    escapeshellarg($this->getDeviceFile()),
+                    $newKeyArg);
+            }
+            $process = new Process($cmd);
+            $process->setRedirect2to1();
+            $process->execute($output, $exitStatus);
+        } finally {
+            if ($newKeyFile !== NULL) {
+                unlink($newKeyFile);
+            }
         }
-        if (TRUE === $newIsFile) {
-            $cmd .= escapeshellarg($new);
-        } else {
-            $cmd .= sprintf(" <(echo -n %s)", escapeshellarg($new));
-            // N.B. Need to use bash rather than default sh here for
-            // process substitution method of injecting new passphrase
-            $cmd = sprintf("/bin/bash -c '%s'", $cmd);
-        }
-        $process = new Process($cmd);
-        $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
         $this->refresh();
         return TRUE;
     }
@@ -594,30 +604,38 @@ class Container extends \OMV\System\Storage\StorageDevice {
                               $new,
                               $oldIsFile = FALSE,
                               $newIsFile = FALSE) {
-        // Build command line
-        if (TRUE === $oldIsFile) {
-            $cmd = sprintf("cryptsetup luksChangeKey -q ".
-                "%s --key-file %s ",
-                escapeshellarg($this->getDeviceFile()),
-                escapeshellarg($old));
-        } else {
-            $cmd = sprintf("echo -n %s | cryptsetup luksChangeKey -q ".
-                " %s --key-file=- ",
-                escapeshellarg($old),
-                escapeshellarg($this->getDeviceFile()));
+        // Write the new passphrase to a temp file to avoid shell quoting
+        // issues with process substitution inside bash -c '...'.
+        $newKeyFile = NULL;
+        try {
+            if (TRUE === $newIsFile) {
+                $newKeyArg = escapeshellarg($new);
+            } else {
+                $newKeyFile = tempnam(sys_get_temp_dir(), 'luks_');
+                file_put_contents($newKeyFile, $new);
+                $newKeyArg = escapeshellarg($newKeyFile);
+            }
+            // Build command line
+            if (TRUE === $oldIsFile) {
+                $cmd = sprintf("cryptsetup luksChangeKey -q %s --key-file %s %s",
+                    escapeshellarg($this->getDeviceFile()),
+                    escapeshellarg($old),
+                    $newKeyArg);
+            } else {
+                $cmd = sprintf("echo -n %s | cryptsetup luksChangeKey -q %s --key-file=- %s",
+                    escapeshellarg($old),
+                    escapeshellarg($this->getDeviceFile()),
+                    $newKeyArg);
+            }
+            // Execute
+            $process = new Process($cmd);
+            $process->setRedirect2to1();
+            $process->execute($output, $exitStatus);
+        } finally {
+            if ($newKeyFile !== NULL) {
+                unlink($newKeyFile);
+            }
         }
-        if (TRUE === $newIsFile) {
-            $cmd .= escapeshellarg($new);
-        } else {
-            $cmd .= sprintf("<(echo -n %s)", escapeshellarg($new));
-            // N.B. Need to use bash rather than default sh here for
-            // process substitution method of injecting new passphrase
-            $cmd = sprintf("/bin/bash -c '%s'", $cmd);
-        }
-        // Execute
-        $process = new Process($cmd);
-        $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
         $this->refresh();
         return TRUE;
     }
@@ -637,8 +655,7 @@ class Container extends \OMV\System\Storage\StorageDevice {
                 escapeshellarg($this->getDeviceFile()),
                 escapeshellarg($key));
         } else {
-            $cmd = sprintf("/bin/bash -c 'echo -n %s | ".
-                "cryptsetup luksRemoveKey -q %s --key-file=-'",
+            $cmd = sprintf("echo -n %s | cryptsetup luksRemoveKey -q %s --key-file=-",
                 escapeshellarg($key),
                 escapeshellarg($this->getDeviceFile()));
         }
@@ -680,13 +697,11 @@ class Container extends \OMV\System\Storage\StorageDevice {
      */
     public function testKey($key, $keyIsFile=FALSE) {
         if (TRUE === $keyIsFile) {
-            $cmd = sprintf("cryptsetup luksOpen -v ".
-                "--test-passphrase %s --key-file %s",
+            $cmd = sprintf("cryptsetup luksOpen -v --test-passphrase %s --key-file %s",
                 escapeshellarg($this->getDeviceFile()),
                 escapeshellarg($key));
         } else {
-            $cmd = sprintf("/bin/bash -c 'echo -n %s | ".
-                "cryptsetup luksOpen -v --test-passphrase %s --key-file=-'",
+            $cmd = sprintf("echo -n %s | cryptsetup luksOpen -v --test-passphrase %s --key-file=-",
                 escapeshellarg($key),
                 escapeshellarg($this->getDeviceFile()));
         }
