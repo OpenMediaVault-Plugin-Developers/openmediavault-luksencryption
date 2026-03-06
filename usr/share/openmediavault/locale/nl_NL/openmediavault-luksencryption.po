@@ -26,7 +26,7 @@ msgid "Add"
 msgstr "Toevoegen"
 
 msgid "Adding key ..."
-msgstr ""
+msgstr "Sleutel toevoegen…"
 
 msgid "Allow discards"
 msgstr "Weggooien toestan"
@@ -68,7 +68,7 @@ msgid "Change"
 msgstr "Wijzigen"
 
 msgid "Changing key ..."
-msgstr ""
+msgstr "Sleutel aanpassen…"
 
 msgid "Cipher"
 msgstr "Versleuteling"
@@ -92,7 +92,7 @@ msgid "Delete"
 msgstr "Verwijderen"
 
 msgid "Deleting encrypted container ..."
-msgstr ""
+msgstr "Versleutelde container verwijderen…"
 
 msgid "Detail"
 msgstr "Detail"
@@ -116,7 +116,7 @@ msgid "Enabling auto-unlock ..."
 msgstr "Auto-unlock inschakelen…"
 
 msgid "Encrypted container has been deleted."
-msgstr ""
+msgstr "Versleutelde container is verwijderd."
 
 msgid "Encrypted device has been locked."
 msgstr "Gecodeerd apparaat is vergrendeld."
@@ -143,7 +143,7 @@ msgid "Erase slot"
 msgstr "Positie wissen"
 
 msgid "Erasing key slot ..."
-msgstr ""
+msgstr "Sleutelpositie wissen…"
 
 msgid "Failed to create key directory '%s'."
 msgstr " Aanmaken van map '%s' is mislukt."
@@ -155,19 +155,19 @@ msgid "Key Slots In Use"
 msgstr "Sleutelposities in gebruik"
 
 msgid "Key has been added to the container."
-msgstr ""
+msgstr "Sleutel is toegevoegd aan container."
 
 msgid "Key has been changed."
-msgstr ""
+msgstr "Sleutel is aangepast."
 
 msgid "Key has been removed from the container."
-msgstr ""
+msgstr "Sleutel is verwijderd van container."
 
 msgid "Key slot"
 msgstr "Sleutelpositie"
 
 msgid "Key slot has been erased."
-msgstr ""
+msgstr "Sleutelpositie is gewist."
 
 msgid "Keys"
 msgstr "Sleutels"
@@ -212,7 +212,7 @@ msgid "Remove stale auto-unlock entry"
 msgstr "Ongebruikt auto-unlock-item verwijderen"
 
 msgid "Removing key ..."
-msgstr ""
+msgstr "Sleutel verwijderen…"
 
 msgid "Removing stale auto-unlock entry ..."
 msgstr "Ongebruikt auto-unlock-item verwijderen…"
@@ -230,7 +230,7 @@ msgid "Test"
 msgstr "Testen"
 
 msgid "Testing key ..."
-msgstr ""
+msgstr "Sleutel testen…"
 
 msgid "The UUID of the LUKS header backup file "
 msgstr "De UUID van het LUKS header back-upbestand"
@@ -239,7 +239,7 @@ msgid "The key did not unlock any key slot on the device"
 msgstr "De sleutel ontgrendelde geen sleutelpositie op het apparaat"
 
 msgid "The passphrase is valid and unlocks the container."
-msgstr ""
+msgstr "De wachtwoordzin is geldig en ontgrendelt de container."
 
 msgid "The passphrases must match."
 msgstr "De wachtwoordzinnen moeten overeenkomen."

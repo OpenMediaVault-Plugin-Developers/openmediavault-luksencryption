@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# kochin <kochinc@outlook.com>, 2016,2022-2025
+# kochin <kochinc@outlook.com>, 2016,2022-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-05 18:06+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: kochin <kochinc@outlook.com>, 2016,2022-2025\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2016,2022-2026\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgid "Add"
 msgstr "新增"
 
 msgid "Adding key ..."
-msgstr ""
+msgstr "新增金鑰中 ..."
 
 msgid "Allow discards"
 msgstr "允許丟棄"
@@ -36,29 +36,29 @@ msgstr "您確定要刪除這個裝置？"
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
 "unlock key will be removed from the container."
-msgstr ""
+msgstr "您確定要停用此裝置的自動開鎖嗎？自動開鎖金鑰將從此容器移除。"
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
 "entry and stored key file will be deleted."
-msgstr ""
+msgstr "您確定要移除這個過時的自動開鎖項目嗎？該 crypttab 項目和儲存的金鑰檔案將被刪除。"
 
 msgid "Auto-unlock"
-msgstr ""
+msgstr "自動開鎖"
 
 msgid "Auto-unlock has been disabled."
-msgstr ""
+msgstr "自動開鎖已被停用。"
 
 msgid ""
 "Auto-unlock has been enabled. The device will be unlocked automatically at "
 "boot."
-msgstr ""
+msgstr "自動開鎖已被啟用。該裝置將於主機啟動時自動開鎖。"
 
 msgid "Auto-unlock is already enabled for this container."
-msgstr ""
+msgstr "此容器的自動開鎖已經被啟用。"
 
 msgid "Auto-unlock is not enabled for this container."
-msgstr ""
+msgstr "此容器的自動開鎖沒有被啟用。"
 
 msgid "Backup header"
 msgstr "備份標頭"
@@ -67,7 +67,7 @@ msgid "Change"
 msgstr "變更"
 
 msgid "Changing key ..."
-msgstr ""
+msgstr "變更金鑰中 ..."
 
 msgid "Cipher"
 msgstr "加密演算法"
@@ -82,7 +82,7 @@ msgid "Created encrypted device."
 msgstr "已建立加密裝置。"
 
 msgid "Current Passphrase"
-msgstr "目前的通行片語"
+msgstr "目前的密碼短語"
 
 msgid "Decrypted Device"
 msgstr "已解密裝置"
@@ -91,7 +91,7 @@ msgid "Delete"
 msgstr "刪除"
 
 msgid "Deleting encrypted container ..."
-msgstr ""
+msgstr "刪除被加密容器中 ..."
 
 msgid "Detail"
 msgstr "詳細資料"
@@ -103,19 +103,19 @@ msgid "Device '%s' not found"
 msgstr "裝置 '%s' 沒有找到"
 
 msgid "Disable auto-unlock"
-msgstr ""
+msgstr "停用自動開鎖"
 
 msgid "Disabling auto-unlock ..."
-msgstr ""
+msgstr "停用自動開鎖中 ..."
 
 msgid "Enable auto-unlock"
-msgstr ""
+msgstr "啟用自動開鎖"
 
 msgid "Enabling auto-unlock ..."
-msgstr ""
+msgstr "啟用自動開鎖中 ..."
 
 msgid "Encrypted container has been deleted."
-msgstr ""
+msgstr "加密容器已被刪除。"
 
 msgid "Encrypted device has been locked."
 msgstr "加密裝置已被鎖住。"
@@ -127,46 +127,46 @@ msgid "Encryption"
 msgstr "加密"
 
 msgid "Enter a new passphrase."
-msgstr "輸入一則新的通行片語。"
+msgstr "輸入一則新的密碼短語。"
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr "輸入解鎖該裝置的現存通行片語。"
+msgstr "輸入解鎖該裝置的現存密碼短語。"
 
 msgid ""
 "Enter an existing passphrase that unlocks the device. A random key file will"
 " be generated and added to the container so it can be unlocked automatically"
 " at boot."
-msgstr ""
+msgstr "輸入解鎖該裝置的現存密碼短語。一個隨機金鑰將被產生並加到該容器，如此它可於主機啟動時自動開鎖。"
 
 msgid "Erase slot"
 msgstr "抹除鑰槽"
 
 msgid "Erasing key slot ..."
-msgstr ""
+msgstr "抹除鑰槽中 ..."
 
 msgid "Failed to create key directory '%s'."
-msgstr ""
+msgstr "建立金鑰目錄失敗 '%s'。"
 
 msgid "Failed to write key file '%s'."
-msgstr ""
+msgstr "寫入金鑰檔案失敗 '%s'。"
 
 msgid "Key Slots In Use"
 msgstr "使用中之鑰槽"
 
 msgid "Key has been added to the container."
-msgstr ""
+msgstr "金鑰已被加入容器。"
 
 msgid "Key has been changed."
-msgstr ""
+msgstr "金鑰已被變更。"
 
 msgid "Key has been removed from the container."
-msgstr ""
+msgstr "金鑰已從容器移除。"
 
 msgid "Key slot"
 msgstr "鑰槽"
 
 msgid "Key slot has been erased."
-msgstr ""
+msgstr "鑰槽已被抹除。"
 
 msgid "Keys"
 msgstr "金鑰"
@@ -193,7 +193,7 @@ msgid "Lock encrypted device ..."
 msgstr "鎖住加密裝置 ..."
 
 msgid "New Passphrase"
-msgstr "新通行片語"
+msgstr "新密碼短語"
 
 msgid "No storage device backend exists for device %s"
 msgstr "沒有儲存裝置後台存在給裝置 %s"
@@ -208,28 +208,28 @@ msgid "Remove"
 msgstr "移除"
 
 msgid "Remove stale auto-unlock entry"
-msgstr ""
+msgstr "移除過時自動開鎖項目"
 
 msgid "Removing key ..."
-msgstr ""
+msgstr "移除金鑰中 ..."
 
 msgid "Removing stale auto-unlock entry ..."
-msgstr ""
+msgstr "移除過時自動開鎖項目中 ..."
 
 msgid "Size"
 msgstr "大小"
 
 msgid "Stale"
-msgstr ""
+msgstr "過時"
 
 msgid "Stale auto-unlock entry has been removed."
-msgstr ""
+msgstr "過時自動開鎖項目已被移除。"
 
 msgid "Test"
 msgstr "測試"
 
 msgid "Testing key ..."
-msgstr ""
+msgstr "測試金鑰中 ..."
 
 msgid "The UUID of the LUKS header backup file "
 msgstr "LUKS 標頭檔案的 UUID"
@@ -238,10 +238,10 @@ msgid "The key did not unlock any key slot on the device"
 msgstr "此金鑰無法打開裝置上的任何鑰槽"
 
 msgid "The passphrase is valid and unlocks the container."
-msgstr ""
+msgstr "密碼短語有效並開鎖容器。"
 
 msgid "The passphrases must match."
-msgstr "通行片語必須相符。"
+msgstr "密碼短語必須相符。"
 
 msgid ""
 "This command can have a negative security impact because it can make "
@@ -249,7 +249,7 @@ msgid ""
 msgstr "這個指令會對安全上有負面的衝撃，因為它會讓檔案系統階層的操作在實體裝置上成為可見。"
 
 msgid "Unable to add auto-unlock key to encrypted device: %s"
-msgstr ""
+msgstr "無法在被加密的裝置增加自動開鎖金鑰：%s"
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "無法在被加密的裝置增加金鑰：%s"
