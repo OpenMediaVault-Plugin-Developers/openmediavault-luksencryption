@@ -1,3 +1,12 @@
+openmediavault-luksencryption (8.1.2) stable; urgency=low
+
+  * Improve password handling
+  * Make sure to only show failure out and not password
+  * Show messages when performing key actions
+  * Remove unneeded saltstack code
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 06 Mar 2026 12:11:04 +0000
+
 openmediavault-luksencryption (8.1.1) stable; urgency=low
 
   * Fix key delete
