@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the openmediavault-luksencryption package.
 # 
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2015,2023-2025
+# Andi Chandler <andi@gowling.com>, 2015,2023-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-05 18:06+0000\n"
+"POT-Creation-Date: 2026-05-31 01:23+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
-"Last-Translator: Andi Chandler <andi@gowling.com>, 2015,2023-2025\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2015,2023-2026\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgid "Add"
 msgstr "Add"
 
 msgid "Adding key ..."
-msgstr ""
+msgstr "Adding key ..."
 
 msgid "Allow discards"
 msgstr "Allow discards"
@@ -36,29 +36,29 @@ msgstr "Are you sure you want to delete to this device?"
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
 "unlock key will be removed from the container."
-msgstr ""
+msgstr "Are you sure you want to disable auto-unlock for this device? The auto-unlock key will be removed from the container."
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
 "entry and stored key file will be deleted."
-msgstr ""
+msgstr "Are you sure you want to remove this stale auto-unlock entry? The crypttab entry and stored key file will be deleted."
 
 msgid "Auto-unlock"
-msgstr ""
+msgstr "Auto-unlock"
 
 msgid "Auto-unlock has been disabled."
-msgstr ""
+msgstr "Auto-unlock has been disabled."
 
 msgid ""
 "Auto-unlock has been enabled. The device will be unlocked automatically at "
 "boot."
-msgstr ""
+msgstr "Auto-unlock has been enabled. The device will be unlocked automatically at boot."
 
 msgid "Auto-unlock is already enabled for this container."
-msgstr ""
+msgstr "Auto-unlock is already enabled for this container."
 
 msgid "Auto-unlock is not enabled for this container."
-msgstr ""
+msgstr "Auto-unlock is not enabled for this container."
 
 msgid "Backup header"
 msgstr "Backup header"
@@ -67,7 +67,7 @@ msgid "Change"
 msgstr "Change"
 
 msgid "Changing key ..."
-msgstr ""
+msgstr "Changing key ..."
 
 msgid "Cipher"
 msgstr "Cipher"
@@ -91,7 +91,7 @@ msgid "Delete"
 msgstr "Delete"
 
 msgid "Deleting encrypted container ..."
-msgstr ""
+msgstr "Deleting encrypted container ..."
 
 msgid "Detail"
 msgstr "Detail"
@@ -103,19 +103,19 @@ msgid "Device '%s' not found"
 msgstr "Device '%s' not found"
 
 msgid "Disable auto-unlock"
-msgstr ""
+msgstr "Disable auto-unlock"
 
 msgid "Disabling auto-unlock ..."
-msgstr ""
+msgstr "Disabling auto-unlock ..."
 
 msgid "Enable auto-unlock"
-msgstr ""
+msgstr "Enable auto-unlock"
 
 msgid "Enabling auto-unlock ..."
-msgstr ""
+msgstr "Enabling auto-unlock ..."
 
 msgid "Encrypted container has been deleted."
-msgstr ""
+msgstr "Encrypted container has been deleted."
 
 msgid "Encrypted device has been locked."
 msgstr "Encrypted device has been locked."
@@ -136,37 +136,37 @@ msgid ""
 "Enter an existing passphrase that unlocks the device. A random key file will"
 " be generated and added to the container so it can be unlocked automatically"
 " at boot."
-msgstr ""
+msgstr "Enter an existing passphrase that unlocks the device. A random key file will be generated and added to the container so it can be unlocked automatically at boot."
 
 msgid "Erase slot"
 msgstr "Erase slot"
 
 msgid "Erasing key slot ..."
-msgstr ""
+msgstr "Erasing key slot ..."
 
 msgid "Failed to create key directory '%s'."
-msgstr ""
+msgstr "Failed to create key directory '%s'."
 
 msgid "Failed to write key file '%s'."
-msgstr ""
+msgstr "Failed to write key file '%s'."
 
 msgid "Key Slots In Use"
 msgstr "Key Slots In Use"
 
 msgid "Key has been added to the container."
-msgstr ""
+msgstr "Key has been added to the container."
 
 msgid "Key has been changed."
-msgstr ""
+msgstr "Key has been changed."
 
 msgid "Key has been removed from the container."
-msgstr ""
+msgstr "Key has been removed from the container."
 
 msgid "Key slot"
 msgstr "Key slot"
 
 msgid "Key slot has been erased."
-msgstr ""
+msgstr "Key slot has been erased."
 
 msgid "Keys"
 msgstr "Keys"
@@ -208,28 +208,28 @@ msgid "Remove"
 msgstr "Remove"
 
 msgid "Remove stale auto-unlock entry"
-msgstr ""
+msgstr "Remove stale auto-unlock entry"
 
 msgid "Removing key ..."
-msgstr ""
+msgstr "Removing key ..."
 
 msgid "Removing stale auto-unlock entry ..."
-msgstr ""
+msgstr "Removing stale auto-unlock entry ..."
 
 msgid "Size"
 msgstr "Size"
 
 msgid "Stale"
-msgstr ""
+msgstr "Stale"
 
 msgid "Stale auto-unlock entry has been removed."
-msgstr ""
+msgstr "Stale auto-unlock entry has been removed."
 
 msgid "Test"
 msgstr "Test"
 
 msgid "Testing key ..."
-msgstr ""
+msgstr "Testing key ..."
 
 msgid "The UUID of the LUKS header backup file "
 msgstr "The UUID of the LUKS header backup file "
@@ -238,7 +238,7 @@ msgid "The key did not unlock any key slot on the device"
 msgstr "The key did not unlock any key slot on the device"
 
 msgid "The passphrase is valid and unlocks the container."
-msgstr ""
+msgstr "The passphrase is valid and unlocks the container."
 
 msgid "The passphrases must match."
 msgstr "The passphrases must match."
@@ -249,7 +249,7 @@ msgid ""
 msgstr "This command can have a negative security impact because it can make filesystem-level operations visible on the physical device."
 
 msgid "Unable to add auto-unlock key to encrypted device: %s"
-msgstr ""
+msgstr "Unable to add auto-unlock key to encrypted device: %s"
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "Unable to add the key to the encrypted device: %s"

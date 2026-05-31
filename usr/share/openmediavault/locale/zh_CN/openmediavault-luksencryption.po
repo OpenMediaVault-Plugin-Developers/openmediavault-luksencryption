@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-05 18:06+0000\n"
+"POT-Creation-Date: 2026-05-31 01:23+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: songming <by@songming.me>, 2015,2022-2024,2026\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/zh_CN/)\n"
@@ -25,7 +25,7 @@ msgid "Add"
 msgstr "添加"
 
 msgid "Adding key ..."
-msgstr ""
+msgstr "添加密钥中 ..."
 
 msgid "Allow discards"
 msgstr "允许丢弃"
@@ -36,29 +36,29 @@ msgstr "您确定要删除这个设备吗？"
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
 "unlock key will be removed from the container."
-msgstr ""
+msgstr "您确定要禁用此设备的自动解锁吗？自动解锁密钥将从容器中移除。"
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
 "entry and stored key file will be deleted."
-msgstr ""
+msgstr "您确定要删除这个过期的自动解锁项目吗？crypttab 项目和存储的密钥文件将被删除。"
 
 msgid "Auto-unlock"
-msgstr ""
+msgstr "自动解锁"
 
 msgid "Auto-unlock has been disabled."
-msgstr ""
+msgstr "自动解锁已被停用"
 
 msgid ""
 "Auto-unlock has been enabled. The device will be unlocked automatically at "
 "boot."
-msgstr ""
+msgstr "自动解锁已启用。设备将在启动时自动解锁。"
 
 msgid "Auto-unlock is already enabled for this container."
-msgstr ""
+msgstr "此容器的自动解锁已启用。"
 
 msgid "Auto-unlock is not enabled for this container."
-msgstr ""
+msgstr "此容器未启用自动解锁。"
 
 msgid "Backup header"
 msgstr "备份 header"
@@ -67,7 +67,7 @@ msgid "Change"
 msgstr "变更"
 
 msgid "Changing key ..."
-msgstr ""
+msgstr "变更密钥中 ..."
 
 msgid "Cipher"
 msgstr "密码"
@@ -91,7 +91,7 @@ msgid "Delete"
 msgstr "删除"
 
 msgid "Deleting encrypted container ..."
-msgstr ""
+msgstr "删除加密容器中 ..."
 
 msgid "Detail"
 msgstr "细节"
@@ -103,19 +103,19 @@ msgid "Device '%s' not found"
 msgstr "设备'%s'没有找到"
 
 msgid "Disable auto-unlock"
-msgstr ""
+msgstr "停用自动解锁"
 
 msgid "Disabling auto-unlock ..."
-msgstr ""
+msgstr "停用自动解锁中 ..."
 
 msgid "Enable auto-unlock"
-msgstr ""
+msgstr "启用自动解锁"
 
 msgid "Enabling auto-unlock ..."
-msgstr ""
+msgstr "启用自动解锁中 ..."
 
 msgid "Encrypted container has been deleted."
-msgstr ""
+msgstr "加密容器已被删除。"
 
 msgid "Encrypted device has been locked."
 msgstr "加密设备已锁定。"
@@ -136,37 +136,37 @@ msgid ""
 "Enter an existing passphrase that unlocks the device. A random key file will"
 " be generated and added to the container so it can be unlocked automatically"
 " at boot."
-msgstr ""
+msgstr "输入一个可以解锁设备的现有密码短语。一个随机密钥文件将被生成并添加到容器中，以便在启动时自动解锁。"
 
 msgid "Erase slot"
 msgstr "擦除 slot"
 
 msgid "Erasing key slot ..."
-msgstr ""
+msgstr "在擦除密钥槽中 ..."
 
 msgid "Failed to create key directory '%s'."
-msgstr ""
+msgstr "创建密钥目录失败‘%s’。"
 
 msgid "Failed to write key file '%s'."
-msgstr ""
+msgstr "写入密钥文件失败‘%s’。"
 
 msgid "Key Slots In Use"
 msgstr "Slots 密钥在使用"
 
 msgid "Key has been added to the container."
-msgstr ""
+msgstr "钥匙已被加入容器。"
 
 msgid "Key has been changed."
-msgstr ""
+msgstr "密钥已变更。"
 
 msgid "Key has been removed from the container."
-msgstr ""
+msgstr "钥匙已从容器中移出。"
 
 msgid "Key slot"
 msgstr "slot密钥"
 
 msgid "Key slot has been erased."
-msgstr ""
+msgstr "密钥槽已被清除。"
 
 msgid "Keys"
 msgstr "密钥"
@@ -208,28 +208,28 @@ msgid "Remove"
 msgstr "移除"
 
 msgid "Remove stale auto-unlock entry"
-msgstr ""
+msgstr "移除过期自动解锁项目"
 
 msgid "Removing key ..."
-msgstr ""
+msgstr "移出密钥中 ..."
 
 msgid "Removing stale auto-unlock entry ..."
-msgstr ""
+msgstr "移除过期的自动解锁项目中 ..."
 
 msgid "Size"
 msgstr "大小"
 
 msgid "Stale"
-msgstr ""
+msgstr "过期"
 
 msgid "Stale auto-unlock entry has been removed."
-msgstr ""
+msgstr "过期的自动解锁项目已被移除。"
 
 msgid "Test"
 msgstr "测试"
 
 msgid "Testing key ..."
-msgstr ""
+msgstr "测试密钥中 ..."
 
 msgid "The UUID of the LUKS header backup file "
 msgstr "LUKS header备份文件的UUID"
@@ -238,7 +238,7 @@ msgid "The key did not unlock any key slot on the device"
 msgstr "该密钥未能匹配设备上的任何slot密钥而解锁"
 
 msgid "The passphrase is valid and unlocks the container."
-msgstr ""
+msgstr "口令有效并且可以解锁容器。"
 
 msgid "The passphrases must match."
 msgstr "密码必须匹配。"
@@ -249,7 +249,7 @@ msgid ""
 msgstr "此命令可能会产生负面的安全影响，因为它可以使文件系统级别的操作在物理设备上可见。"
 
 msgid "Unable to add auto-unlock key to encrypted device: %s"
-msgstr ""
+msgstr "无法将自动解锁密钥添加到加密设备：%s"
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "不能在加密设备：%s上添加密钥"

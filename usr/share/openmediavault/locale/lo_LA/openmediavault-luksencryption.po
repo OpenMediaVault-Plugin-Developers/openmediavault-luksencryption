@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-05 18:06+0000\n"
+"POT-Creation-Date: 2026-05-31 01:23+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Lao (Laos) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/lo_LA/)\n"
@@ -18,285 +18,285 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "%s is not a valid LUKS header backup file"
-msgstr ""
+msgstr "%s ບໍ່ແມ່ນໄຟລ໌ສຳຮອງສ່ວນຫົວ (header) ຂອງ LUKS ທີ່ຖືກຕ້ອງ"
 
 msgid "Add"
-msgstr ""
+msgstr "ເພີ່ມ"
 
 msgid "Adding key ..."
-msgstr ""
+msgstr "ກຳລັງເພີ່ມກຸນແຈ ..."
 
 msgid "Allow discards"
-msgstr ""
+msgstr "ອະນຸຍາດ Discards"
 
 msgid "Are you sure you want to delete to this device?"
-msgstr ""
+msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບອຸປະກອນນີ້?"
 
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
 "unlock key will be removed from the container."
-msgstr ""
+msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການປິດການປົດລັອກອັດຕະໂນມັດສຳລັບອຸປະກອນນີ້? ກຸນແຈປົດລັອກອັດຕະໂນມັດຈະຖືກລຶບອອກຈາກຄອນເທນເນີ."
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
 "entry and stored key file will be deleted."
-msgstr ""
+msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບລາຍການປົດລັອກອັດຕະໂນມັດທີ່ຕົກຄ້າງນີ້? ລາຍການໃນ crypttab ແລະ ໄຟລ໌ກຸນແຈທີ່ເກັບໄວ້ຈະຖືກລຶບອອກ."
 
 msgid "Auto-unlock"
-msgstr ""
+msgstr "ປົດລັອກອັດຕະໂນມັດ"
 
 msgid "Auto-unlock has been disabled."
-msgstr ""
+msgstr "ປິດການປົດລັອກອັດຕະໂນມັດແລ້ວ."
 
 msgid ""
 "Auto-unlock has been enabled. The device will be unlocked automatically at "
 "boot."
-msgstr ""
+msgstr "ເປີດການປົດລັອກອັດຕະໂນມັດແລ້ວ. ອຸປະກອນຈະຖືກປົດລັອກໂດຍອັດຕະໂນມັດເມື່ອເລີ່ມລະບົບ (boot)."
 
 msgid "Auto-unlock is already enabled for this container."
-msgstr ""
+msgstr "ການປົດລັອກອັດຕະໂນມັດຖືກເປີດໃຊ້ງານແລ້ວສຳລັບຄອນເທນເນີນີ້."
 
 msgid "Auto-unlock is not enabled for this container."
-msgstr ""
+msgstr "ການປົດລັອກອັດຕະໂນມັດຍັງບໍ່ໄດ້ຖືກເປີດໃຊ້ງານສຳລັບຄອນເທນເນີນີ້."
 
 msgid "Backup header"
-msgstr ""
+msgstr "ສຳຮອງສ່ວນຫົວ (Header)"
 
 msgid "Change"
-msgstr ""
+msgstr "ປ່ຽນ"
 
 msgid "Changing key ..."
-msgstr ""
+msgstr "ກຳລັງປ່ຽນກຸນແຈ ..."
 
 msgid "Cipher"
-msgstr ""
+msgstr "ລະຫັດລັບ (Cipher)"
 
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "ຢືນຢັນລະຫັດຜ່ານ"
 
 msgid "Create"
-msgstr ""
+msgstr "ສ້າງ"
 
 msgid "Created encrypted device."
-msgstr ""
+msgstr "ສ້າງອຸປະກອນທີ່ເຂົ້າລະຫັດແລ້ວ."
 
 msgid "Current Passphrase"
-msgstr ""
+msgstr "ລະຫັດຜ່ານປັດຈຸບັນ"
 
 msgid "Decrypted Device"
-msgstr ""
+msgstr "ອຸປະກອນທີ່ຖອດລະຫັດແລ້ວ"
 
 msgid "Delete"
-msgstr ""
+msgstr "ລຶບ"
 
 msgid "Deleting encrypted container ..."
-msgstr ""
+msgstr "ກຳລັງລຶບຄອນເທນເນີທີ່ເຂົ້າລະຫັດ ..."
 
 msgid "Detail"
-msgstr ""
+msgstr "ລາຍລະອຽດ"
 
 msgid "Device"
-msgstr ""
+msgstr "ອຸປະກອນ"
 
 msgid "Device '%s' not found"
-msgstr ""
+msgstr "ບໍ່ພົບອຸປະກອນ '%s'"
 
 msgid "Disable auto-unlock"
-msgstr ""
+msgstr "ປິດການປົດລັອກອັດຕະໂນມັດ"
 
 msgid "Disabling auto-unlock ..."
-msgstr ""
+msgstr "ກຳລັງປິດການປົດລັອກອັດຕະໂນມັດ ..."
 
 msgid "Enable auto-unlock"
-msgstr ""
+msgstr "ເປີດການປົດລັອກອັດຕະໂນມັດ"
 
 msgid "Enabling auto-unlock ..."
-msgstr ""
+msgstr "ກຳລັງເປີດການປົດລັອກອັດຕະໂນມັດ ..."
 
 msgid "Encrypted container has been deleted."
-msgstr ""
+msgstr "ລຶບຄອນເທນເນີທີ່ເຂົ້າລະຫັດແລ້ວ."
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "ລັອກອຸປະກອນທີ່ເຂົ້າລະຫັດແລ້ວ."
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "ປົດລັອກອຸປະກອນທີ່ເຂົ້າລະຫັດແລ້ວ."
 
 msgid "Encryption"
-msgstr ""
+msgstr "ການເຂົ້າລະຫັດ"
 
 msgid "Enter a new passphrase."
-msgstr ""
+msgstr "ປ້ອນລະຫັດຜ່ານໃໝ່."
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr ""
+msgstr "ປ້ອນລະຫັດຜ່ານເດີມທີ່ໃຊ້ປົດລັອກອຸປະກອນ."
 
 msgid ""
 "Enter an existing passphrase that unlocks the device. A random key file will"
 " be generated and added to the container so it can be unlocked automatically"
 " at boot."
-msgstr ""
+msgstr "ປ້ອນລະຫັດຜ່ານເດີມທີ່ໃຊ້ປົດລັອກອຸປະກອນ. ໄຟລ໌ກຸນແຈແບບສຸ່ມຈະຖືກສ້າງຂຶ້ນ ແລະ ເພີ່ມເຂົ້າໃນຄອນເທນເນີ ເພື່ອໃຫ້ສາມາດປົດລັອກໂດຍອັດຕະໂນມັດເມື່ອເລີ່ມລະບົບ (boot)."
 
 msgid "Erase slot"
-msgstr ""
+msgstr "ລ້າງຊ່ອງເກັບກຸນແຈ"
 
 msgid "Erasing key slot ..."
-msgstr ""
+msgstr "ກຳລັງລ້າງຊ່ອງເກັບກຸນແຈ ..."
 
 msgid "Failed to create key directory '%s'."
-msgstr ""
+msgstr "ສ້າງໄດເຣັກທໍຣີກຸນແຈ '%s' ບໍ່ສຳເລັດ."
 
 msgid "Failed to write key file '%s'."
-msgstr ""
+msgstr "ຂຽນໄຟລ໌ກຸນແຈ '%s' ບໍ່ສຳເລັດ."
 
 msgid "Key Slots In Use"
-msgstr ""
+msgstr "ຊ່ອງເກັບກຸນແຈທີ່ໃຊ້ຢູ່"
 
 msgid "Key has been added to the container."
-msgstr ""
+msgstr "ເພີ່ມກຸນແຈເຂົ້າໃນຄອນເທນເນີແລ້ວ."
 
 msgid "Key has been changed."
-msgstr ""
+msgstr "ປ່ຽນກຸນແຈແລ້ວ."
 
 msgid "Key has been removed from the container."
-msgstr ""
+msgstr "ລຶບກຸນແຈອອກຈາກຄອນເທນເນີແລ້ວ."
 
 msgid "Key slot"
-msgstr ""
+msgstr "ຊ່ອງເກັບກຸນແຈ"
 
 msgid "Key slot has been erased."
-msgstr ""
+msgstr "ລ້າງຊ່ອງເກັບກຸນແຈແລ້ວ."
 
 msgid "Keys"
-msgstr ""
+msgstr "ກຸນແຈ"
 
 msgid "LUKS Label"
-msgstr ""
+msgstr "ປ້າຍຊື່ LUKS"
 
 msgid "LUKS UUID"
-msgstr ""
+msgstr "LUKS UUID"
 
 msgid "LUKS container on '%s' not found"
-msgstr ""
+msgstr "ບໍ່ພົບຄອນເທນເນີ LUKS ໃນ '%s'"
 
 msgid "LUKS encrypted device %s[%s, %s]"
-msgstr ""
+msgstr "ອຸປະກອນເຂົ້າລະຫັດ LUKS %s[%s, %s]"
 
 msgid "Label"
-msgstr ""
+msgstr "ປ້າຍຊື່"
 
 msgid "Lock"
-msgstr ""
+msgstr "ລັອກ"
 
 msgid "Lock encrypted device ..."
-msgstr ""
+msgstr "ກຳລັງລັອກອຸປະກອນທີ່ເຂົ້າລະຫັດ ..."
 
 msgid "New Passphrase"
-msgstr ""
+msgstr "ລະຫັດຜ່ານໃໝ່"
 
 msgid "No storage device backend exists for device %s"
-msgstr ""
+msgstr "ບໍ່ມີລະບົບຈັດການອຸປະກອນເກັບຂໍ້ມູນ (backend) ສຳລັບອຸປະກອນ %s"
 
 msgid "Passphrase"
-msgstr ""
+msgstr "ລະຫັດຜ່ານ"
 
 msgid "Referenced"
-msgstr ""
+msgstr "ຖືກອ້າງອີງ"
 
 msgid "Remove"
-msgstr ""
+msgstr "ລຶບອອກ"
 
 msgid "Remove stale auto-unlock entry"
-msgstr ""
+msgstr "ລຶບລາຍການປົດລັອກອັດຕະໂນມັດທີ່ຕົກຄ້າງ"
 
 msgid "Removing key ..."
-msgstr ""
+msgstr "ກຳລັງລຶບກຸນແຈ ..."
 
 msgid "Removing stale auto-unlock entry ..."
-msgstr ""
+msgstr "ກຳລັງລຶບລາຍການປົດລັອກອັດຕະໂນມັດທີ່ຕົກຄ້າງ ..."
 
 msgid "Size"
-msgstr ""
+msgstr "ຂະໜາດ"
 
 msgid "Stale"
-msgstr ""
+msgstr "ຕົກຄ້າງ"
 
 msgid "Stale auto-unlock entry has been removed."
-msgstr ""
+msgstr "ລຶບລາຍການປົດລັອກອັດຕະໂນມັດທີ່ຕົກຄ້າງອອກແລ້ວ."
 
 msgid "Test"
-msgstr ""
+msgstr "ທົດສອບ"
 
 msgid "Testing key ..."
-msgstr ""
+msgstr "ກຳລັງທົດສອບກຸນແຈ ..."
 
 msgid "The UUID of the LUKS header backup file "
-msgstr ""
+msgstr "UUID ຂອງໄຟລ໌ສຳຮອງສ່ວນຫົວ LUKS "
 
 msgid "The key did not unlock any key slot on the device"
-msgstr ""
+msgstr "ກຸນແຈນີ້ບໍ່ສາມາດປົດລັອກຊ່ອງກຸນແຈໃດໆໃນອຸປະກອນໄດ້"
 
 msgid "The passphrase is valid and unlocks the container."
-msgstr ""
+msgstr "ລະຫັດຜ່ານຖືກຕ້ອງ ແລະ ສາມາດປົດລັອກຄອນເທນເນີໄດ້."
 
 msgid "The passphrases must match."
-msgstr ""
+msgstr "ລະຫັດຜ່ານຕ້ອງຕົງກັນ."
 
 msgid ""
 "This command can have a negative security impact because it can make "
 "filesystem-level operations visible on the physical device."
-msgstr ""
+msgstr "ຄຳສັ່ງນີ້ອາດສົ່ງຜົນກະທົບຕໍ່ຄວາມປອດໄພ ເພາະມັນອາດເຮັດໃຫ້ການເຮັດວຽກໃນລະດັບລະບົບໄຟລ໌ຖືກເບິ່ງເຫັນໄດ້ໃນອຸປະກອນຕົວຈິງ."
 
 msgid "Unable to add auto-unlock key to encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດເພີ່ມກຸນແຈປົດລັອກອັດຕະໂນມັດໃຫ້ກັບອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to add the key to the encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດເພີ່ມກຸນແຈໃຫ້ກັບອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດປ່ຽນກຸນແຈໃນອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to create encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດສ້າງອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດລ້າງຊ່ອງເກັບກຸນແຈໃນອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to extract the LUKS header from the encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດດຶງສ່ວນຫົວ (header) LUKS ອອກຈາກອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to lock encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດລັອກອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to remove encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດລຶບອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດລຶບກຸນແຈອອກຈາກອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unable to restore the LUKS header to device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດກູ້ຄືນສ່ວນຫົວ LUKS ໄປຫາອຸປະກອນ: %s"
 
 msgid "Unable to unlock encrypted device: %s"
-msgstr ""
+msgstr "ບໍ່ສາມາດປົດລັອກອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
 
 msgid "Unlock"
-msgstr ""
+msgstr "ປົດລັອກ"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "ກຳລັງປົດລັອກອຸປະກອນທີ່ເຂົ້າລະຫັດ ..."
 
 msgid "Unlocked"
-msgstr ""
+msgstr "ປົດລັອກແລ້ວ"
 
 msgid "Version"
-msgstr ""
+msgstr "ເວີຊັນ"
 
 msgid "aes-cbc-essiv:sha256"
-msgstr ""
+msgstr "aes-cbc-essiv:sha256"
 
 msgid "aes-xts-plain64 (default)"
-msgstr ""
+msgstr "aes-xts-plain64 (ຄ່າເລີ່ມຕົ້ນ)"
 
 msgid "device"
-msgstr ""
+msgstr "ອຸປະກອນ"
