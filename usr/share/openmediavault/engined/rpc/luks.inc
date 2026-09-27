@@ -946,6 +946,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
      *     \em devicefile The block device of the LUKS container.
      *     \em passphrase An existing passphrase that unlocks the container.
      *     \em keyfile Path to an uploaded key file that unlocks the container.
+     *     \em discards Optional. Allow discards (TRIM) at boot.
      * @param context The context of the caller.
      * @return None.
      * @throw E_MISC_FAILURE
@@ -1006,7 +1007,8 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             'name'    => sprintf("luks-%s", $uuid),
             'device'  => sprintf("UUID=%s", $uuid),
             'keyfile' => $keyFilePath,
-            'options' => 'luks,nofail',
+            'options' => !empty($params['discards']) ?
+                'luks,nofail,discard' : 'luks,nofail',
         ];
         $this->writeCryptTab($entries);
         // Notify configuration changes.

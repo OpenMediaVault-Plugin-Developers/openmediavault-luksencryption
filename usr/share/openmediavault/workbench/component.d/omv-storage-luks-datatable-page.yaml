@@ -151,6 +151,11 @@ data:
                 hint: _("Enter an existing passphrase that unlocks the device. A random key file will be generated and added to the container so it can be unlocked automatically at boot.")
                 validators:
                   required: true
+              - type: checkbox
+                name: discards
+                value: false
+                label: _("Allow discards")
+                hint: _("This command can have a negative security impact because it can make filesystem-level operations visible on the physical device.")
             buttons:
               submit:
                 text: _('Enable')

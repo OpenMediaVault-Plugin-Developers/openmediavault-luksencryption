@@ -198,6 +198,10 @@
         "keyfile": {
           "type": "string",
           "required": false
+        },
+        "discards": {
+          "type": "boolean",
+          "required": false
         }
       }
     }
