@@ -1,3 +1,15 @@
+openmediavault-luksencryption (8.1.4) stable; urgency=low
+
+  * Fix key slot detection when testing a key with newer cryptsetup
+  * Refuse to remove the last key or erase the last key slot
+  * Refuse to create a container on a device that is in use
+  * Refuse to delete an unlocked container
+  * Refuse to remove the auto-unlock entry of an existing container
+  * Escape file and device paths passed to shell commands
+  * Add cipher and label to the create container schema
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 27 Sep 2026 13:59:05 +0000
+
 openmediavault-luksencryption (8.1.3) stable; urgency=low
 
   * Add discard option to auto-unlock
