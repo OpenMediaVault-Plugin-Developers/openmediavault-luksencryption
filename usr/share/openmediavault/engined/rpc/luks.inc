@@ -463,6 +463,17 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             throw new \OMV\Exception(sprintf(gettext("Device '%s' not found"),
                 $params['devicefile']));
         }
+        // Refuse devices that are in use by another block device, e.g. an
+        // unlocked LUKS container, RAID member or LVM physical volume.
+        // Wiping them would destroy the data of the device on top.
+        $holders = glob(sprintf("/sys/class/block/%s/holders/*",
+            basename(realpath($sd->getDeviceFile()))));
+        if (!empty($holders)) {
+            throw new \OMV\Exception(sprintf(
+                gettext("Device '%s' is in use by %s"),
+                $sd->getDeviceFile(),
+                implode(", ", array_map("basename", $holders))));
+        }
         // Get the storage device backend of the given device.
         $mngr = \OMV\System\Storage\Backend\Manager::getInstance();
         $sdb = $mngr->getBackend($sd->getDeviceFile());
@@ -476,7 +487,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         case OMV_STORAGE_DEVICE_TYPE_DEVICEMAPPER:
             // Wipe existing filesystems.
             $cmd = sprintf("export LANG=C; wipefs -a %s 2>&1",
-                            $sd->getDeviceFile());
+                            escapeshellarg($sd->getDeviceFile()));
             if (0 !== $this->exec($cmd, $output)) {
                 throw new \OMV\Exception($cmd . implode("\n", $output));
             }
@@ -497,8 +508,8 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             throw new \OMV\Exception($cmd . implode("\n", $output));
         }
         // Create the container.
-        $cipher = $params['cipher'];
-        $label = $params['lukslabel'];
+        $cipher = $params['cipher'] ?? "aes-xts-plain64";
+        $label = $params['lukslabel'] ?? "";
         $luks = new \OMV\System\Storage\Luks\Container($sd->getDeviceFile());
         if(isset($params['keyfile']) && !empty($params['keyfile'])) {
             $key = $params['keyfile'];
@@ -540,6 +551,11 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             throw new \OMV\Exception(
                 sprintf(gettext("LUKS container on '%s' not found"),
                         $params['devicefile']));
+        }
+        if (TRUE === $luks->isOpen()) {
+            throw new \OMV\Exception(sprintf(
+                gettext("LUKS container on '%s' must be locked before it can be deleted"),
+                $params['devicefile']));
         }
         // Remove the container.
         try {
@@ -720,6 +736,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 sprintf(gettext("LUKS container on '%s' not found"),
                         $params['devicefile']));
         }
+        $this->assertNotLastKey($luks);
         // Remove the key
         if(isset($params['keyfile']) && !empty($params['keyfile'])) {
             $key = $params['keyfile'];
@@ -798,6 +815,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 sprintf(gettext("LUKS container on '%s' not found"),
                         $params['devicefile']));
         }
+        $this->assertNotLastKey($luks);
         // Kill the key slot.
         try {
             $luks->killSlot($params['keyslot']);
@@ -863,6 +881,19 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             "contenttype"    => "application/octet-stream",
             "unlink"         => TRUE
         ];
+    }
+
+    /**
+     * Throw if the container has only one key slot in use, so that removing
+     * a key or erasing a slot can never leave it impossible to unlock.
+     * @param luks The \OMV\System\Storage\Luks\Container to check.
+     * @throw E_MISC_FAILURE
+     */
+    private function assertNotLastKey($luks) {
+        if ($luks->getUsedKeySlots() <= 1) {
+            throw new \OMV\Exception(gettext(
+                "Refusing to remove the last key; the container could never be unlocked again."));
+        }
     }
 
     /**
@@ -1085,6 +1116,14 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
         $this->validateMethodParams($params, "rpc.luks.staleuuid");
         $uuid = $params['uuid'];
+        foreach (\OMV\System\Storage\Luks\Containers::enumerate() as $dev) {
+            $luks = new \OMV\System\Storage\Luks\Container($dev);
+            if ($luks->getUuid() === $uuid) {
+                throw new \OMV\Exception(sprintf(
+                    gettext("The auto-unlock entry for '%s' is not stale; the container exists on '%s'."),
+                    $uuid, $dev));
+            }
+        }
         $keyFilePath = $this->getKeyFilePath($uuid);
         if (file_exists($keyFilePath))
             unlink($keyFilePath);
@@ -1133,7 +1172,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         }
         // Validate the new header
         $cmd = sprintf("export LANG=C; cryptsetup isLuks %s 2>&1",
-                        $params['filepath']);
+                        escapeshellarg($params['filepath']));
         if (0 !== $this->exec($cmd, $output)) {
             throw new \OMV\Exception(
                 sprintf(gettext("%s is not a valid LUKS header backup file"),
@@ -1143,7 +1182,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         if($params['force'] === FALSE) {
             unset($cmd, $output, $result);
             $cmd = sprintf("export LANG=C; cryptsetup luksUUID %s 2>&1",
-                $params['filepath']
+                escapeshellarg($params['filepath'])
             );
             $this->exec($cmd, $output);
             $header_uuid = $output[0];

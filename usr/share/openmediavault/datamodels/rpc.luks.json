@@ -31,6 +31,15 @@
         "keyfile": {
           "type": "string",
           "required": false
+        },
+        "cipher": {
+          "type": "string",
+          "enum": ["aes-xts-plain64", "aes-cbc-essiv:sha256"],
+          "required": false
+        },
+        "lukslabel": {
+          "type": "string",
+          "required": false
         }
       }
     }

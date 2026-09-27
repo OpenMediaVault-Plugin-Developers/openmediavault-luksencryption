@@ -395,7 +395,8 @@ class Container extends \OMV\System\Storage\StorageDevice {
      * @param label Optional. String to tag the block device
      * @return TRUE if successful, otherwise FALSE.
      */
-    public function create($key, $keyIsFile=FALSE, $cipher, $label) {
+    public function create($key, $keyIsFile = FALSE,
+                           $cipher = "aes-xts-plain64", $label = "") {
         if (TRUE === $keyIsFile) {
             $cmd = sprintf("cryptsetup luksFormat --label=%s -c %s -q %s %s",
                 escapeshellarg($label),
@@ -427,7 +428,7 @@ class Container extends \OMV\System\Storage\StorageDevice {
     public function remove() {
         // First, close the device if it is open
         if ($this->isOpen()) {
-            if (FALSE === $luks->close()) {
+            if (FALSE === $this->close()) {
                 return FALSE;
             }
         }
@@ -717,7 +718,12 @@ class Container extends \OMV\System\Storage\StorageDevice {
         if ($exitStatus !== 0) {
             throw new \OMV\Exception($output);
         }
-        $slot = explode(" ", $output[0])[2];
+        // Newer cryptsetup versions print token messages before the
+        // "Key slot N unlocked." line, so search for it.
+        $matches = preg_grep("/^Key slot \d+ unlocked/", $output);
+        if (empty($matches))
+            return FALSE;
+        $slot = explode(" ", reset($matches))[2];
         // Return which key slot was unlocked.
         return $slot;
     }
