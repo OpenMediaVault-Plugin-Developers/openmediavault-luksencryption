@@ -4,11 +4,12 @@
 # 
 # Translators:
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2017
+# efef6ec5b435a041fce803c7f8af77d2_2341d43, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:23+0000\n"
+"POT-Creation-Date: 2026-09-30 21:24+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: efef6ec5b435a041fce803c7f8af77d2_2341d43, 2017\n"
 "Language-Team: Swedish (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/sv/)\n"
@@ -19,285 +20,355 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s is not a valid LUKS header backup file"
-msgstr "%s är inte ett giltigt LUKS header säkerhetskopia"
+msgstr "%s är inte en giltig säkerhetskopia av ett LUKS-huvud"
+
+msgid "A Tang server URL is required."
+msgstr ""
 
 msgid "Add"
 msgstr "Lägg till"
 
 msgid "Adding key ..."
-msgstr ""
+msgstr "Lägger till nyckel…"
 
 msgid "Allow discards"
-msgstr ""
+msgstr "Tillåt discard"
 
 msgid "Are you sure you want to delete to this device?"
-msgstr ""
+msgstr "Vill du verkligen ta bort den här enheten?"
 
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
-"unlock key will be removed from the container."
+"unlock key or Clevis binding will be removed from the container."
 msgstr ""
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
 "entry and stored key file will be deleted."
-msgstr ""
+msgstr "Vill du verkligen ta bort den här inaktuella posten för automatisk upplåsning? crypttab-posten och den lagrade nyckelfilen tas bort."
 
 msgid "Auto-unlock"
+msgstr "Automatisk upplåsning"
+
+msgid "Auto-unlock Method"
 msgstr ""
 
 msgid "Auto-unlock has been disabled."
-msgstr ""
+msgstr "Automatisk upplåsning har inaktiverats."
 
 msgid ""
 "Auto-unlock has been enabled. The device will be unlocked automatically at "
 "boot."
-msgstr ""
+msgstr "Automatisk upplåsning har aktiverats. Enheten låses upp automatiskt vid start."
 
 msgid "Auto-unlock is already enabled for this container."
-msgstr ""
+msgstr "Automatisk upplåsning är redan aktiverad för den här containern."
 
 msgid "Auto-unlock is not enabled for this container."
-msgstr ""
+msgstr "Automatisk upplåsning är inte aktiverad för den här containern."
 
 msgid "Backup header"
-msgstr ""
+msgstr "Säkerhetskopiera huvud"
 
 msgid "Change"
 msgstr "Ändra"
 
 msgid "Changing key ..."
-msgstr ""
+msgstr "Ändrar nyckel…"
 
 msgid "Cipher"
+msgstr "Krypteringsalgoritm"
+
+msgid "Clevis could not be installed."
 msgstr ""
 
 msgid "Confirm passphrase"
-msgstr "Bekräfta lösenordsfrasen"
+msgstr "Bekräfta lösenfras"
 
 msgid "Create"
 msgstr "Skapa"
 
 msgid "Created encrypted device."
-msgstr ""
+msgstr "Den krypterade enheten har skapats."
 
 msgid "Current Passphrase"
-msgstr ""
+msgstr "Aktuell lösenfras"
 
 msgid "Decrypted Device"
-msgstr ""
+msgstr "Dekrypterad enhet"
 
 msgid "Delete"
-msgstr ""
+msgstr "Ta bort"
 
 msgid "Deleting encrypted container ..."
-msgstr ""
+msgstr "Tar bort krypterad container…"
 
 msgid "Detail"
-msgstr "Detalj"
+msgstr "Information"
 
 msgid "Device"
 msgstr "Enhet"
 
-msgid "Device '%s' not found"
+msgid "Device '%s' is in use by %s"
 msgstr ""
+
+msgid "Device '%s' not found"
+msgstr "Enheten ”%s” hittades inte"
 
 msgid "Disable auto-unlock"
-msgstr ""
+msgstr "Inaktivera automatisk upplåsning"
 
 msgid "Disabling auto-unlock ..."
-msgstr ""
+msgstr "Inaktiverar automatisk upplåsning…"
 
 msgid "Enable auto-unlock"
-msgstr ""
+msgstr "Aktivera automatisk upplåsning"
 
 msgid "Enabling auto-unlock ..."
-msgstr ""
+msgstr "Aktiverar automatisk upplåsning…"
 
 msgid "Encrypted container has been deleted."
-msgstr ""
+msgstr "Den krypterade containern har tagits bort."
 
 msgid "Encrypted device has been locked."
-msgstr ""
+msgstr "Den krypterade enheten har låsts."
 
 msgid "Encrypted device has been unlocked."
-msgstr ""
+msgstr "Den krypterade enheten har låsts upp."
 
 msgid "Encryption"
 msgstr "Kryptering"
 
 msgid "Enter a new passphrase."
-msgstr ""
+msgstr "Ange en ny lösenfras."
 
 msgid "Enter an existing passphrase that unlocks the device."
-msgstr ""
-
-msgid ""
-"Enter an existing passphrase that unlocks the device. A random key file will"
-" be generated and added to the container so it can be unlocked automatically"
-" at boot."
-msgstr ""
+msgstr "Ange en befintlig lösenfras som låser upp enheten."
 
 msgid "Erase slot"
-msgstr ""
+msgstr "Radera nyckelplats"
 
 msgid "Erasing key slot ..."
-msgstr ""
+msgstr "Raderar nyckelplats…"
 
 msgid "Failed to create key directory '%s'."
-msgstr ""
+msgstr "Det gick inte att skapa nyckelmappen ”%s”."
 
 msgid "Failed to write key file '%s'."
+msgstr "Det gick inte att skriva nyckelfilen ”%s”."
+
+msgid "For example http://tang.example.com"
 msgstr ""
 
 msgid "Key Slots In Use"
+msgstr "Nyckelplatser som används"
+
+msgid "Key file"
 msgstr ""
 
 msgid "Key has been added to the container."
-msgstr ""
+msgstr "Nyckeln har lagts till i containern."
 
 msgid "Key has been changed."
-msgstr ""
+msgstr "Nyckeln har ändrats."
 
 msgid "Key has been removed from the container."
-msgstr ""
+msgstr "Nyckeln har tagits bort från containern."
 
 msgid "Key slot"
-msgstr ""
+msgstr "Nyckelplats"
 
 msgid "Key slot has been erased."
-msgstr ""
+msgstr "Nyckelplatsen har raderats."
 
 msgid "Keys"
 msgstr "Nycklar"
 
 msgid "LUKS Label"
-msgstr ""
+msgstr "LUKS-etikett"
 
 msgid "LUKS UUID"
+msgstr "LUKS-UUID"
+
+msgid "LUKS container on '%s' must be locked before it can be deleted"
 msgstr ""
 
 msgid "LUKS container on '%s' not found"
-msgstr "LUKS behållare på \"%s\" inte funnen"
+msgstr "LUKS-containern på ”%s” hittades inte"
 
 msgid "LUKS encrypted device %s[%s, %s]"
-msgstr ""
+msgstr "LUKS-krypterad enhet %s [%s, %s]"
 
 msgid "Label"
-msgstr ""
+msgstr "Etikett"
 
 msgid "Lock"
 msgstr "Lås"
 
 msgid "Lock encrypted device ..."
+msgstr "Låser krypterad enhet…"
+
+msgid "Method"
+msgstr ""
+
+msgid "Must be a http:// or https:// URL."
 msgstr ""
 
 msgid "New Passphrase"
+msgstr "Ny lösenfras"
+
+msgid "No TPM2 device was found on this system."
 msgstr ""
 
 msgid "No storage device backend exists for device %s"
-msgstr "Det finns ingen lagringsenhets backend för enheten %s"
+msgstr "Det finns ingen lagringsbakände för enheten %s"
+
+msgid ""
+"Optional. The thumbprint of the Tang server signing key, shown by 'tang-"
+"show-keys' on the Tang server. If empty, the keys the server advertises are "
+"trusted."
+msgstr ""
 
 msgid "Passphrase"
 msgstr "Lösenfras"
 
 msgid "Referenced"
-msgstr "Refererade"
+msgstr "Refererad"
+
+msgid ""
+"Refusing to remove the last key; the container could never be unlocked "
+"again."
+msgstr ""
 
 msgid "Remove"
 msgstr "Ta bort"
 
 msgid "Remove stale auto-unlock entry"
-msgstr ""
+msgstr "Ta bort inaktuell post för automatisk upplåsning"
 
 msgid "Removing key ..."
-msgstr ""
+msgstr "Tar bort nyckel…"
 
 msgid "Removing stale auto-unlock entry ..."
-msgstr ""
+msgstr "Tar bort inaktuell post för automatisk upplåsning…"
 
 msgid "Size"
 msgstr "Storlek"
 
 msgid "Stale"
-msgstr ""
+msgstr "Inaktuell"
 
 msgid "Stale auto-unlock entry has been removed."
+msgstr "Den inaktuella posten för automatisk upplåsning har tagits bort."
+
+msgid "TPM2"
+msgstr ""
+
+msgid "Tang key thumbprint"
+msgstr ""
+
+msgid "Tang server"
+msgstr ""
+
+msgid "Tang server URL"
+msgstr ""
+
+msgid "Tang server and TPM2"
 msgstr ""
 
 msgid "Test"
 msgstr "Testa"
 
 msgid "Testing key ..."
-msgstr ""
+msgstr "Testar nyckel…"
 
 msgid "The UUID of the LUKS header backup file "
+msgstr "UUID för säkerhetskopian av LUKS-huvudet "
+
+msgid ""
+"The auto-unlock entry for '%s' is not stale; the container exists on '%s'."
 msgstr ""
 
 msgid "The key did not unlock any key slot on the device"
+msgstr "Nyckeln låste inte upp någon nyckelplats på enheten"
+
+msgid "The passphrase does not unlock the encrypted device."
 msgstr ""
 
 msgid "The passphrase is valid and unlocks the container."
-msgstr ""
+msgstr "Lösenfrasen är giltig och låser upp containern."
 
 msgid "The passphrases must match."
-msgstr ""
+msgstr "Lösenfraserna måste stämma överens."
 
 msgid ""
 "This command can have a negative security impact because it can make "
 "filesystem-level operations visible on the physical device."
-msgstr ""
+msgstr "Det här kommandot kan försämra säkerheten eftersom åtgärder på filsystemsnivå kan bli synliga på den fysiska enheten."
 
 msgid "Unable to add auto-unlock key to encrypted device: %s"
-msgstr ""
+msgstr "Det gick inte att lägga till nyckeln för automatisk upplåsning på den krypterade enheten: %s"
 
 msgid "Unable to add the key to the encrypted device: %s"
+msgstr "Det gick inte att lägga till nyckeln på den krypterade enheten: %s"
+
+msgid "Unable to bind the encrypted device with Clevis: %s"
 msgstr ""
 
 msgid "Unable to change the key on the encrypted device: %s"
-msgstr ""
+msgstr "Det gick inte att ändra nyckeln på den krypterade enheten: %s"
 
 msgid "Unable to create encrypted device: %s"
-msgstr ""
+msgstr "Det gick inte att skapa den krypterade enheten: %s"
 
 msgid "Unable to erase the key slot on the encrypted device: %s"
-msgstr ""
+msgstr "Det gick inte att radera nyckelplatsen på den krypterade enheten: %s"
 
 msgid "Unable to extract the LUKS header from the encrypted device: %s"
-msgstr ""
+msgstr "Det gick inte att extrahera LUKS-huvudet från den krypterade enheten: %s"
 
 msgid "Unable to lock encrypted device: %s"
-msgstr "Det gick inte att låsa krypterad enhet: %s"
+msgstr "Det gick inte att låsa den krypterade enheten: %s"
 
 msgid "Unable to remove encrypted device: %s"
-msgstr ""
+msgstr "Det gick inte att ta bort den krypterade enheten: %s"
 
 msgid "Unable to remove the key from the encrypted device: %s"
-msgstr ""
+msgstr "Det gick inte att ta bort nyckeln från den krypterade enheten: %s"
 
 msgid "Unable to restore the LUKS header to device: %s"
-msgstr ""
+msgstr "Det gick inte att återställa LUKS-huvudet till enheten: %s"
 
 msgid "Unable to unlock encrypted device: %s"
-msgstr "Det går inte att låsa upp krypterad enhet: %s"
+msgstr "Det gick inte att låsa upp den krypterade enheten: %s"
 
 msgid "Unlock"
 msgstr "Lås upp"
 
 msgid "Unlock encrypted device ..."
-msgstr ""
+msgstr "Låser upp krypterad enhet…"
 
 msgid "Unlocked"
-msgstr "Olåst"
+msgstr "Upplåst"
 
 msgid "Version"
+msgstr "Version"
+
+msgid ""
+"With a key file, a random key file is stored on this system and added to the"
+" container. With a Tang server, the container is unlocked by a Tang server "
+"on the network, so it cannot be unlocked when the system is taken away from "
+"that network. With TPM2, the container is unlocked by this system's TPM2 "
+"chip, so the disks cannot be unlocked in another system. With both, the Tang"
+" server and the TPM2 are required. Clevis is installed when a Tang or TPM2 "
+"method is used."
 msgstr ""
 
 msgid "aes-cbc-essiv:sha256"
-msgstr ""
+msgstr "aes-cbc-essiv:sha256"
 
 msgid "aes-xts-plain64 (default)"
-msgstr ""
+msgstr "aes-xts-plain64 (standard)"
 
 msgid "device"
-msgstr ""
+msgstr "enhet"

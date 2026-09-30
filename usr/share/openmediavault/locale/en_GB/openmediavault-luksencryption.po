@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:23+0000\n"
+"POT-Creation-Date: 2026-09-30 21:24+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2015,2023-2026\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/en_GB/)\n"
@@ -20,6 +20,9 @@ msgstr ""
 
 msgid "%s is not a valid LUKS header backup file"
 msgstr "%s is not a valid LUKS header backup file"
+
+msgid "A Tang server URL is required."
+msgstr ""
 
 msgid "Add"
 msgstr "Add"
@@ -35,8 +38,8 @@ msgstr "Are you sure you want to delete to this device?"
 
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
-"unlock key will be removed from the container."
-msgstr "Are you sure you want to disable auto-unlock for this device? The auto-unlock key will be removed from the container."
+"unlock key or Clevis binding will be removed from the container."
+msgstr ""
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
@@ -45,6 +48,9 @@ msgstr "Are you sure you want to remove this stale auto-unlock entry? The cryptt
 
 msgid "Auto-unlock"
 msgstr "Auto-unlock"
+
+msgid "Auto-unlock Method"
+msgstr ""
 
 msgid "Auto-unlock has been disabled."
 msgstr "Auto-unlock has been disabled."
@@ -72,6 +78,9 @@ msgstr "Changing key ..."
 msgid "Cipher"
 msgstr "Cipher"
 
+msgid "Clevis could not be installed."
+msgstr ""
+
 msgid "Confirm passphrase"
 msgstr "Confirm passphrase"
 
@@ -98,6 +107,9 @@ msgstr "Detail"
 
 msgid "Device"
 msgstr "Device"
+
+msgid "Device '%s' is in use by %s"
+msgstr ""
 
 msgid "Device '%s' not found"
 msgstr "Device '%s' not found"
@@ -132,12 +144,6 @@ msgstr "Enter a new passphrase."
 msgid "Enter an existing passphrase that unlocks the device."
 msgstr "Enter an existing passphrase that unlocks the device."
 
-msgid ""
-"Enter an existing passphrase that unlocks the device. A random key file will"
-" be generated and added to the container so it can be unlocked automatically"
-" at boot."
-msgstr "Enter an existing passphrase that unlocks the device. A random key file will be generated and added to the container so it can be unlocked automatically at boot."
-
 msgid "Erase slot"
 msgstr "Erase slot"
 
@@ -150,8 +156,14 @@ msgstr "Failed to create key directory '%s'."
 msgid "Failed to write key file '%s'."
 msgstr "Failed to write key file '%s'."
 
+msgid "For example http://tang.example.com"
+msgstr ""
+
 msgid "Key Slots In Use"
 msgstr "Key Slots In Use"
+
+msgid "Key file"
+msgstr ""
 
 msgid "Key has been added to the container."
 msgstr "Key has been added to the container."
@@ -177,6 +189,9 @@ msgstr "LUKS Label"
 msgid "LUKS UUID"
 msgstr "LUKS UUID"
 
+msgid "LUKS container on '%s' must be locked before it can be deleted"
+msgstr ""
+
 msgid "LUKS container on '%s' not found"
 msgstr "LUKS container on '%s' not found"
 
@@ -192,17 +207,37 @@ msgstr "Lock"
 msgid "Lock encrypted device ..."
 msgstr "Lock encrypted device ..."
 
+msgid "Method"
+msgstr ""
+
+msgid "Must be a http:// or https:// URL."
+msgstr ""
+
 msgid "New Passphrase"
 msgstr "New Passphrase"
 
+msgid "No TPM2 device was found on this system."
+msgstr ""
+
 msgid "No storage device backend exists for device %s"
 msgstr "No storage device backend exists for device %s"
+
+msgid ""
+"Optional. The thumbprint of the Tang server signing key, shown by 'tang-"
+"show-keys' on the Tang server. If empty, the keys the server advertises are "
+"trusted."
+msgstr ""
 
 msgid "Passphrase"
 msgstr "Passphrase"
 
 msgid "Referenced"
 msgstr "Referenced"
+
+msgid ""
+"Refusing to remove the last key; the container could never be unlocked "
+"again."
+msgstr ""
 
 msgid "Remove"
 msgstr "Remove"
@@ -225,6 +260,21 @@ msgstr "Stale"
 msgid "Stale auto-unlock entry has been removed."
 msgstr "Stale auto-unlock entry has been removed."
 
+msgid "TPM2"
+msgstr ""
+
+msgid "Tang key thumbprint"
+msgstr ""
+
+msgid "Tang server"
+msgstr ""
+
+msgid "Tang server URL"
+msgstr ""
+
+msgid "Tang server and TPM2"
+msgstr ""
+
 msgid "Test"
 msgstr "Test"
 
@@ -234,8 +284,15 @@ msgstr "Testing key ..."
 msgid "The UUID of the LUKS header backup file "
 msgstr "The UUID of the LUKS header backup file "
 
+msgid ""
+"The auto-unlock entry for '%s' is not stale; the container exists on '%s'."
+msgstr ""
+
 msgid "The key did not unlock any key slot on the device"
 msgstr "The key did not unlock any key slot on the device"
+
+msgid "The passphrase does not unlock the encrypted device."
+msgstr ""
 
 msgid "The passphrase is valid and unlocks the container."
 msgstr "The passphrase is valid and unlocks the container."
@@ -253,6 +310,9 @@ msgstr "Unable to add auto-unlock key to encrypted device: %s"
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "Unable to add the key to the encrypted device: %s"
+
+msgid "Unable to bind the encrypted device with Clevis: %s"
+msgstr ""
 
 msgid "Unable to change the key on the encrypted device: %s"
 msgstr "Unable to change the key on the encrypted device: %s"
@@ -292,6 +352,16 @@ msgstr "Unlocked"
 
 msgid "Version"
 msgstr "Version"
+
+msgid ""
+"With a key file, a random key file is stored on this system and added to the"
+" container. With a Tang server, the container is unlocked by a Tang server "
+"on the network, so it cannot be unlocked when the system is taken away from "
+"that network. With TPM2, the container is unlocked by this system's TPM2 "
+"chip, so the disks cannot be unlocked in another system. With both, the Tang"
+" server and the TPM2 are required. Clevis is installed when a Tang or TPM2 "
+"method is used."
+msgstr ""
 
 msgid "aes-cbc-essiv:sha256"
 msgstr "aes-cbc-essiv:sha256"

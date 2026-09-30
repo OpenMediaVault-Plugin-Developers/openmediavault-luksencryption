@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:23+0000\n"
+"POT-Creation-Date: 2026-09-30 21:24+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Lao (Laos) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/lo_LA/)\n"
@@ -19,6 +19,9 @@ msgstr ""
 
 msgid "%s is not a valid LUKS header backup file"
 msgstr "%s ບໍ່ແມ່ນໄຟລ໌ສຳຮອງສ່ວນຫົວ (header) ຂອງ LUKS ທີ່ຖືກຕ້ອງ"
+
+msgid "A Tang server URL is required."
+msgstr ""
 
 msgid "Add"
 msgstr "ເພີ່ມ"
@@ -34,8 +37,8 @@ msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການລ
 
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
-"unlock key will be removed from the container."
-msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການປິດການປົດລັອກອັດຕະໂນມັດສຳລັບອຸປະກອນນີ້? ກຸນແຈປົດລັອກອັດຕະໂນມັດຈະຖືກລຶບອອກຈາກຄອນເທນເນີ."
+"unlock key or Clevis binding will be removed from the container."
+msgstr ""
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
@@ -44,6 +47,9 @@ msgstr "ເຈົ້າແນ່ໃຈບໍ່ວ່າຕ້ອງການລ
 
 msgid "Auto-unlock"
 msgstr "ປົດລັອກອັດຕະໂນມັດ"
+
+msgid "Auto-unlock Method"
+msgstr ""
 
 msgid "Auto-unlock has been disabled."
 msgstr "ປິດການປົດລັອກອັດຕະໂນມັດແລ້ວ."
@@ -71,6 +77,9 @@ msgstr "ກຳລັງປ່ຽນກຸນແຈ ..."
 msgid "Cipher"
 msgstr "ລະຫັດລັບ (Cipher)"
 
+msgid "Clevis could not be installed."
+msgstr ""
+
 msgid "Confirm passphrase"
 msgstr "ຢືນຢັນລະຫັດຜ່ານ"
 
@@ -97,6 +106,9 @@ msgstr "ລາຍລະອຽດ"
 
 msgid "Device"
 msgstr "ອຸປະກອນ"
+
+msgid "Device '%s' is in use by %s"
+msgstr ""
 
 msgid "Device '%s' not found"
 msgstr "ບໍ່ພົບອຸປະກອນ '%s'"
@@ -131,12 +143,6 @@ msgstr "ປ້ອນລະຫັດຜ່ານໃໝ່."
 msgid "Enter an existing passphrase that unlocks the device."
 msgstr "ປ້ອນລະຫັດຜ່ານເດີມທີ່ໃຊ້ປົດລັອກອຸປະກອນ."
 
-msgid ""
-"Enter an existing passphrase that unlocks the device. A random key file will"
-" be generated and added to the container so it can be unlocked automatically"
-" at boot."
-msgstr "ປ້ອນລະຫັດຜ່ານເດີມທີ່ໃຊ້ປົດລັອກອຸປະກອນ. ໄຟລ໌ກຸນແຈແບບສຸ່ມຈະຖືກສ້າງຂຶ້ນ ແລະ ເພີ່ມເຂົ້າໃນຄອນເທນເນີ ເພື່ອໃຫ້ສາມາດປົດລັອກໂດຍອັດຕະໂນມັດເມື່ອເລີ່ມລະບົບ (boot)."
-
 msgid "Erase slot"
 msgstr "ລ້າງຊ່ອງເກັບກຸນແຈ"
 
@@ -149,8 +155,14 @@ msgstr "ສ້າງໄດເຣັກທໍຣີກຸນແຈ '%s' ບໍ່
 msgid "Failed to write key file '%s'."
 msgstr "ຂຽນໄຟລ໌ກຸນແຈ '%s' ບໍ່ສຳເລັດ."
 
+msgid "For example http://tang.example.com"
+msgstr ""
+
 msgid "Key Slots In Use"
 msgstr "ຊ່ອງເກັບກຸນແຈທີ່ໃຊ້ຢູ່"
+
+msgid "Key file"
+msgstr ""
 
 msgid "Key has been added to the container."
 msgstr "ເພີ່ມກຸນແຈເຂົ້າໃນຄອນເທນເນີແລ້ວ."
@@ -176,6 +188,9 @@ msgstr "ປ້າຍຊື່ LUKS"
 msgid "LUKS UUID"
 msgstr "LUKS UUID"
 
+msgid "LUKS container on '%s' must be locked before it can be deleted"
+msgstr ""
+
 msgid "LUKS container on '%s' not found"
 msgstr "ບໍ່ພົບຄອນເທນເນີ LUKS ໃນ '%s'"
 
@@ -191,17 +206,37 @@ msgstr "ລັອກ"
 msgid "Lock encrypted device ..."
 msgstr "ກຳລັງລັອກອຸປະກອນທີ່ເຂົ້າລະຫັດ ..."
 
+msgid "Method"
+msgstr ""
+
+msgid "Must be a http:// or https:// URL."
+msgstr ""
+
 msgid "New Passphrase"
 msgstr "ລະຫັດຜ່ານໃໝ່"
 
+msgid "No TPM2 device was found on this system."
+msgstr ""
+
 msgid "No storage device backend exists for device %s"
 msgstr "ບໍ່ມີລະບົບຈັດການອຸປະກອນເກັບຂໍ້ມູນ (backend) ສຳລັບອຸປະກອນ %s"
+
+msgid ""
+"Optional. The thumbprint of the Tang server signing key, shown by 'tang-"
+"show-keys' on the Tang server. If empty, the keys the server advertises are "
+"trusted."
+msgstr ""
 
 msgid "Passphrase"
 msgstr "ລະຫັດຜ່ານ"
 
 msgid "Referenced"
 msgstr "ຖືກອ້າງອີງ"
+
+msgid ""
+"Refusing to remove the last key; the container could never be unlocked "
+"again."
+msgstr ""
 
 msgid "Remove"
 msgstr "ລຶບອອກ"
@@ -224,6 +259,21 @@ msgstr "ຕົກຄ້າງ"
 msgid "Stale auto-unlock entry has been removed."
 msgstr "ລຶບລາຍການປົດລັອກອັດຕະໂນມັດທີ່ຕົກຄ້າງອອກແລ້ວ."
 
+msgid "TPM2"
+msgstr ""
+
+msgid "Tang key thumbprint"
+msgstr ""
+
+msgid "Tang server"
+msgstr ""
+
+msgid "Tang server URL"
+msgstr ""
+
+msgid "Tang server and TPM2"
+msgstr ""
+
 msgid "Test"
 msgstr "ທົດສອບ"
 
@@ -233,8 +283,15 @@ msgstr "ກຳລັງທົດສອບກຸນແຈ ..."
 msgid "The UUID of the LUKS header backup file "
 msgstr "UUID ຂອງໄຟລ໌ສຳຮອງສ່ວນຫົວ LUKS "
 
+msgid ""
+"The auto-unlock entry for '%s' is not stale; the container exists on '%s'."
+msgstr ""
+
 msgid "The key did not unlock any key slot on the device"
 msgstr "ກຸນແຈນີ້ບໍ່ສາມາດປົດລັອກຊ່ອງກຸນແຈໃດໆໃນອຸປະກອນໄດ້"
+
+msgid "The passphrase does not unlock the encrypted device."
+msgstr ""
 
 msgid "The passphrase is valid and unlocks the container."
 msgstr "ລະຫັດຜ່ານຖືກຕ້ອງ ແລະ ສາມາດປົດລັອກຄອນເທນເນີໄດ້."
@@ -252,6 +309,9 @@ msgstr "ບໍ່ສາມາດເພີ່ມກຸນແຈປົດລັອ
 
 msgid "Unable to add the key to the encrypted device: %s"
 msgstr "ບໍ່ສາມາດເພີ່ມກຸນແຈໃຫ້ກັບອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
+
+msgid "Unable to bind the encrypted device with Clevis: %s"
+msgstr ""
 
 msgid "Unable to change the key on the encrypted device: %s"
 msgstr "ບໍ່ສາມາດປ່ຽນກຸນແຈໃນອຸປະກອນທີ່ເຂົ້າລະຫັດ: %s"
@@ -291,6 +351,16 @@ msgstr "ປົດລັອກແລ້ວ"
 
 msgid "Version"
 msgstr "ເວີຊັນ"
+
+msgid ""
+"With a key file, a random key file is stored on this system and added to the"
+" container. With a Tang server, the container is unlocked by a Tang server "
+"on the network, so it cannot be unlocked when the system is taken away from "
+"that network. With TPM2, the container is unlocked by this system's TPM2 "
+"chip, so the disks cannot be unlocked in another system. With both, the Tang"
+" server and the TPM2 are required. Clevis is installed when a Tang or TPM2 "
+"method is used."
+msgstr ""
 
 msgid "aes-cbc-essiv:sha256"
 msgstr "aes-cbc-essiv:sha256"

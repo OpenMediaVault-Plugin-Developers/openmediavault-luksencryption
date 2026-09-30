@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:23+0000\n"
+"POT-Creation-Date: 2026-09-30 21:24+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Galician (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/gl/)\n"
@@ -18,6 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%s is not a valid LUKS header backup file"
+msgstr ""
+
+msgid "A Tang server URL is required."
 msgstr ""
 
 msgid "Add"
@@ -34,7 +37,7 @@ msgstr ""
 
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
-"unlock key will be removed from the container."
+"unlock key or Clevis binding will be removed from the container."
 msgstr ""
 
 msgid ""
@@ -43,6 +46,9 @@ msgid ""
 msgstr ""
 
 msgid "Auto-unlock"
+msgstr ""
+
+msgid "Auto-unlock Method"
 msgstr ""
 
 msgid "Auto-unlock has been disabled."
@@ -71,6 +77,9 @@ msgstr ""
 msgid "Cipher"
 msgstr ""
 
+msgid "Clevis could not be installed."
+msgstr ""
+
 msgid "Confirm passphrase"
 msgstr ""
 
@@ -96,6 +105,9 @@ msgid "Detail"
 msgstr ""
 
 msgid "Device"
+msgstr ""
+
+msgid "Device '%s' is in use by %s"
 msgstr ""
 
 msgid "Device '%s' not found"
@@ -131,12 +143,6 @@ msgstr ""
 msgid "Enter an existing passphrase that unlocks the device."
 msgstr ""
 
-msgid ""
-"Enter an existing passphrase that unlocks the device. A random key file will"
-" be generated and added to the container so it can be unlocked automatically"
-" at boot."
-msgstr ""
-
 msgid "Erase slot"
 msgstr ""
 
@@ -149,7 +155,13 @@ msgstr ""
 msgid "Failed to write key file '%s'."
 msgstr ""
 
+msgid "For example http://tang.example.com"
+msgstr ""
+
 msgid "Key Slots In Use"
+msgstr ""
+
+msgid "Key file"
 msgstr ""
 
 msgid "Key has been added to the container."
@@ -176,6 +188,9 @@ msgstr ""
 msgid "LUKS UUID"
 msgstr ""
 
+msgid "LUKS container on '%s' must be locked before it can be deleted"
+msgstr ""
+
 msgid "LUKS container on '%s' not found"
 msgstr ""
 
@@ -191,16 +206,36 @@ msgstr ""
 msgid "Lock encrypted device ..."
 msgstr ""
 
+msgid "Method"
+msgstr ""
+
+msgid "Must be a http:// or https:// URL."
+msgstr ""
+
 msgid "New Passphrase"
 msgstr ""
 
+msgid "No TPM2 device was found on this system."
+msgstr ""
+
 msgid "No storage device backend exists for device %s"
+msgstr ""
+
+msgid ""
+"Optional. The thumbprint of the Tang server signing key, shown by 'tang-"
+"show-keys' on the Tang server. If empty, the keys the server advertises are "
+"trusted."
 msgstr ""
 
 msgid "Passphrase"
 msgstr ""
 
 msgid "Referenced"
+msgstr ""
+
+msgid ""
+"Refusing to remove the last key; the container could never be unlocked "
+"again."
 msgstr ""
 
 msgid "Remove"
@@ -224,6 +259,21 @@ msgstr ""
 msgid "Stale auto-unlock entry has been removed."
 msgstr ""
 
+msgid "TPM2"
+msgstr ""
+
+msgid "Tang key thumbprint"
+msgstr ""
+
+msgid "Tang server"
+msgstr ""
+
+msgid "Tang server URL"
+msgstr ""
+
+msgid "Tang server and TPM2"
+msgstr ""
+
 msgid "Test"
 msgstr ""
 
@@ -233,7 +283,14 @@ msgstr ""
 msgid "The UUID of the LUKS header backup file "
 msgstr ""
 
+msgid ""
+"The auto-unlock entry for '%s' is not stale; the container exists on '%s'."
+msgstr ""
+
 msgid "The key did not unlock any key slot on the device"
+msgstr ""
+
+msgid "The passphrase does not unlock the encrypted device."
 msgstr ""
 
 msgid "The passphrase is valid and unlocks the container."
@@ -251,6 +308,9 @@ msgid "Unable to add auto-unlock key to encrypted device: %s"
 msgstr ""
 
 msgid "Unable to add the key to the encrypted device: %s"
+msgstr ""
+
+msgid "Unable to bind the encrypted device with Clevis: %s"
 msgstr ""
 
 msgid "Unable to change the key on the encrypted device: %s"
@@ -290,6 +350,16 @@ msgid "Unlocked"
 msgstr ""
 
 msgid "Version"
+msgstr ""
+
+msgid ""
+"With a key file, a random key file is stored on this system and added to the"
+" container. With a Tang server, the container is unlocked by a Tang server "
+"on the network, so it cannot be unlocked when the system is taken away from "
+"that network. With TPM2, the container is unlocked by this system's TPM2 "
+"chip, so the disks cannot be unlocked in another system. With both, the Tang"
+" server and the TPM2 are required. Clevis is installed when a Tang or TPM2 "
+"method is used."
 msgstr ""
 
 msgid "aes-cbc-essiv:sha256"
