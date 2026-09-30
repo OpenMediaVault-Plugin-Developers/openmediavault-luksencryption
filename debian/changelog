@@ -1,3 +1,9 @@
+openmediavault-luksencryption (8.1.5) stable; urgency=low
+
+  * Add tang and/or tpm2 auto-unlock
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 30 Sep 2026 21:23:47 +0000
+
 openmediavault-luksencryption (8.1.4) stable; urgency=low
 
   * Fix key slot detection when testing a key with newer cryptsetup
