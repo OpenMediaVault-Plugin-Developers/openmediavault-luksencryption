@@ -13,6 +13,10 @@
 #   - Run as root
 #   - OMV with the luksencryption plugin installed
 #   - cryptsetup, losetup, dmsetup, blkid, systemd-cryptsetup
+#
+# Clevis auto-unlock: set TANG_URL (e.g. TANG_URL=http://tang.lan) to test
+# binding to a real Tang server; TPM2 binding is tested when /dev/tpmrm0
+# exists.  Either installs clevis via the plugin's salt state.
 
 set -uo pipefail
 
@@ -137,6 +141,16 @@ crypttab_options() {
     awk -v dev="UUID=$1" '$1 !~ /^#/ && $2 == dev { print $4 }' /etc/crypttab 2>/dev/null
 }
 
+# Print the key file column of the crypttab entry for UUID $1 (empty if none).
+crypttab_keyfile() {
+    awk -v dev="UUID=$1" '$1 !~ /^#/ && $2 == dev { print $3 }' /etc/crypttab 2>/dev/null
+}
+
+# Print the Clevis pins bound to device $1, one per line.
+clevis_pins() {
+    clevis luks list -d "$1" 2>/dev/null | awk '{ print $2 }'
+}
+
 # True if passphrase $2 unlocks device $1.
 key_works() {
     echo -n "$2" | cryptsetup open --test-passphrase "$1" --key-file=- >/dev/null 2>&1
@@ -192,10 +206,11 @@ mapper_of()    { echo "$(basename "$1")-crypt"; }
 boot_unit_of() { echo "systemd-cryptsetup@$(systemd-escape "luks-$1").service"; }
 
 # Unlock UUID $1 via systemd-cryptsetup using its crypttab entry, as happens
-# at boot.  Returns non-zero if the unit could not be started.
+# at boot.  Returns non-zero if the unit could not be started.  No password
+# agent runs on this terminal, so a prompt can only be answered by clevis.
 boot_unlock() {
     systemctl daemon-reload
-    systemctl start "$(boot_unit_of "$1")" >/dev/null 2>&1
+    timeout 60 systemctl --no-ask-password start "$(boot_unit_of "$1")" >/dev/null 2>&1
 }
 boot_lock() {
     systemctl stop "$(boot_unit_of "$1")" >/dev/null 2>&1 || true
@@ -684,6 +699,7 @@ check "key file is 512 bytes" "$(stat -c %s "$KEY_DIR/$UUID_A" 2>&1)" \
 check "key file unlocks A" "" keyfile_works "$DEV_A" "$KEY_DIR/$UUID_A"
 v=$(container_field "$DEV_A" usedslots); check "enable added a key slot" "got '$v'" [ "$v" = "2" ]
 v=$(container_field "$DEV_A" autounlock); check "enumerate autounlock is true" "got '$v'" [ "$v" = "true" ]
+v=$(container_field "$DEV_A" autounlockmethod); check "enumerate autounlockmethod is keyfile" "got '$v'" [ "$v" = "keyfile" ]
 v=$(list_field "$UUID_A" stale); check "live container is not stale" "got '$v'" [ "$v" != "true" ]
 
 assert_rpc_fails "enableContainerAutoUnlock twice fails" \
@@ -716,6 +732,7 @@ check "disable removes crypttab entry" "'$(crypttab_options "$UUID_A")'" [ -z "$
 check "disable removes key file" "" test ! -e "$KEY_DIR/$UUID_A"
 v=$(container_field "$DEV_A" usedslots); check "disable removes the key slot" "got '$v'" [ "$v" = "1" ]
 v=$(container_field "$DEV_A" autounlock); check "enumerate autounlock is false" "got '$v'" [ "$v" = "false" ]
+v=$(container_field "$DEV_A" autounlockmethod); check "enumerate autounlockmethod is empty" "got '$v'" [ -z "$v" ]
 check "passphrase still unlocks A after disable" "" key_works "$DEV_A" "$PASS_A"
 
 # ---------------------------------------------------------------------------
@@ -773,6 +790,89 @@ check "LUKS1 key file unlocks C" "" keyfile_works "$DEV_C" "$KEY_DIR/$UUID_C"
 assert_rpc "disableContainerAutoUnlock on a LUKS1 container" \
     "$SVC" disableContainerAutoUnlock "{\"devicefile\":\"$DEV_C\"}"
 v=$(container_field "$DEV_C" usedslots); check "C usedslots back to 1" "got '$v'" [ "$v" = "1" ]
+
+# ---------------------------------------------------------------------------
+section "Auto-unlock — Clevis"
+# ---------------------------------------------------------------------------
+
+assert_rpc_fails "enableContainerAutoUnlock rejects an unknown method" \
+    "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_A\",\"passphrase\":\"$PASS_A\",\"method\":\"bogus\"}"
+assert_rpc_fails "enableContainerAutoUnlock rejects a non-http Tang URL" \
+    "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_A\",\"passphrase\":\"$PASS_A\",\"method\":\"tang\",\"tangurl\":\"ftp://tang\"}"
+assert_rpc_fails "enableContainerAutoUnlock rejects a bad Tang thumbprint" \
+    "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_A\",\"passphrase\":\"$PASS_A\",\"method\":\"tang\",\"tangurl\":\"http://tang\",\"tangthp\":\"a b\"}"
+assert_rpc_fails "tang method without a URL fails" \
+    "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_A\",\"passphrase\":\"$PASS_A\",\"method\":\"tang\"}"
+assert_rpc_fails "tang method with wrong passphrase fails" \
+    "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_A\",\"passphrase\":\"$WRONG\",\"method\":\"tang\",\"tangurl\":\"http://tang.invalid\"}"
+check "failed Clevis enable leaves no crypttab entry" "got '$(crypttab_options "$UUID_A")'" \
+    [ -z "$(crypttab_options "$UUID_A")" ]
+v=$(container_field "$DEV_A" usedslots); check "failed Clevis enable adds no key slot" "got '$v'" [ "$v" = "1" ]
+
+if [ ! -e /dev/tpmrm0 ] && [ ! -e /dev/tpm0 ]; then
+    assert_rpc_fails "tpm2 method without a TPM fails" \
+        "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_A\",\"passphrase\":\"$PASS_A\",\"method\":\"tpm2\"}"
+    check "failed TPM2 enable leaves no crypttab entry" "" [ -z "$(crypttab_options "$UUID_A")" ]
+fi
+
+# Enable Clevis method $1 (with extra JSON params $2) on A, verify the binding
+# and the crypttab entry, unlock it as at boot, then disable it again.
+clevis_roundtrip() {
+    local method=$1 extra=$2 netdev=$3; shift 3
+    local pins=("$@") opts v p
+    assert_rpc "enableContainerAutoUnlock method=$method" \
+        "$SVC" enableContainerAutoUnlock \
+        "{\"devicefile\":\"$DEV_A\",\"passphrase\":\"$PASS_A\",\"method\":\"$method\"$extra}" || return
+    check "clevis is installed" "" test -x /usr/bin/clevis
+    check "clevis-luks-askpass.path is enabled" "" systemctl -q is-enabled clevis-luks-askpass.path
+    opts=$(crypttab_options "$UUID_A")
+    check "crypttab key file is none" "got '$(crypttab_keyfile "$UUID_A")'" \
+        [ "$(crypttab_keyfile "$UUID_A")" = "none" ]
+    check "crypttab options include luks"   "'$opts'" has_opt "$opts" luks
+    check "crypttab options include nofail" "'$opts'" has_opt "$opts" nofail
+    if [ "$netdev" = 1 ]; then
+        check "crypttab options include _netdev" "'$opts'" has_opt "$opts" _netdev
+    else
+        check "crypttab options omit _netdev" "'$opts'" lacks_opt "$opts" _netdev
+    fi
+    for p in "${pins[@]}"; do
+        check "container is bound with clevis pin $p" "$(clevis luks list -d "$DEV_A" 2>&1)" \
+            grep -qx "$p" <(clevis_pins "$DEV_A")
+    done
+    check "no key file stored" "" test ! -e "$KEY_DIR/$UUID_A"
+    v=$(container_field "$DEV_A" usedslots);        check "enable added a key slot" "got '$v'" [ "$v" = "2" ]
+    v=$(container_field "$DEV_A" autounlock);       check "enumerate autounlock is true" "got '$v'" [ "$v" = "true" ]
+    v=$(container_field "$DEV_A" autounlockmethod); check "enumerate autounlockmethod is clevis" "got '$v'" [ "$v" = "clevis" ]
+    if boot_unlock "$UUID_A"; then
+        _pass "systemd-cryptsetup unlocks A via clevis"
+        check "clevis-unlocked mapping exists" "" test -e "/dev/mapper/luks-$UUID_A"
+    else
+        _fail "systemd-cryptsetup unlocks A via clevis" \
+            "$(systemctl status "$(boot_unit_of "$UUID_A")" 2>&1 | tail -5)"
+    fi
+    boot_lock "$UUID_A"
+    assert_rpc "disableContainerAutoUnlock method=$method" \
+        "$SVC" disableContainerAutoUnlock "{\"devicefile\":\"$DEV_A\"}"
+    check "disable removes crypttab entry" "" [ -z "$(crypttab_options "$UUID_A")" ]
+    check "disable removes clevis binding" "$(clevis luks list -d "$DEV_A" 2>&1)" \
+        [ -z "$(clevis_pins "$DEV_A")" ]
+    v=$(container_field "$DEV_A" usedslots); check "disable removes the key slot" "got '$v'" [ "$v" = "1" ]
+    check "passphrase still unlocks A after disable" "" key_works "$DEV_A" "$PASS_A"
+}
+
+if [ -n "${TANG_URL:-}" ]; then
+    clevis_roundtrip tang ",\"tangurl\":\"$TANG_URL\"" 1 tang
+else
+    info "TANG_URL not set; skipping Tang binding tests"
+fi
+if [ -e /dev/tpmrm0 ]; then
+    clevis_roundtrip tpm2 "" 0 tpm2
+    if [ -n "${TANG_URL:-}" ]; then
+        clevis_roundtrip tangtpm2 ",\"tangurl\":\"$TANG_URL\"" 1 sss
+    fi
+else
+    info "No TPM2 device; skipping TPM2 binding tests"
+fi
 
 # ---------------------------------------------------------------------------
 section "Stale auto-unlock entries"
