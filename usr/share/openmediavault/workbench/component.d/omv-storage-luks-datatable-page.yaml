@@ -52,6 +52,10 @@ data:
         prop: autounlock
         flexGrow: 1
         cellTemplateName: checkIcon
+      - name: _("Auto-unlock Method")
+        prop: autounlockmethod
+        flexGrow: 1
+        hidden: true
       - name: _("Stale")
         prop: stale
         flexGrow: 1
@@ -148,9 +152,48 @@ data:
                 name: passphrase
                 label: _("Passphrase")
                 value: ""
-                hint: _("Enter an existing passphrase that unlocks the device. A random key file will be generated and added to the container so it can be unlocked automatically at boot.")
+                hint: _("Enter an existing passphrase that unlocks the device.")
                 validators:
                   required: true
+              - type: select
+                name: method
+                label: _("Method")
+                value: "keyfile"
+                store:
+                  data:
+                    - ["keyfile", _("Key file")]
+                    - ["tang", _("Tang server")]
+                    - ["tpm2", _("TPM2")]
+                    - ["tangtpm2", _("Tang server and TPM2")]
+                hint: _("With a key file, a random key file is stored on this system and added to the container. With a Tang server, the container is unlocked by a Tang server on the network, so it cannot be unlocked when the system is taken away from that network. With TPM2, the container is unlocked by this system's TPM2 chip, so the disks cannot be unlocked in another system. With both, the Tang server and the TPM2 are required. Clevis is installed when a Tang or TPM2 method is used.")
+              - type: textInput
+                name: tangurl
+                label: _("Tang server URL")
+                value: ""
+                hint: _("For example http://tang.example.com")
+                validators:
+                  pattern:
+                    pattern: '^https?://\S+$'
+                    errorData: _("Must be a http:// or https:// URL.")
+                modifiers:
+                  - type: visible
+                    constraint:
+                      operator: in
+                      arg0:
+                        prop: method
+                      arg1: ["tang", "tangtpm2"]
+              - type: textInput
+                name: tangthp
+                label: _("Tang key thumbprint")
+                value: ""
+                hint: _("Optional. The thumbprint of the Tang server signing key, shown by 'tang-show-keys' on the Tang server. If empty, the keys the server advertises are trusted.")
+                modifiers:
+                  - type: visible
+                    constraint:
+                      operator: in
+                      arg0:
+                        prop: method
+                      arg1: ["tang", "tangtpm2"]
               - type: checkbox
                 name: discards
                 value: false
@@ -190,7 +233,7 @@ data:
             successNotification: _("Auto-unlock has been disabled.")
         confirmationDialogConfig:
           template: confirmation
-          message: _("Are you sure you want to disable auto-unlock for this device? The auto-unlock key will be removed from the container.")
+          message: _("Are you sure you want to disable auto-unlock for this device? The auto-unlock key or Clevis binding will be removed from the container.")
         enabledConstraints:
           minSelected: 1
           maxSelected: 1

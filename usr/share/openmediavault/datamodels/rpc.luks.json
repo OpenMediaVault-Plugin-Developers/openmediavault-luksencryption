@@ -211,6 +211,27 @@
         "discards": {
           "type": "boolean",
           "required": false
+        },
+        "method": {
+          "type": "string",
+          "enum": ["keyfile", "tang", "tpm2", "tangtpm2"],
+          "required": false
+        },
+        "tangurl": {
+          "type": "string",
+          "oneOf": [{
+            "type": "string",
+            "pattern": "^https?:\\/\\/[^\\s'\"]+$"
+          },{
+            "type": "string",
+            "maxLength": 0
+          }],
+          "required": false
+        },
+        "tangthp": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]*$",
+          "required": false
         }
       }
     }

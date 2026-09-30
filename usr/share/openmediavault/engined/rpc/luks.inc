@@ -90,7 +90,8 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 "usedslots"             => $luks->getUsedKeySlots(),
                 "luksversion"           => $luks->getLuksVersion(),
                 "lukslabel"             => $luks->getLuksLabel(),
-                "autounlock"            => $this->hasCryptTabEntry($luks->getUuid())
+                "autounlock"            => $this->hasCryptTabEntry($luks->getUuid()),
+                "autounlockmethod"      => $this->getAutoUnlockMethod($luks->getUuid())
             ];
         }
         return $result;
@@ -145,6 +146,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 "luksversion"         => "",
                 "lukslabel"           => "",
                 "autounlock"          => true,
+                "autounlockmethod"    => $this->getAutoUnlockMethod($uuid),
                 "_used"               => null,
                 "stale"               => true,
             ];
@@ -962,22 +964,72 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
      * @return TRUE if an entry exists, FALSE otherwise.
      */
     private function hasCryptTabEntry($uuid) {
+        return !is_null($this->getCryptTabEntry($uuid));
+    }
+
+    /**
+     * Get the /etc/crypttab entry for the given LUKS UUID.
+     * @param uuid The UUID of the LUKS container.
+     * @return The entry as returned by getCryptTabEntries(), or NULL.
+     */
+    private function getCryptTabEntry($uuid) {
         foreach ($this->getCryptTabEntries() as $entry) {
             if ($entry['type'] !== 'entry') continue;
-            if ($entry['device'] === "UUID={$uuid}") return TRUE;
+            if ($entry['device'] === "UUID={$uuid}") return $entry;
         }
-        return FALSE;
+        return NULL;
+    }
+
+    /**
+     * Get how a container is unlocked at boot.
+     * @param uuid The UUID of the LUKS container.
+     * @return 'keyfile' if a stored key file is used, 'clevis' if the
+     *         crypttab entry has no key file (Clevis answers the password
+     *         prompt), or an empty string if auto-unlock is not enabled.
+     */
+    private function getAutoUnlockMethod($uuid) {
+        $entry = $this->getCryptTabEntry($uuid);
+        if (is_null($entry))
+            return "";
+        return ($entry['keyfile'] === 'none' || $entry['keyfile'] === '-') ?
+            "clevis" : "keyfile";
+    }
+
+    /**
+     * Install the Clevis packages needed for the given pins via SaltStack.
+     * @param pins An array of Clevis pins, e.g. ['tang'] or ['tang', 'tpm2'].
+     * @throw E_EXEC_FAILED
+     */
+    private function installClevis(array $pins) {
+        $cmd = new \OMV\System\Process("omv-salt", [
+            "deploy", "run", "--no-color", "luks"
+        ]);
+        $cmd->setEnv("OMV_LUKS_CLEVIS_PINS", implode(",", $pins));
+        $cmd->setRedirect2to1();
+        $cmd->execute();
+        if (!file_exists("/usr/bin/clevis")) {
+            throw new \OMV\Exception(gettext(
+                "Clevis could not be installed."));
+        }
     }
 
     /**
      * Enable auto-unlock of a LUKS container at boot via /etc/crypttab.
-     * Generates a random key file, adds it to the container, and writes
-     * a crypttab entry so systemd unlocks the container automatically.
+     * With the 'keyfile' method a random key file is generated and added to
+     * the container. With the Clevis methods ('tang', 'tpm2', 'tangtpm2') the
+     * container is bound to a Tang server and/or the TPM2 instead, so no key
+     * is stored on the system. Either way a crypttab entry is written so
+     * systemd unlocks the container automatically.
      * @param params An array containing the following fields:
      *     \em devicefile The block device of the LUKS container.
      *     \em passphrase An existing passphrase that unlocks the container.
      *     \em keyfile Path to an uploaded key file that unlocks the container.
      *     \em discards Optional. Allow discards (TRIM) at boot.
+     *     \em method Optional. 'keyfile' (default), 'tang', 'tpm2' or
+     *         'tangtpm2' (requires both the Tang server and the TPM2).
+     *     \em tangurl The Tang server URL. Required for the Tang methods.
+     *     \em tangthp Optional. The Tang server key thumbprint to trust.
+     *         If empty, the server's advertised keys are trusted.
      * @param context The context of the caller.
      * @return None.
      * @throw E_MISC_FAILURE
@@ -993,13 +1045,61 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 $params['devicefile']));
         }
         $uuid = $luks->getUuid();
-        $keyFilePath = $this->getKeyFilePath($uuid);
-        $keyDir = dirname($keyFilePath);
         // Check not already enabled.
         if ($this->hasCryptTabEntry($uuid)) {
             throw new \OMV\Exception(gettext(
                 "Auto-unlock is already enabled for this container."));
         }
+        // The supplied credential that unlocks the container.
+        if (isset($params['keyfile']) && !empty($params['keyfile'])) {
+            $old = $params['keyfile'];
+            $oldIsKeyFile = TRUE;
+        } else {
+            $old = $params['passphrase'];
+            $oldIsKeyFile = FALSE;
+        }
+        $method = $params['method'] ?? "keyfile";
+        $options = ['luks', 'nofail'];
+        if ($method === "keyfile") {
+            $keyFile = $this->addAutoUnlockKeyFile($luks, $old, $oldIsKeyFile);
+        } else {
+            $this->bindClevis($luks, $old, $oldIsKeyFile, $method, $params);
+            // Clevis answers the systemd password prompt, so no key file.
+            $keyFile = 'none';
+            // Tang is reached over the network, so wait for it at boot.
+            if ($method !== "tpm2")
+                $options[] = '_netdev';
+        }
+        if (!empty($params['discards']))
+            $options[] = 'discard';
+        // Write the crypttab entry.
+        $entries = $this->getCryptTabEntries();
+        $entries[] = [
+            'type'    => 'entry',
+            'name'    => sprintf("luks-%s", $uuid),
+            'device'  => sprintf("UUID=%s", $uuid),
+            'keyfile' => $keyFile,
+            'options' => implode(",", $options),
+        ];
+        $this->writeCryptTab($entries);
+        // Notify configuration changes.
+        $dispatcher = \OMV\Engine\Notify\Dispatcher::getInstance();
+        $dispatcher->notify(OMV_NOTIFY_MODIFY,
+            "org.openmediavault.system.storage.luks.container",
+            ["devicefile" => $params['devicefile'], "autounlock" => TRUE]);
+    }
+
+    /**
+     * Generate a random key file for auto-unlock and add it to the container.
+     * @param luks The \OMV\System\Storage\Luks\Container to modify.
+     * @param old A passphrase or key file that unlocks the container.
+     * @param oldIsKeyFile Whether 'old' is a path to a key file.
+     * @return The path to the generated key file.
+     * @throw E_MISC_FAILURE
+     */
+    private function addAutoUnlockKeyFile($luks, $old, $oldIsKeyFile) {
+        $keyFilePath = $this->getKeyFilePath($luks->getUuid());
+        $keyDir = dirname($keyFilePath);
         // Create the key directory if it doesn't exist.
         if (!is_dir($keyDir)) {
             if (!mkdir($keyDir, 0700, TRUE)) {
@@ -1016,13 +1116,6 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         }
         chmod($keyFilePath, 0400);
         // Add the key file to the LUKS container using the supplied credential.
-        if (isset($params['keyfile']) && !empty($params['keyfile'])) {
-            $old = $params['keyfile'];
-            $oldIsKeyFile = TRUE;
-        } else {
-            $old = $params['passphrase'];
-            $oldIsKeyFile = FALSE;
-        }
         try {
             $luks->addKey($old, $keyFilePath, $oldIsKeyFile, TRUE);
         } catch (Exception $e) {
@@ -1031,28 +1124,73 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 gettext("Unable to add auto-unlock key to encrypted device: %s"),
                 $e->getMessage()));
         }
-        // Write the crypttab entry.
-        $entries = $this->getCryptTabEntries();
-        $entries[] = [
-            'type'    => 'entry',
-            'name'    => sprintf("luks-%s", $uuid),
-            'device'  => sprintf("UUID=%s", $uuid),
-            'keyfile' => $keyFilePath,
-            'options' => !empty($params['discards']) ?
-                'luks,nofail,discard' : 'luks,nofail',
-        ];
-        $this->writeCryptTab($entries);
-        // Notify configuration changes.
-        $dispatcher = \OMV\Engine\Notify\Dispatcher::getInstance();
-        $dispatcher->notify(OMV_NOTIFY_MODIFY,
-            "org.openmediavault.system.storage.luks.container",
-            ["devicefile" => $params['devicefile'], "autounlock" => TRUE]);
+        return $keyFilePath;
+    }
+
+    /**
+     * Bind the container to a Tang server and/or the TPM2 with Clevis,
+     * installing Clevis first if needed.
+     * @param luks The \OMV\System\Storage\Luks\Container to modify.
+     * @param old A passphrase or key file that unlocks the container.
+     * @param oldIsKeyFile Whether 'old' is a path to a key file.
+     * @param method 'tang', 'tpm2' or 'tangtpm2'.
+     * @param params The enableContainerAutoUnlock parameters.
+     * @throw E_MISC_FAILURE
+     */
+    private function bindClevis($luks, $old, $oldIsKeyFile, $method, $params) {
+        $pins = [
+            "tang"     => ["tang"],
+            "tpm2"     => ["tpm2"],
+            "tangtpm2" => ["tang", "tpm2"],
+        ][$method];
+        $pinConfigs = [];
+        if (in_array("tang", $pins)) {
+            if (empty($params['tangurl'])) {
+                throw new \OMV\Exception(gettext(
+                    "A Tang server URL is required."));
+            }
+            $pinConfigs['tang'] = ["url" => $params['tangurl']];
+            if (!empty($params['tangthp']))
+                $pinConfigs['tang']['thp'] = $params['tangthp'];
+        }
+        if (in_array("tpm2", $pins)) {
+            if (!file_exists("/dev/tpmrm0") && !file_exists("/dev/tpm0")) {
+                throw new \OMV\Exception(gettext(
+                    "No TPM2 device was found on this system."));
+            }
+            $pinConfigs['tpm2'] = new \stdClass();
+        }
+        // Check the credential before installing anything.
+        try {
+            $luks->testKey($old, $oldIsKeyFile);
+        } catch (Exception $e) {
+            throw new \OMV\Exception(gettext(
+                "The passphrase does not unlock the encrypted device."));
+        }
+        $this->installClevis($pins);
+        // A single pin is bound directly; Tang plus TPM2 uses Shamir's
+        // secret sharing requiring both.
+        if (count($pinConfigs) === 1) {
+            $pin = array_key_first($pinConfigs);
+            $config = $pinConfigs[$pin];
+        } else {
+            $pin = "sss";
+            $config = ["t" => 2, "pins" => $pinConfigs];
+        }
+        try {
+            $luks->clevisBind($old, $oldIsKeyFile, $pin,
+                json_encode($config, JSON_UNESCAPED_SLASHES));
+        } catch (Exception $e) {
+            throw new \OMV\Exception(sprintf(
+                gettext("Unable to bind the encrypted device with Clevis: %s"),
+                $e->getMessage()));
+        }
     }
 
     /**
      * Disable auto-unlock of a LUKS container.
      * Removes the crypttab entry, deletes the stored key file, and removes
-     * the auto-unlock key slot from the container.
+     * the auto-unlock key slot (or the Clevis bindings) from the container.
      * @param params An array containing the following fields:
      *     \em devicefile The block device of the LUKS container.
      * @param context The context of the caller.
@@ -1076,9 +1214,19 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             throw new \OMV\Exception(gettext(
                 "Auto-unlock is not enabled for this container."));
         }
-        // Remove the auto-unlock key from the LUKS container and delete
-        // the key file. If removal fails (e.g. last slot), log and continue.
-        if (file_exists($keyFilePath)) {
+        // Remove the Clevis bindings, or the auto-unlock key and its key
+        // file. If removal fails (e.g. last slot), log and continue.
+        if ($this->getAutoUnlockMethod($uuid) === "clevis") {
+            foreach ($luks->getClevisSlots() as $slot) {
+                try {
+                    $luks->clevisUnbind($slot);
+                } catch (Exception $e) {
+                    $this->debug(sprintf(
+                        "Warning: Could not remove Clevis binding from LUKS device: %s",
+                        $e->getMessage()));
+                }
+            }
+        } else if (file_exists($keyFilePath)) {
             try {
                 $luks->removeKey($keyFilePath, TRUE);
             } catch (Exception $e) {

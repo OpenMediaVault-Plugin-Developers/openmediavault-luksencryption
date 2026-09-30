@@ -729,6 +729,79 @@ class Container extends \OMV\System\Storage\StorageDevice {
     }
 
     /**
+     * Bind the container to a Clevis policy so it can be unlocked
+     * automatically (e.g. by a Tang server or the TPM2).
+     * @param key A passphrase or key file (see following) that unlocks the device.
+     * @param keyIsFile A boolean indicating whether the param 'key' is a
+     *                  passphrase (FALSE) or a path to a key file (TRUE).
+     * @param pin The Clevis pin, e.g. 'tang', 'tpm2' or 'sss'.
+     * @param config The pin configuration as a JSON string.
+     * @return TRUE if successful, otherwise FALSE.
+     */
+    public function clevisBind($key, $keyIsFile, $pin, $config) {
+        // -y trusts the Tang advertisement without prompting; the thumbprint
+        // is pinned via 'thp' in the config when the user supplies one.
+        if (TRUE === $keyIsFile) {
+            $cmd = sprintf("clevis luks bind -y -d %s -k %s %s %s",
+                escapeshellarg($this->getDeviceFile()),
+                escapeshellarg($key),
+                escapeshellarg($pin),
+                escapeshellarg($config));
+        } else {
+            $cmd = sprintf("echo -n %s | clevis luks bind -y -d %s -k - %s %s",
+                escapeshellarg($key),
+                escapeshellarg($this->getDeviceFile()),
+                escapeshellarg($pin),
+                escapeshellarg($config));
+        }
+        $process = new Process($cmd);
+        $process->setRedirect2to1();
+        $process->execute($output, $exitStatus);
+        $this->refresh();
+        return TRUE;
+    }
+
+    /**
+     * Get the key slots bound to a Clevis policy.
+     * @return An array of key slot numbers. Empty if Clevis is not
+     *         installed or no slot is bound.
+     */
+    public function getClevisSlots() {
+        if (!file_exists("/usr/bin/clevis"))
+            return [];
+        // Output lines look like: 1: tang '{"url":"http://tang"}'
+        $cmd = sprintf("clevis luks list -d %s",
+            escapeshellarg($this->getDeviceFile()));
+        $process = new Process($cmd);
+        $process->setQuiet(TRUE);
+        $process->execute($output, $exitStatus);
+        if ($exitStatus !== 0)
+            return [];
+        $slots = [];
+        foreach ($output as $line) {
+            if (preg_match('/^(\d+):\s/', $line, $m))
+                $slots[] = intval($m[1]);
+        }
+        return $slots;
+    }
+
+    /**
+     * Remove a Clevis binding and its key slot from the container.
+     * @param slot The key slot bound to Clevis.
+     * @return TRUE if successful, otherwise FALSE.
+     */
+    public function clevisUnbind($slot) {
+        $cmd = sprintf("clevis luks unbind -f -d %s -s %s",
+            escapeshellarg($this->getDeviceFile()),
+            escapeshellarg($slot));
+        $process = new Process($cmd);
+        $process->setRedirect2to1();
+        $process->execute($output, $exitStatus);
+        $this->refresh();
+        return TRUE;
+    }
+
+    /**
      * Backup the header for the container.
      * @param filepath The filename to write the header backup to.
      * @return TRUE if successful, otherwise FALSE.
