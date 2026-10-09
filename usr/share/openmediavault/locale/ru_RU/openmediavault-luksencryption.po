@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 21:24+0000\n"
+"POT-Creation-Date: 2026-10-09 15:32+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Asdfgr Wertyu, 2024\n"
 "Language-Team: Russian (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ru/)\n"
@@ -194,11 +194,18 @@ msgstr "LUKS UUID"
 msgid "LUKS container on '%s' must be locked before it can be deleted"
 msgstr ""
 
+msgid ""
+"LUKS container on '%s' must be locked before its header can be restored"
+msgstr ""
+
 msgid "LUKS container on '%s' not found"
 msgstr "Контейнер LUKS для '%s' не найден"
 
 msgid "LUKS encrypted device %s[%s, %s]"
 msgstr "Зашифрованное устройство LUKS %s[%s, %s]"
+
+msgid "LUKS1 has key slots 0-7, LUKS2 has key slots 0-31."
+msgstr ""
 
 msgid "Label"
 msgstr "Метка"
@@ -235,6 +242,11 @@ msgstr "Кодовая фраза"
 
 msgid "Referenced"
 msgstr "Ссылка"
+
+msgid ""
+"Refusing to disable auto-unlock; it holds the last key of the container. Add"
+" a passphrase first."
+msgstr ""
 
 msgid ""
 "Refusing to remove the last key; the container could never be unlocked "
@@ -333,6 +345,9 @@ msgstr "Не удалось заблокировать зашифрованно�
 
 msgid "Unable to remove encrypted device: %s"
 msgstr "Не удалось удалить зашифрованное устройство: %s"
+
+msgid "Unable to remove the auto-unlock key from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to remove the key from the encrypted device: %s"
 msgstr "Не удалось удалить ключ с зашифрованного устройства: %s"

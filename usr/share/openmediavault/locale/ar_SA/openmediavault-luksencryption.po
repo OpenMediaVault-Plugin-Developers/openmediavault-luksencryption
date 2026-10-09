@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 21:24+0000\n"
+"POT-Creation-Date: 2026-10-09 15:32+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: omv nas <myomv100@gmail.com>, 2023\n"
 "Language-Team: Arabic (Saudi Arabia) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/ar_SA/)\n"
@@ -192,11 +192,18 @@ msgstr "معرف LUKS فريد"
 msgid "LUKS container on '%s' must be locked before it can be deleted"
 msgstr ""
 
+msgid ""
+"LUKS container on '%s' must be locked before its header can be restored"
+msgstr ""
+
 msgid "LUKS container on '%s' not found"
 msgstr "حاوية LUKS الموجودة على '%s' غير موجودة"
 
 msgid "LUKS encrypted device %s[%s, %s]"
 msgstr "قرص LUKS المشفر %s [%s، %s]"
+
+msgid "LUKS1 has key slots 0-7, LUKS2 has key slots 0-31."
+msgstr ""
 
 msgid "Label"
 msgstr "علامة"
@@ -233,6 +240,11 @@ msgstr "عبارة المرور"
 
 msgid "Referenced"
 msgstr "مشار إليه"
+
+msgid ""
+"Refusing to disable auto-unlock; it holds the last key of the container. Add"
+" a passphrase first."
+msgstr ""
 
 msgid ""
 "Refusing to remove the last key; the container could never be unlocked "
@@ -331,6 +343,9 @@ msgstr "تعذر قفل القرص المشفر: %s"
 
 msgid "Unable to remove encrypted device: %s"
 msgstr "تعذر إزالة القرص المشفر: %s"
+
+msgid "Unable to remove the auto-unlock key from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to remove the key from the encrypted device: %s"
 msgstr "تعذر إزالة المفتاح من القرص المشفر: %s"

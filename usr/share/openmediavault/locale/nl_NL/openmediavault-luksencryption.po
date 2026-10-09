@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 21:24+0000\n"
+"POT-Creation-Date: 2026-10-09 15:32+0000\n"
 "PO-Revision-Date: 2015-11-07 02:25+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025-2026\n"
 "Language-Team: Dutch (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-luksencryption/language/nl/)\n"
@@ -23,7 +23,7 @@ msgid "%s is not a valid LUKS header backup file"
 msgstr "%s is geen geldig LUKS header back-upbestand"
 
 msgid "A Tang server URL is required."
-msgstr ""
+msgstr "Een Tang server-URL is vereist."
 
 msgid "Add"
 msgstr "Toevoegen"
@@ -40,7 +40,7 @@ msgstr "Weet u zeker dat u dit apparaat wilt verwijderen?"
 msgid ""
 "Are you sure you want to disable auto-unlock for this device? The auto-"
 "unlock key or Clevis binding will be removed from the container."
-msgstr ""
+msgstr "Weet u zeker dat u autom. ontgrendelen voor dit apparaat wilt uitschakelen? De autom. ontgrendelingssleutel of Clevis-binding wordt uit de container verwijderd."
 
 msgid ""
 "Are you sure you want to remove this stale auto-unlock entry? The crypttab "
@@ -51,7 +51,7 @@ msgid "Auto-unlock"
 msgstr "Auto-unlock"
 
 msgid "Auto-unlock Method"
-msgstr ""
+msgstr "Autom. ontgrendelingsmethode"
 
 msgid "Auto-unlock has been disabled."
 msgstr "Auto-unlock is uitgeschakeld."
@@ -80,7 +80,7 @@ msgid "Cipher"
 msgstr "Versleuteling"
 
 msgid "Clevis could not be installed."
-msgstr ""
+msgstr "Clevis kon niet worden geïnstalleerd."
 
 msgid "Confirm passphrase"
 msgstr "Wachtwoord bevestigen"
@@ -110,7 +110,7 @@ msgid "Device"
 msgstr "Apparaat"
 
 msgid "Device '%s' is in use by %s"
-msgstr ""
+msgstr "Apparaat '%s' wordt gebruikt door %s"
 
 msgid "Device '%s' not found"
 msgstr "Apparaat '%s' niet gevonden"
@@ -158,13 +158,13 @@ msgid "Failed to write key file '%s'."
 msgstr "Schrijven van sleutelbestand '%s' is mislukt."
 
 msgid "For example http://tang.example.com"
-msgstr ""
+msgstr "Bijvoorbeeld http://tang.example.com"
 
 msgid "Key Slots In Use"
 msgstr "Sleutelposities in gebruik"
 
 msgid "Key file"
-msgstr ""
+msgstr "Sleutelbestand"
 
 msgid "Key has been added to the container."
 msgstr "Sleutel is toegevoegd aan container."
@@ -191,6 +191,10 @@ msgid "LUKS UUID"
 msgstr "LUKS-UUID"
 
 msgid "LUKS container on '%s' must be locked before it can be deleted"
+msgstr "LUKS-container op '%s' moet worden vergrendeld voordat deze kan worden verwijderd"
+
+msgid ""
+"LUKS container on '%s' must be locked before its header can be restored"
 msgstr ""
 
 msgid "LUKS container on '%s' not found"
@@ -198,6 +202,9 @@ msgstr "Geen LUKS-container gevonden op  '%s'"
 
 msgid "LUKS encrypted device %s[%s, %s]"
 msgstr "LUKS-gecodeerd apparaat %s[%s, %s]"
+
+msgid "LUKS1 has key slots 0-7, LUKS2 has key slots 0-31."
+msgstr ""
 
 msgid "Label"
 msgstr "Label"
@@ -209,16 +216,16 @@ msgid "Lock encrypted device ..."
 msgstr "Gecodeerd apparaat vergrendelen…"
 
 msgid "Method"
-msgstr ""
+msgstr "Methode"
 
 msgid "Must be a http:// or https:// URL."
-msgstr ""
+msgstr "URL moet http:// of https:// zijn."
 
 msgid "New Passphrase"
 msgstr "Nieuwe wachtwoordzin"
 
 msgid "No TPM2 device was found on this system."
-msgstr ""
+msgstr "Geen TPM2-apparaat gevonden op dit systeem."
 
 msgid "No storage device backend exists for device %s"
 msgstr "Er bestaat geen opslagapparaten-backend voor het apparaat %s"
@@ -227,7 +234,7 @@ msgid ""
 "Optional. The thumbprint of the Tang server signing key, shown by 'tang-"
 "show-keys' on the Tang server. If empty, the keys the server advertises are "
 "trusted."
-msgstr ""
+msgstr "Optioneel. De vingerafdruk van de Tang-server signing key, getoond door 'tang-show-keys' op de Tang-server. Indien leeg, worden de sleutels die de server adverteert vertrouwd."
 
 msgid "Passphrase"
 msgstr "Wachtwoordzin"
@@ -236,9 +243,14 @@ msgid "Referenced"
 msgstr "Gerefereerd"
 
 msgid ""
+"Refusing to disable auto-unlock; it holds the last key of the container. Add"
+" a passphrase first."
+msgstr ""
+
+msgid ""
 "Refusing to remove the last key; the container could never be unlocked "
 "again."
-msgstr ""
+msgstr "Verwijdering van de laatste sleutel geweigerd; de container zou nooit meer ontgrendeld kunnen worden."
 
 msgid "Remove"
 msgstr "Verwijderen"
@@ -262,19 +274,19 @@ msgid "Stale auto-unlock entry has been removed."
 msgstr "Ongebruikt auto-unlock-item is verwijderd."
 
 msgid "TPM2"
-msgstr ""
+msgstr "TPM2"
 
 msgid "Tang key thumbprint"
-msgstr ""
+msgstr "Vingerafdruk Tang-sleutel"
 
 msgid "Tang server"
-msgstr ""
+msgstr "Tang+server"
 
 msgid "Tang server URL"
-msgstr ""
+msgstr "Tang-server-URL"
 
 msgid "Tang server and TPM2"
-msgstr ""
+msgstr "Tang-server en TPM2"
 
 msgid "Test"
 msgstr "Testen"
@@ -287,13 +299,13 @@ msgstr "De UUID van het LUKS header back-upbestand"
 
 msgid ""
 "The auto-unlock entry for '%s' is not stale; the container exists on '%s'."
-msgstr ""
+msgstr "De automatische ontgrendeling voor '%s' is niet oud; de container staat op '%s'."
 
 msgid "The key did not unlock any key slot on the device"
 msgstr "De sleutel ontgrendelde geen sleutelpositie op het apparaat"
 
 msgid "The passphrase does not unlock the encrypted device."
-msgstr ""
+msgstr "De wachtwoordzin ontgrendelt het gecodeerde apparaat niet."
 
 msgid "The passphrase is valid and unlocks the container."
 msgstr "De wachtwoordzin is geldig en ontgrendelt de container."
@@ -313,7 +325,7 @@ msgid "Unable to add the key to the encrypted device: %s"
 msgstr "Kan de sleutel niet toevoegen aan het gecodeerde apparaat: %s"
 
 msgid "Unable to bind the encrypted device with Clevis: %s"
-msgstr ""
+msgstr "Kan het gecodeerde apparaat niet binden met Clevis: %s"
 
 msgid "Unable to change the key on the encrypted device: %s"
 msgstr "Kan de sleutel niet wijzigen op het gecodeerde apparaat: %s"
@@ -332,6 +344,9 @@ msgstr "Kan gecodeerd apparaat niet vergrendelen: %s"
 
 msgid "Unable to remove encrypted device: %s"
 msgstr "Kan gecodeerd apparaat niet verwijderen: %s"
+
+msgid "Unable to remove the auto-unlock key from the encrypted device: %s"
+msgstr ""
 
 msgid "Unable to remove the key from the encrypted device: %s"
 msgstr "Kan de sleutel niet van het gecodeerde apparaat verwijderen: %s"
@@ -362,7 +377,7 @@ msgid ""
 "chip, so the disks cannot be unlocked in another system. With both, the Tang"
 " server and the TPM2 are required. Clevis is installed when a Tang or TPM2 "
 "method is used."
-msgstr ""
+msgstr "Bij een sleutelbestand wordt op dit systeem een willekeurig sleutelbestand opgeslagen en aan de container toegevoegd. Bij een Tang-server wordt de container ontgrendeld door een Tang-server op het netwerk, zodat deze niet kan worden ontgrendeld wanneer het systeem uit dat netwerk wordt gehaald. Bij TPM2 wordt de container ontgrendeld door de TPM2-chip van dit systeem, zodat de schijven niet in een ander systeem kunnen worden ontgrendeld. Bij beide zijn de Tang-server en de TPM2 vereist. Clevis wordt geïnstalleerd wanneer een Tang- of TPM2-methode wordt gebruikt."
 
 msgid "aes-cbc-essiv:sha256"
 msgstr "aes-cbc-essiv:sha256"

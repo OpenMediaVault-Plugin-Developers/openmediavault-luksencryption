@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-luksencryption\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 21:24+0000\n"
+"POT-Creation-Date: 2026-10-09 15:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,10 +185,16 @@ msgstr ""
 msgid "LUKS container on '%s' must be locked before it can be deleted"
 msgstr ""
 
+msgid "LUKS container on '%s' must be locked before its header can be restored"
+msgstr ""
+
 msgid "LUKS container on '%s' not found"
 msgstr ""
 
 msgid "LUKS encrypted device %s[%s, %s]"
+msgstr ""
+
+msgid "LUKS1 has key slots 0-7, LUKS2 has key slots 0-31."
 msgstr ""
 
 msgid "Label"
@@ -222,6 +228,9 @@ msgid "Passphrase"
 msgstr ""
 
 msgid "Referenced"
+msgstr ""
+
+msgid "Refusing to disable auto-unlock; it holds the last key of the container. Add a passphrase first."
 msgstr ""
 
 msgid "Refusing to remove the last key; the container could never be unlocked again."
@@ -315,6 +324,9 @@ msgid "Unable to lock encrypted device: %s"
 msgstr ""
 
 msgid "Unable to remove encrypted device: %s"
+msgstr ""
+
+msgid "Unable to remove the auto-unlock key from the encrypted device: %s"
 msgstr ""
 
 msgid "Unable to remove the key from the encrypted device: %s"
