@@ -45,6 +45,8 @@ class Container extends \OMV\System\Storage\StorageDevice {
     protected $headerInfo   = "";
     protected $usedKeySlots = 0;
     protected $freeKeySlots = 8;
+    protected $luksVersion  = "";
+    protected $luksLabel    = "";
 
     protected $deviceMapperDeviceFile = "";
     protected $deviceMapperName       = "";
@@ -121,11 +123,12 @@ class Container extends \OMV\System\Storage\StorageDevice {
         $this->freeKeySlots           = 8;
         $this->deviceMapperDeviceFile = "";
         $this->deviceMapperName       = "";
-        $this->LuksVersion            = "";
-        $this->LuksLabel              = "";
+        $this->luksVersion            = "";
+        $this->luksLabel              = "";
 
         // Look up the UUID for the LUKS container
-        $cmd = sprintf("cryptsetup luksUUID %s", $this->getDeviceFile());
+        $cmd = sprintf("cryptsetup luksUUID %s",
+            escapeshellarg($this->getDeviceFile()));
         $process = new Process($cmd);
         $process->setQuiet();
         $process->execute($output, $exitStatus);
@@ -158,18 +161,24 @@ class Container extends \OMV\System\Storage\StorageDevice {
         }
 
         // Collect the detailed output from luksDump
-        $cmd = sprintf("cryptsetup luksDump %s", $this->getDeviceFile());
+        $cmd = sprintf("cryptsetup luksDump %s",
+            escapeshellarg($this->getDeviceFile()));
         $process = new Process($cmd);
         $process->execute($output, $exitStatus);
         $this->headerInfo = $output;
 
-        $version = explode(':',preg_replace('/\s/','',implode('', preg_grep("/^Version:/", $this->headerInfo))))[1];
+        $version = "";
+        if (1 === preg_match("/^Version:\s*(\d+)/m",
+                implode("\n", $this->headerInfo), $matches))
+            $version = $matches[1];
         $this->luksVersion = $version;
-        
+
         switch ($version) {
             case 2:
-                $label_line = implode( preg_grep( "/^Label:/", $this->headerInfo ) );
-                $label = preg_replace( '/^\s+/', '' , explode( ':' , $label_line )[1] );
+                $label = "";
+                if (1 === preg_match("/^Label:\s*(.*)$/m",
+                        implode("\n", $this->headerInfo), $matches))
+                    $label = trim($matches[1]);
                 if ("(no label)" == $label)  {
                     $this->luksLabel = "";
                 } else {
@@ -185,13 +194,14 @@ class Container extends \OMV\System\Storage\StorageDevice {
         if ($version == "1") {
             $this->usedKeySlots = count(preg_grep("/^Key Slot \d: ENABLED$/",
                                                  $this->headerInfo));
+            $this->freeKeySlots = count(preg_grep("/^Key Slot \d: DISABLED$/",
+                                                 $this->headerInfo));
         } elseif ($version == "2" ) {
-            $this->usedKeySlots = count(preg_grep("/^\s+(\d:\s)(luks2)/",
+            // LUKS2 has 32 key slots, numbered 0-31.
+            $this->usedKeySlots = count(preg_grep("/^\s+\d+: luks2/",
                                                 $this->headerInfo));
+            $this->freeKeySlots = 32 - $this->usedKeySlots;
         }
-
-        $this->freeKeySlots = count(preg_grep("/^Key Slot \d: DISABLED$/",
-                                                $this->headerInfo));
 
         // Set flag to mark information has been successfully read.
         $this->dataCached = TRUE;
@@ -412,11 +422,7 @@ class Container extends \OMV\System\Storage\StorageDevice {
         }
         $process = new Process($cmd);
         $process->setRedirect2to1();
-        $process->execute($output, $exitStatus);
-        if ($exitStatus !== 0) {
-            throw new \OMV\Exception("Failed to create encrypted device: %s",
-                implode("\n", $output));
-        }
+        $process->execute();
         $this->refresh();
         return TRUE;
     }
@@ -432,22 +438,30 @@ class Container extends \OMV\System\Storage\StorageDevice {
                 return FALSE;
             }
         }
-        // Get the payload offset (header size)
-        $cmd = sprintf("cryptsetup luksDump %s ".
-            "| grep 'Payload offset' | awk '{print $3}'",
-            escapeshellarg($this->getDeviceFile()));
+        // Get the header size (the offset of the data, in 512 byte
+        // sectors): LUKS1 prints 'Payload offset: <sectors>', LUKS2 prints
+        // 'offset: <bytes> [bytes]' for the data segment.
+        $header_size = 0;
+        $dump = implode("\n", (FALSE === $this->refresh()) ? [] :
+            $this->headerInfo);
+        if (1 === preg_match("/^Payload offset:\s*(\d+)/m", $dump, $matches)) {
+            $header_size = intval($matches[1]);
+        } elseif (1 === preg_match("/^\s+offset:\s*(\d+) \[bytes\]/m",
+                $dump, $matches)) {
+            $header_size = intdiv(intval($matches[1]), 512);
+        }
+        // Fall back to the LUKS2 default header size of 16 MiB.
+        if ($header_size <= 0) {
+            $header_size = 32768;
+        }
 
+        // Destroy all key slots first, so the master key can never be
+        // recovered from the device even if parts of the header survive.
+        $cmd = sprintf("cryptsetup erase -q %s",
+            escapeshellarg($this->getDeviceFile()));
         $process = new Process($cmd);
-        $process->setQuiet();
-        $process->execute($output, $exitStatus);
-        if (0 !== $exitStatus) {
-            $header_size = 4096;
-        } else {
-            $header_size = trim($output[0]);
-        }
-        if (intval($header_size) <= 0) {
-            $header_size = 4096;
-        }
+        $process->setRedirect2to1();
+        $process->execute();
         unset($cmd, $output, $exitStatus);
 
         // Get the storage device object.
@@ -721,10 +735,10 @@ class Container extends \OMV\System\Storage\StorageDevice {
         // Test the key and get the key slot number if successful
         $process = new Process($cmd);
         $process->setRedirect2to1();
+        $process->setQuiet(TRUE);
         $process->execute($output, $exitStatus);
-        if ($exitStatus !== 0) {
-            throw new \OMV\Exception($output);
-        }
+        if ($exitStatus !== 0)
+            return FALSE;
         // Newer cryptsetup versions print token messages before the
         // "Key slot N unlocked." line, so search for it.
         $matches = preg_grep("/^Key slot \d+ unlocked/", $output);

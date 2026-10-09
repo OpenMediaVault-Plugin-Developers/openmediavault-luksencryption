@@ -133,9 +133,12 @@ class UploadExtras extends Upload {
                 !is_uploaded_file($file['tmp_name'])) {
                 throw new \OMV\Exception("Invalid upload request.");
             }
-            // Modify the service method parameters.
+            // Modify the service method parameters. A file field must
+            // never be taken from a plain form field of the same name.
             if($file['error']===UPLOAD_ERR_OK)
                 $this->params['params'][$key] = $file['tmp_name'];
+            else
+                unset($this->params['params'][$key]);
         }
     }
 
@@ -177,10 +180,10 @@ class UploadExtras extends Upload {
      */
     protected function unlinkFiles() {
         foreach($_FILES as $key => $file) {
-            if(array_key_exists($key, $this->params['params'])) {
-                if(file_exists($this->params['params'][$key]))
-                    unlink($this->params['params'][$key]);
-            }
+            if($file['error']===UPLOAD_ERR_OK &&
+                is_uploaded_file($file['tmp_name']) &&
+                file_exists($file['tmp_name']))
+                unlink($file['tmp_name']);
         }
     }
 }

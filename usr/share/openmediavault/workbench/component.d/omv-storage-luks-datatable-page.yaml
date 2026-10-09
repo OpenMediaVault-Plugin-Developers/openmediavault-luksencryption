@@ -445,19 +445,15 @@ data:
                     label: _("Device")
                     value: "{{ _selected[0].devicefile }}"
                     readonly: true
-                  - type: select
+                  - type: numberInput
                     name: keyslot
                     label: _("Key slot")
-                    store:
-                      data:
-                        - [0, "0"]
-                        - [1, "1"]
-                        - [2, "2"]
-                        - [3, "3"]
-                        - [4, "4"]
-                        - [5, "5"]
-                        - [6, "6"]
-                        - [7, "7"]
+                    value: 0
+                    hint: _("LUKS1 has key slots 0-7, LUKS2 has key slots 0-31.")
+                    validators:
+                      min: 0
+                      max: 31
+                      required: true
                   - type: hidden
                     name: usedslots
                     value: "{{ _selected[0].usedslots }}"

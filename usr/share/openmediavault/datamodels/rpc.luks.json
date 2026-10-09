@@ -46,29 +46,6 @@
   },
   {
     "type": "rpc",
-    "id": "rpc.luks.modifycontainer",
-    "params": {
-      "type": "object",
-      "properties": {
-        "uuid": {
-          "type": "string",
-          "format": "uuidv4",
-          "required": true
-        },
-        "devicefile": {
-          "type": "string",
-          "format": "devicefile",
-          "required": true
-        },
-        "openatboot": {
-          "type": "boolean",
-          "required": true
-        }
-      }
-    }
-  },
-  {
-    "type": "rpc",
     "id": "rpc.luks.opencontainer",
     "params": {
       "type": "object",
@@ -183,7 +160,7 @@
         "keyslot": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 7,
+          "maximum": 31,
           "required": true
         }
       }

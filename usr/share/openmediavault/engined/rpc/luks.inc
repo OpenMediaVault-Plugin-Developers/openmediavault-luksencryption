@@ -46,7 +46,6 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         $this->registerMethod("getContainerDetails");
         $this->registerMethod("createContainer");
         $this->registerMethod("deleteContainer");
-        $this->registerMethod("modifyContainer");
         $this->registerMethod("openContainer");
         $this->registerMethod("closeContainer");
         $this->registerMethod("addContainerKey");
@@ -276,48 +275,34 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
         /* Downstream operations with the decrypted container */
         $sdluks = new \OMV\System\Storage\StorageDeviceLuks($luks->getDecryptedDeviceFile());
         $df = $sdluks->getDeviceFile();
-        // If the container contains an LVM physical volume, determine the
-        // volume group and activate it (otherwise the logical volume and any
-        // filesystem on it won't be accessible)
-        if (class_exists("\OMV\System\Storage\Lvm\PhysicalVolume")) {
-            // Use LVM plugin if it's installed to get VG name
-            $pv = new \OMV\System\Storage\Lvm\PhysicalVolume($df);
-            if (TRUE === $pv->exists()) {
-                $vgName = $pv->getVGName();
-            }
-        } else {
-            // Fall back to manual method without LVM plugin
-            $cmd = sprintf("export LANG=C; pvdisplay --noheadings -C -o vg_name %s",
-                escapeshellarg($df)
-            );
-            if (0 === $this->exec($cmd, $output)) {
-                $vgName = trim($output[0]);
-            }
-        }
-        // PV/VG was found - activate the VG, set devicefile to LV via
-        // LVM plugin if available - although LVM/udev seems to
-        // automatically mount filesystems in fstab from logical
-        // volumes when activated, so probably not strictly necessary.
-        if (isset($vgName)) {
+        $fsDevs = [ $df ];
+        // If the container contains an LVM physical volume that belongs to a
+        // volume group, activate the volume group (otherwise its logical
+        // volumes and any filesystems on them won't be accessible) and mount
+        // the filesystems on the logical volumes instead.
+        $vgName = "";
+        $cmd = sprintf("export LANG=C; pvs --noheadings -o vg_name %s 2>/dev/null",
+            escapeshellarg($df));
+        if (0 === $this->exec($cmd, $output) && !empty($output))
+            $vgName = trim($output[0]);
+        if ("" !== $vgName) {
             $this->debug(sprintf("%s contains an LVM2 PV, part of VG: %s",
                                  $df, $vgName));
-            $cmd = sprintf("export LANG=C; vgchange -a y %s",
-                escapeshellarg($vgName)
-            );
+            $cmd = sprintf("export LANG=C; vgchange -a y %s 2>&1",
+                escapeshellarg($vgName));
             if (0 !== $this->exec($cmd, $output)) {
-                $this->debug($output);
+                $this->debug(implode("\n", $output));
+                $fsDevs = [];
             } else {
-                if (class_exists("\OMV\System\Storage\Lvm\VolumeGroup")) {
-                    $vg = new \OMV\System\Storage\Lvm\VolumeGroup($vgName);
-                    $lvNames = $vg->getLVName();
-                    $fsDevs = array_map(function($lv) use ($vgName) {
-                                            return "/dev/$vgName-$lv";
-                                        }, $lvNames);
-                }
+                // Wait for the /dev/<vg>/<lv> symlinks to be created.
+                $settle = new Process("udevadm", ["settle", "--timeout=30"]);
+                $settle->setQuiet(true);
+                $settle->execute();
+                $cmd = sprintf("export LANG=C; lvs --noheadings -o lv_path %s",
+                    escapeshellarg($vgName));
+                $this->exec($cmd, $output);
+                $fsDevs = array_values(array_filter(array_map("trim", $output)));
             }
-        } else {
-            // If not an LVM2 PV, just pass the container devicefile
-            $fsDevs = [ $df ];
         }
         // If the container contains a (referenced) filesystem, then mount it
         // (unless this automounting is disabled by the global configuration
@@ -589,43 +574,6 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
     }
 
     /**
-     * Modify a LUKS container.
-     * @param params An array containing the following fields:
-     *     \em UUID The UUID of the LUKS container device.
-     *     \em devicefile The device file of the container to modify.
-     *     \em openatboot A boolean value representing whether to unlock
-     *         the encrypted device at boot or not.
-     * @param context The context of the caller.
-     * @return None.
-     * @throw E_MISC_FAILURE
-     */
-    public function modifyContainer($params, $context) {
-        // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
-        // Validate the parameters of the RPC service method.
-        $this->validateMethodParams($params, "rpc.luks.modifycontainer");
-        // Validate the container
-        $luks = new \OMV\System\Storage\Luks\Container($params['devicefile']);
-        if (is_null($luks) || !$luks->exists()) {
-            throw new \OMV\Exception(
-                sprintf(gettext("LUKS container on '%s' not found"),
-                        $params['devicefile']));
-        }
-        // Set the unlock at boot status
-        // TODO: change crypttab method
-        // Notify configuration changes.
-        // Notify configuration changes.
-        $dispatcher = \OMV\Engine\Notify\Dispatcher::getInstance();
-        $dispatcher->notify(OMV_NOTIFY_MODIFY,
-            "org.openmediavault.system.storage.luks.container",
-            [
-                "devicefile" => $params['devicefile'],
-                "openatboot" => array_boolval($params, "openatboot")
-            ]
-        );
-    }
-
-    /**
      * Add a key to a container.
      * @param params An array containing the following fields:
      *     \em UUID The UUID of the LUKS container device.
@@ -778,7 +726,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
      *     \em passphrase The passphrase to unlock the device.
      *     \em keyfile Path to the uploaded key file to unlock the device.
      * @param context The context of the caller.
-     * @return An integer from 0-7 representing which keyslot the
+     * @return An integer from 0-31 (0-7 for LUKS1) representing which keyslot the
      *          passphrase successfully unlocked, otherwise none.
      * @throw E_MISC_FAILURE
      * @throw E_EXEC_MISC
@@ -813,7 +761,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
      * @param params An array containing the following fields:
      *     \em UUID The UUID of the LUKS container device.
      *     \em devicefile The device file of the container to modify.
-     *     \em keyslot A number from 0-7 representing which key slot to kill.
+     *     \em keyslot A number from 0-31 (0-7 for LUKS1) representing which key slot to kill.
      * @param context The context of the caller.
      * @return None.
      * @throw E_MISC_FAILURE
@@ -1175,9 +1123,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             $pinConfigs['tpm2'] = new \stdClass();
         }
         // Check the credential before installing anything.
-        try {
-            $luks->testKey($old, $oldIsKeyFile);
-        } catch (Exception $e) {
+        if (FALSE === $luks->testKey($old, $oldIsKeyFile)) {
             throw new \OMV\Exception(gettext(
                 "The passphrase does not unlock the encrypted device."));
         }
@@ -1229,9 +1175,15 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 "Auto-unlock is not enabled for this container."));
         }
         // Remove the Clevis bindings, or the auto-unlock key and its key
-        // file. If removal fails (e.g. last slot), log and continue.
+        // file. Refuse if that would leave the container without any key,
+        // e.g. when its passphrase was removed after enabling auto-unlock.
         if ($this->getAutoUnlockMethod($uuid) === "clevis") {
-            foreach ($luks->getClevisSlots() as $slot) {
+            $slots = $luks->getClevisSlots();
+            if ($luks->getUsedKeySlots() - count($slots) < 1) {
+                throw new \OMV\Exception(gettext(
+                    "Refusing to disable auto-unlock; it holds the last key of the container. Add a passphrase first."));
+            }
+            foreach ($slots as $slot) {
                 try {
                     $luks->clevisUnbind($slot);
                 } catch (Exception $e) {
@@ -1240,12 +1192,22 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                         $e->getMessage()));
                 }
             }
+        } else if (file_exists($keyFilePath) &&
+                   FALSE === $luks->testKey($keyFilePath, TRUE)) {
+            // The key was already removed from the container.
+            unlink($keyFilePath);
         } else if (file_exists($keyFilePath)) {
+            if ($luks->getUsedKeySlots() <= 1) {
+                throw new \OMV\Exception(gettext(
+                    "Refusing to disable auto-unlock; it holds the last key of the container. Add a passphrase first."));
+            }
+            // Keep the key file if its key slot could not be removed, so
+            // the slot is not left holding a key nobody has.
             try {
                 $luks->removeKey($keyFilePath, TRUE);
             } catch (Exception $e) {
-                $this->debug(sprintf(
-                    "Warning: Could not remove auto-unlock key from LUKS device: %s",
+                throw new \OMV\Exception(sprintf(
+                    gettext("Unable to remove the auto-unlock key from the encrypted device: %s"),
                     $e->getMessage()));
             }
             unlink($keyFilePath);
@@ -1340,7 +1302,16 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                 sprintf(gettext("%s is not a valid LUKS header backup file"),
                         $params['filename']));
         }
-        // Check the UUIDs match, unless force is set
+        // Never overwrite the header of an unlocked container.
+        $luks = new \OMV\System\Storage\Luks\Container($params['devicefile']);
+        if (TRUE === $luks->exists() && TRUE === $luks->isOpen()) {
+            throw new \OMV\Exception(sprintf(
+                gettext("LUKS container on '%s' must be locked before its header can be restored"),
+                $params['devicefile']));
+        }
+        // Check the UUIDs match, unless force is set. Compare against the
+        // UUID on the device itself; only if its header is unreadable (the
+        // usual reason to restore one) fall back to the UUID supplied.
         if($params['force'] === FALSE) {
             unset($cmd, $output, $result);
             $cmd = sprintf("export LANG=C; cryptsetup luksUUID %s 2>&1",
@@ -1348,7 +1319,8 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
             );
             $this->exec($cmd, $output);
             $header_uuid = $output[0];
-            if($header_uuid !== $params['uuid']) {
+            $device_uuid = $luks->exists() ? $luks->getUuid() : $params['uuid'];
+            if($header_uuid !== $device_uuid) {
                 throw new \OMV\Exception(
                     sprintf(gettext("The UUID of the LUKS header backup file ".
                             "doesn't match the device. If you are sure you ".
@@ -1356,13 +1328,12 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                             "again with the 'force' option enabled.".PHP_EOL.
                             "Target device UUID:".PHP_EOL." %s".PHP_EOL.
                             "Header backup UUID:".PHP_EOL." %s"),
-                            $params['uuid'],
+                            $device_uuid,
                             $header_uuid
                            ));
             }
         }
         // Write the header to the device
-        $luks = new \OMV\System\Storage\Luks\Container($params['devicefile']);
         try {
             $luks->restoreHeader($params['filepath']);
         } catch(Exception $e) {
