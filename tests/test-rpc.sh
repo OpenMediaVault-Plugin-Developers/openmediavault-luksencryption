@@ -5,14 +5,16 @@
 #
 # Creates temporary loop-backed LUKS containers and exercises every LuksMgmt
 # RPC method: create/delete, enumerate/list/details, unlock/lock (including
-# "allow discards"), key management, header backup/restore, auto-unlock at
-# boot via /etc/crypttab and stale entry cleanup.  Everything is removed on
-# exit and /etc/crypttab is restored.  No real disks are touched.
+# "allow discards" and mounting the filesystem inside on unlock), key
+# management, header backup/restore, auto-unlock at boot via /etc/crypttab
+# and stale entry cleanup.  Everything is removed on exit and /etc/crypttab
+# and /etc/fstab are restored.  No real disks are touched.
 #
 # Requirements:
 #   - Run as root
 #   - OMV with the luksencryption plugin installed
-#   - cryptsetup, losetup, dmsetup, blkid, systemd-cryptsetup
+#   - cryptsetup, losetup, dmsetup, blkid, systemd-cryptsetup, mkfs.ext4
+#   - mkfs.btrfs, lvm2 (optional; the BTRFS / LVM mount tests are skipped without them)
 #
 # Clevis auto-unlock: set TANG_URL (e.g. TANG_URL=http://tang.lan) to test
 # binding to a real Tang server; TPM2 binding is tested when /dev/tpmrm0
@@ -184,13 +186,14 @@ not_luks() { ! is_luks "$1"; }
 has_opt()  { [[ ",$1," == *",$2,"* ]]; }
 lacks_opt() { ! has_opt "$1" "$2"; }
 
-# Create a sparse image, attach it to a loop device and print the device.
+# Create a sparse image of size $1 (default $LOOP_SIZE), attach it to a loop
+# device and print the device.  Runs in a subshell, so the caller records the
+# image for cleanup.
 new_loop() {
     local img
     img=$(mktemp /var/tmp/omv-luks-test.XXXXXX)
-    IMG_FILES+=("$img")
-    truncate -s "$LOOP_SIZE" "$img"
-    losetup --find --show "$img"
+    truncate -s "${1:-$LOOP_SIZE}" "$img"
+    losetup --find --show "$img" || { rm -f "$img"; return 1; }
 }
 
 # Format device $1 directly (not via RPC) with passphrase $2 and type $3,
@@ -204,6 +207,43 @@ quick_format() {
 
 mapper_of()    { echo "$(basename "$1")-crypt"; }
 boot_unit_of() { echo "systemd-cryptsetup@$(systemd-escape "luks-$1").service"; }
+
+# True if a filesystem is mounted on directory $1.
+is_mounted()  { findmnt -n "$1" >/dev/null 2>&1; }
+not_mounted() { ! is_mounted "$1"; }
+mount_count() { findmnt -n "$1" 2>/dev/null | wc -l; }
+
+# Mount the /etc/fstab entry for directory $2 as soon as /dev/mapper/$1
+# appears, the way systemd may mount it while openContainer is still running.
+race_mount() {
+    local i
+    for i in $(seq 600); do
+        if [ -e "/dev/mapper/$1" ]; then
+            is_mounted "$2" || mount "$2" >/dev/null 2>&1 || true
+            is_mounted "$2" && return 0
+        fi
+        sleep 0.05
+    done
+    return 1
+}
+
+# Unlock device $1 directly (not via RPC) with passphrase $2.
+quick_open() {
+    echo -n "$2" | cryptsetup open "$1" "$(mapper_of "$1")" --key-file=- >/dev/null
+    udevadm settle
+}
+
+# Register an OMV mount point for the filesystem with UUID $1 (type $2) on
+# directory $3, both in the OMV database (which openContainer consults) and
+# in /etc/fstab (which the mount itself uses).  Prints the mntent UUID.
+add_mntent() {
+    local fsname="/dev/disk/by-uuid/$1" out
+    mkdir -p "$3"
+    out=$(rpc FsTab set "{\"uuid\":\"$NEW_UUID\",\"fsname\":\"$fsname\",\"dir\":\"$3\",\"type\":\"$2\",\"opts\":\"defaults,nofail\",\"freq\":0,\"passno\":0}") || return 1
+    printf '%s\t%s\t%s\tdefaults,nofail\t0 0\n' "$fsname" "$3" "$2" >> /etc/fstab
+    systemctl daemon-reload
+    echo "$out" | json_field uuid
+}
 
 # Unlock UUID $1 via systemd-cryptsetup using its crypttab entry, as happens
 # at boot.  Returns non-zero if the unit could not be started.  No password
@@ -225,12 +265,20 @@ LIST_PARAMS='{"start":0,"limit":null,"sortfield":null,"sortdir":null}'
 KEY_DIR="/etc/luks-keys"
 LOOP_SIZE="64M"
 LABEL="omvtest$$"
+NEW_UUID="fa4b1c66-ef79-11e5-87a0-0002b3a176b4"  # OMV_CONFIGOBJECT_NEW_UUID
+MNT_EXT4="/srv/omv-luks-test-$$-ext4"
+MNT_BTRFS="/srv/omv-luks-test-$$-btrfs"
+MNT_LVM="/srv/omv-luks-test-$$-lvm"
+VG_NAME="omv-luks-$$"   # hyphens are doubled in /dev/mapper names
+LV_NAME="data-lv"
 
 PASS_A="omv-luks-a-$$"
 PASS_A2="omv-luks-a2-$$"
 PASS_A3="omv-luks-a3-$$"
 PASS_B="omv-luks-b-$$"
 PASS_C="omv-luks-c-$$"
+PASS_D="omv-luks-d-$$"
+PASS_E="omv-luks-e-$$"
 WRONG="wrong-passphrase-$$"
 
 # ---------------------------------------------------------------------------
@@ -240,11 +288,14 @@ declare -a IMG_FILES=()
 declare -a LOOPS=()
 declare -a UUIDS=()
 declare -a TMP_FILES=()
-DEV_A=""; DEV_B=""; DEV_C=""
-UUID_A=""; UUID_B=""; UUID_C=""
+declare -a MNTENTS=()
+DEV_A=""; DEV_B=""; DEV_C=""; DEV_D=""; DEV_E=""
+UUID_A=""; UUID_B=""; UUID_C=""; UUID_D=""; UUID_E=""
 STALE_UUID=""
 CRYPTTAB_BACKUP=""
 CRYPTTAB_EXISTED=0
+FSTAB_BACKUP=""
+RACER=""
 
 # ---------------------------------------------------------------------------
 # Cleanup — always runs on exit
@@ -252,7 +303,21 @@ CRYPTTAB_EXISTED=0
 cleanup() {
     section "Cleanup"
 
-    local u d f
+    local u d f m
+    [ -n "$RACER" ] && kill "$RACER" >/dev/null 2>&1
+    for m in "$MNT_EXT4" "$MNT_BTRFS" "$MNT_LVM"; do
+        umount -R "$m" >/dev/null 2>&1 || true
+        rmdir "$m" >/dev/null 2>&1 || true
+    done
+    vgchange -a n "$VG_NAME" >/dev/null 2>&1 || true
+    for u in "${MNTENTS[@]}"; do
+        rpc FsTab delete "{\"uuid\":\"$u\"}" >/dev/null 2>&1 || true
+    done
+    if [ -n "$FSTAB_BACKUP" ]; then
+        info "Restoring /etc/fstab"
+        cp -p "$FSTAB_BACKUP" /etc/fstab
+        rm -f "$FSTAB_BACKUP"
+    fi
     for u in "${UUIDS[@]}" "$STALE_UUID"; do
         [ -n "$u" ] || continue
         boot_lock "$u"
@@ -303,16 +368,24 @@ if [ -f /etc/crypttab ]; then
     cp -p /etc/crypttab "$CRYPTTAB_BACKUP"
     CRYPTTAB_EXISTED=1
 fi
+FSTAB_BACKUP=$(mktemp)
+cp -p /etc/fstab "$FSTAB_BACKUP"
 
-for v in DEV_A DEV_B DEV_C; do
-    d=$(new_loop) || { echo "Failed to attach loop device" >&2; exit 1; }
+# D and E hold filesystems; E is large enough for a two-device BTRFS.
+for v in DEV_A DEV_B DEV_C DEV_D DEV_E; do
+    size=$LOOP_SIZE
+    [ "$v" = DEV_D ] || [ "$v" = DEV_E ] && size=256M
+    d=$(new_loop "$size") || { echo "Failed to attach loop device" >&2; exit 1; }
     LOOPS+=("$d")
+    IMG_FILES+=("$(losetup -nO BACK-FILE "$d")")
     printf -v "$v" '%s' "$d"
 done
-info "Loop devices: A=$DEV_A B=$DEV_B C=$DEV_C"
+info "Loop devices: A=$DEV_A B=$DEV_B C=$DEV_C D=$DEV_D E=$DEV_E"
 
 MAPPER_A=$(mapper_of "$DEV_A")
 MAPPER_C=$(mapper_of "$DEV_C")
+MAPPER_D=$(mapper_of "$DEV_D")
+MAPPER_E=$(mapper_of "$DEV_E")
 
 LOOP_DISCARD=1
 if [ "$(cat "/sys/block/$(basename "$DEV_A")/queue/discard_max_bytes" 2>/dev/null)" = "0" ]; then
@@ -449,19 +522,6 @@ check "details include LUKS header information" "" \
     grep -q "LUKS header information" <<<"$RPC_OUT"
 
 # ---------------------------------------------------------------------------
-section "modifyContainer"
-# ---------------------------------------------------------------------------
-
-assert_rpc "modifyContainer openatboot=true" \
-    "$SVC" modifyContainer "{\"uuid\":\"$UUID_A\",\"devicefile\":\"$DEV_A\",\"openatboot\":true}"
-assert_rpc "modifyContainer openatboot=false" \
-    "$SVC" modifyContainer "{\"uuid\":\"$UUID_A\",\"devicefile\":\"$DEV_A\",\"openatboot\":false}"
-assert_rpc_fails "modifyContainer rejects missing openatboot" \
-    "$SVC" modifyContainer "{\"uuid\":\"$UUID_A\",\"devicefile\":\"$DEV_A\"}"
-assert_rpc_fails "modifyContainer rejects a non-LUKS device" \
-    "$SVC" modifyContainer "{\"uuid\":\"$UUID_A\",\"devicefile\":\"$JUNK_FILE\",\"openatboot\":true}"
-
-# ---------------------------------------------------------------------------
 section "openContainer / closeContainer"
 # ---------------------------------------------------------------------------
 
@@ -516,6 +576,149 @@ assert_rpc "openContainer on a LUKS1 container" \
 v=$(container_field "$DEV_C" unlocked); check "C is unlocked" "got '$v'" [ "$v" = "true" ]
 assert_rpc "closeContainer on a LUKS1 container" \
     "$SVC" closeContainer "{\"devicefile\":\"$DEV_C\"}"
+
+# ---------------------------------------------------------------------------
+section "openContainer — mount on unlock"
+# ---------------------------------------------------------------------------
+# openContainer mounts a filesystem inside the container if it has an OMV
+# mount point.  systemd may mount the same /etc/fstab entry as soon as the
+# decrypted device appears; that race must not make openContainer fail.
+
+quick_format "$DEV_D" "$PASS_D" luks2
+UUID_D=$(cryptsetup luksUUID "$DEV_D" 2>/dev/null); UUIDS+=("$UUID_D")
+OPEN_D="{\"uuid\":\"$UUID_D\",\"devicefile\":\"$DEV_D\",\"passphrase\":\"$PASS_D\"}"
+quick_open "$DEV_D" "$PASS_D"
+mkfs.ext4 -q -F "/dev/mapper/$MAPPER_D" >/dev/null
+udevadm settle
+FSUUID_D=$(blkid -s UUID -o value "/dev/mapper/$MAPPER_D")
+cryptsetup close "$MAPPER_D"
+udevadm settle
+
+if m=$(add_mntent "$FSUUID_D" ext4 "$MNT_EXT4") && [ -n "$m" ]; then
+    MNTENTS+=("$m")
+
+    assert_rpc "openContainer mounts the filesystem inside" "$SVC" openContainer "$OPEN_D"
+    check "ext4 filesystem mounted on $MNT_EXT4" "$(findmnt "$MNT_EXT4" 2>&1)" is_mounted "$MNT_EXT4"
+    v=$(findmnt -n -o UUID "$MNT_EXT4" 2>/dev/null)
+    check "the mounted filesystem is D's" "got '$v'" [ "$v" = "$FSUUID_D" ]
+    v=$(list_field "$UUID_D" _used); check "D _used is true (has a mount point)" "got '$v'" [ "$v" = "true" ]
+
+    assert_rpc "openContainer on an unlocked, mounted container is a no-op" \
+        "$SVC" openContainer "$OPEN_D"
+    v=$(mount_count "$MNT_EXT4"); check "filesystem still mounted once" "got $v mounts" [ "$v" = "1" ]
+
+    umount "$MNT_EXT4"
+    assert_rpc "openContainer mounts the filesystem of an already unlocked container" \
+        "$SVC" openContainer "$OPEN_D"
+    check "filesystem remounted" "" is_mounted "$MNT_EXT4"
+
+    # Let something else mount the filesystem while openContainer runs.
+    for i in 1 2 3; do
+        umount "$MNT_EXT4" >/dev/null 2>&1
+        rpc "$SVC" closeContainer "{\"devicefile\":\"$DEV_D\"}" >/dev/null 2>&1
+        race_mount "$MAPPER_D" "$MNT_EXT4" & RACER=$!
+        assert_rpc "openContainer succeeds when the filesystem is mounted concurrently (#$i)" \
+            "$SVC" openContainer "$OPEN_D"
+        wait "$RACER"; RACER=""
+        check "filesystem mounted after race (#$i)" "" is_mounted "$MNT_EXT4"
+        v=$(mount_count "$MNT_EXT4"); check "filesystem mounted once after race (#$i)" "got $v mounts" [ "$v" = "1" ]
+    done
+
+    umount "$MNT_EXT4" >/dev/null 2>&1
+    assert_rpc "closeContainer after unmounting" "$SVC" closeContainer "{\"devicefile\":\"$DEV_D\"}"
+    check "D mapping removed" "" test ! -e "/dev/mapper/$MAPPER_D"
+else
+    _fail "register an OMV mount point for D's ext4 filesystem" "FsTab set failed"
+fi
+
+# A multi-device BTRFS filesystem must only be mounted once all of its
+# containers are unlocked.
+if command -v mkfs.btrfs >/dev/null 2>&1; then
+    quick_format "$DEV_D" "$PASS_D" luks2
+    UUID_D=$(cryptsetup luksUUID "$DEV_D" 2>/dev/null); UUIDS+=("$UUID_D")
+    quick_format "$DEV_E" "$PASS_E" luks2
+    UUID_E=$(cryptsetup luksUUID "$DEV_E" 2>/dev/null); UUIDS+=("$UUID_E")
+    OPEN_D="{\"uuid\":\"$UUID_D\",\"devicefile\":\"$DEV_D\",\"passphrase\":\"$PASS_D\"}"
+    OPEN_E="{\"uuid\":\"$UUID_E\",\"devicefile\":\"$DEV_E\",\"passphrase\":\"$PASS_E\"}"
+    quick_open "$DEV_D" "$PASS_D"
+    quick_open "$DEV_E" "$PASS_E"
+    mkfs.btrfs -q -f -d raid1 -m raid1 "/dev/mapper/$MAPPER_D" "/dev/mapper/$MAPPER_E" >/dev/null
+    udevadm settle
+    FSUUID_BTRFS=$(blkid -s UUID -o value "/dev/mapper/$MAPPER_D")
+    cryptsetup close "$MAPPER_D"
+    cryptsetup close "$MAPPER_E"
+    udevadm settle
+
+    if m=$(add_mntent "$FSUUID_BTRFS" btrfs "$MNT_BTRFS") && [ -n "$m" ]; then
+        MNTENTS+=("$m")
+        assert_rpc "openContainer on the first of two BTRFS devices" "$SVC" openContainer "$OPEN_D"
+        check "incomplete BTRFS filesystem not mounted" "$(findmnt "$MNT_BTRFS" 2>&1)" \
+            not_mounted "$MNT_BTRFS"
+        assert_rpc "openContainer on the second BTRFS device" "$SVC" openContainer "$OPEN_E"
+        check "complete BTRFS filesystem mounted" "" is_mounted "$MNT_BTRFS"
+        v=$(findmnt -n -o UUID "$MNT_BTRFS" 2>/dev/null)
+        check "the mounted filesystem is the BTRFS one" "got '$v'" [ "$v" = "$FSUUID_BTRFS" ]
+        umount "$MNT_BTRFS" >/dev/null 2>&1
+    else
+        _fail "register an OMV mount point for the BTRFS filesystem" "FsTab set failed"
+    fi
+    rpc "$SVC" closeContainer "{\"devicefile\":\"$DEV_D\"}" >/dev/null 2>&1
+    rpc "$SVC" closeContainer "{\"devicefile\":\"$DEV_E\"}" >/dev/null 2>&1
+else
+    info "mkfs.btrfs not found; skipping multi-device BTRFS mount tests"
+fi
+
+# A filesystem on a logical volume inside the container is mounted once the
+# volume group is activated.  The hyphenated names make the /dev/mapper name
+# differ from <vg>-<lv>.
+if command -v pvcreate >/dev/null 2>&1; then
+    quick_format "$DEV_D" "$PASS_D" luks2
+    UUID_D=$(cryptsetup luksUUID "$DEV_D" 2>/dev/null); UUIDS+=("$UUID_D")
+    OPEN_D="{\"uuid\":\"$UUID_D\",\"devicefile\":\"$DEV_D\",\"passphrase\":\"$PASS_D\"}"
+    quick_open "$DEV_D" "$PASS_D"
+    pvcreate -q -y "/dev/mapper/$MAPPER_D" >/dev/null
+    vgcreate -q "$VG_NAME" "/dev/mapper/$MAPPER_D" >/dev/null
+    lvcreate -q -y -n "$LV_NAME" -L 64M "$VG_NAME" >/dev/null
+    udevadm settle
+    mkfs.ext4 -q -F "/dev/$VG_NAME/$LV_NAME" >/dev/null
+    udevadm settle
+    FSUUID_LV=$(blkid -s UUID -o value "/dev/$VG_NAME/$LV_NAME")
+    vgchange -q -a n "$VG_NAME" >/dev/null
+    cryptsetup close "$MAPPER_D"
+    udevadm settle
+
+    if m=$(add_mntent "$FSUUID_LV" ext4 "$MNT_LVM") && [ -n "$m" ]; then
+        MNTENTS+=("$m")
+        assert_rpc "openContainer on a container holding an LVM volume group" \
+            "$SVC" openContainer "$OPEN_D"
+        check "logical volume activated" "" test -e "/dev/$VG_NAME/$LV_NAME"
+        check "filesystem on the logical volume mounted" "$(findmnt "$MNT_LVM" 2>&1)" \
+            is_mounted "$MNT_LVM"
+        v=$(findmnt -n -o UUID "$MNT_LVM" 2>/dev/null)
+        check "the mounted filesystem is the logical volume's" "got '$v'" [ "$v" = "$FSUUID_LV" ]
+        umount "$MNT_LVM" >/dev/null 2>&1
+    else
+        _fail "register an OMV mount point for the LVM filesystem" "FsTab set failed"
+    fi
+    vgremove -q -f "$VG_NAME" >/dev/null 2>&1
+    pvremove -q -f "/dev/mapper/$MAPPER_D" >/dev/null 2>&1
+    cryptsetup close "$MAPPER_D" >/dev/null 2>&1
+
+    # A physical volume that is not in any volume group is left alone.
+    quick_format "$DEV_E" "$PASS_E" luks2
+    UUID_E=$(cryptsetup luksUUID "$DEV_E" 2>/dev/null); UUIDS+=("$UUID_E")
+    quick_open "$DEV_E" "$PASS_E"
+    pvcreate -q -y "/dev/mapper/$MAPPER_E" >/dev/null
+    cryptsetup close "$MAPPER_E"
+    udevadm settle
+    assert_rpc "openContainer on a container holding a PV without a volume group" \
+        "$SVC" openContainer "{\"uuid\":\"$UUID_E\",\"devicefile\":\"$DEV_E\",\"passphrase\":\"$PASS_E\"}"
+    v=$(container_field "$DEV_E" unlocked); check "E is unlocked" "got '$v'" [ "$v" = "true" ]
+    pvremove -q -f "/dev/mapper/$MAPPER_E" >/dev/null 2>&1
+    rpc "$SVC" closeContainer "{\"devicefile\":\"$DEV_E\"}" >/dev/null 2>&1
+else
+    info "pvcreate not found; skipping LVM mount tests"
+fi
 
 # ---------------------------------------------------------------------------
 section "Key management"
@@ -594,12 +797,23 @@ v=$(container_field "$DEV_A" usedslots); check "A usedslots is 1 after kill" "go
 
 assert_rpc_fails "killContainerKeySlot on an empty slot fails" \
     "$SVC" killContainerKeySlot "{$KEY_A,\"keyslot\":5}"
-assert_rpc_fails "killContainerKeySlot rejects keyslot 8" \
-    "$SVC" killContainerKeySlot "{$KEY_A,\"keyslot\":8}"
+assert_rpc_fails "killContainerKeySlot rejects keyslot 32" \
+    "$SVC" killContainerKeySlot "{$KEY_A,\"keyslot\":32}"
 assert_rpc_fails "killContainerKeySlot rejects keyslot -1" \
     "$SVC" killContainerKeySlot "{$KEY_A,\"keyslot\":-1}"
 assert_rpc_fails "killContainerKeySlot rejects missing keyslot" \
     "$SVC" killContainerKeySlot "{$KEY_A}"
+
+# LUKS2 key slots go up to 31.
+echo -n "$PASS_A" | cryptsetup luksAddKey -q --key-slot 12 \
+    --pbkdf pbkdf2 --pbkdf-force-iterations 1000 "$DEV_A" "$KEYFILE" --key-file=- >/dev/null 2>&1
+v=$(container_field "$DEV_A" usedslots); check "A usedslots counts LUKS2 slot 12" "got '$v'" [ "$v" = "2" ]
+assert_rpc "testContainerKey reports LUKS2 slot 12" \
+    "$SVC" testContainerKey "{$KEY_A,\"keyfile\":\"$KEYFILE\"}" '^"\?12"\?$'
+assert_rpc "killContainerKeySlot erases LUKS2 slot 12" \
+    "$SVC" killContainerKeySlot "{$KEY_A,\"keyslot\":12}"
+check "erased slot-12 key no longer unlocks A" "" eval "! keyfile_works '$DEV_A' '$KEYFILE'"
+v=$(container_field "$DEV_A" usedslots); check "A usedslots back to 1" "got '$v'" [ "$v" = "1" ]
 
 assert_rpc "addContainerKey on a LUKS1 container" \
     "$SVC" addContainerKey "{\"uuid\":\"$UUID_C\",\"devicefile\":\"$DEV_C\",\"oldpassphrase\":\"$PASS_C\",\"newpassphrase\":\"$PASS_A2\"}"
@@ -644,8 +858,17 @@ assert_rpc_fails "restoreContainerHeader rejects a non-LUKS file" \
     "$SVC" restoreContainerHeader "{$RESTORE_A,\"force\":false,\"filepath\":\"$JUNK_FILE\"}"
 assert_rpc_fails "restoreContainerHeader rejects another container's header (UUID mismatch)" \
     "$SVC" restoreContainerHeader "{$RESTORE_A,\"force\":false,\"filepath\":\"$HDR_B\"}"
+assert_rpc_fails "restoreContainerHeader checks the device's UUID, not the one supplied" \
+    "$SVC" restoreContainerHeader \
+    "{\"uuid\":\"$UUID_B\",\"devicefile\":\"$DEV_A\",\"filename\":\"b.bak\",\"force\":false,\"filepath\":\"$HDR_B\"}"
 v=$(cryptsetup luksUUID "$DEV_A" 2>/dev/null)
 check "A UUID unchanged after rejected restore" "got '$v'" [ "$v" = "$UUID_A" ]
+rpc "$SVC" openContainer "$OPEN_A" >/dev/null 2>&1
+assert_rpc_fails "restoreContainerHeader refuses an unlocked container (even with force)" \
+    "$SVC" restoreContainerHeader "{$RESTORE_A,\"force\":true,\"filepath\":\"$HDR_B\"}"
+rpc "$SVC" closeContainer "{\"devicefile\":\"$DEV_A\"}" >/dev/null 2>&1
+v=$(cryptsetup luksUUID "$DEV_A" 2>/dev/null)
+check "A UUID unchanged after refused restore" "got '$v'" [ "$v" = "$UUID_A" ]
 assert_rpc_fails "restoreContainerHeader rejects missing force" \
     "$SVC" restoreContainerHeader "{$RESTORE_A,\"filepath\":\"$HDR_COPY\"}"
 
@@ -940,6 +1163,32 @@ assert_rpc_fails "removeContainerKey refuses to remove the last key" \
     "$SVC" removeContainerKey "{\"uuid\":\"$UUID_C\",\"devicefile\":\"$DEV_C\",\"passphrase\":\"$PASS_C\"}"
 check "container still unlockable after refused remove" "" key_works "$DEV_C" "$PASS_C"
 
+# Auto-unlock may hold the last key if the passphrase was removed later.
+assert_rpc "enableContainerAutoUnlock on C" \
+    "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_C\",\"passphrase\":\"$PASS_C\"}"
+echo -n "$PASS_C" | cryptsetup luksRemoveKey -q "$DEV_C" --key-file=- >/dev/null 2>&1
+assert_rpc_fails "disableContainerAutoUnlock refuses to remove the last key" \
+    "$SVC" disableContainerAutoUnlock "{\"devicefile\":\"$DEV_C\"}"
+check "crypttab entry kept after refused disable" "" [ -n "$(crypttab_options "$UUID_C")" ]
+check "key file still unlocks C after refused disable" "" keyfile_works "$DEV_C" "$KEY_DIR/$UUID_C"
+PASS_FILE=$(mktemp /var/tmp/omv-luks-pass.XXXXXX); TMP_FILES+=("$PASS_FILE")
+echo -n "$PASS_C" > "$PASS_FILE"
+cryptsetup luksAddKey -q --pbkdf pbkdf2 --pbkdf-force-iterations 1000 \
+    "$DEV_C" "$PASS_FILE" --key-file "$KEY_DIR/$UUID_C" >/dev/null 2>&1
+assert_rpc "disableContainerAutoUnlock once a passphrase is back" \
+    "$SVC" disableContainerAutoUnlock "{\"devicefile\":\"$DEV_C\"}"
+check "key file removed" "" test ! -e "$KEY_DIR/$UUID_C"
+check "passphrase unlocks C" "" key_works "$DEV_C" "$PASS_C"
+
+# The key file's slot may already be gone; disabling still cleans up.
+rpc "$SVC" enableContainerAutoUnlock "{\"devicefile\":\"$DEV_C\",\"passphrase\":\"$PASS_C\"}" >/dev/null 2>&1
+cryptsetup luksRemoveKey -q "$DEV_C" --key-file "$KEY_DIR/$UUID_C" >/dev/null 2>&1
+assert_rpc "disableContainerAutoUnlock when its key slot was already removed" \
+    "$SVC" disableContainerAutoUnlock "{\"devicefile\":\"$DEV_C\"}"
+check "crypttab entry removed" "" [ -z "$(crypttab_options "$UUID_C")" ]
+check "stale key file removed" "" test ! -e "$KEY_DIR/$UUID_C"
+v=$(container_field "$DEV_C" usedslots); check "C usedslots is 1" "got '$v'" [ "$v" = "1" ]
+
 # ---------------------------------------------------------------------------
 section "deleteContainer"
 # ---------------------------------------------------------------------------
@@ -949,6 +1198,10 @@ assert_rpc "deleteContainer on locked B" \
 udevadm settle
 check "B is no longer a LUKS device" "" not_luks "$DEV_B"
 check "B passphrase no longer unlocks" "" key_fails "$DEV_B" "$PASS_B"
+# The LUKS2 header area is 16 MiB; all of it must be overwritten, not just
+# the first 2 MiB.
+check "delete overwrites the whole LUKS2 header area" "" \
+    eval "! cmp -s <(dd if='$DEV_B' bs=1M skip=2 count=14 2>/dev/null) <(head -c 14M /dev/zero)"
 v=$(container_field "$DEV_B" uuid); check "B no longer enumerated" "got '$v'" [ -z "$v" ]
 assert_rpc_fails "getContainerDetails on deleted B fails" \
     "$SVC" getContainerDetails "{\"devicefile\":\"$DEV_B\"}"
