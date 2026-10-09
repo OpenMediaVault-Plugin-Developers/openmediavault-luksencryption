@@ -520,6 +520,13 @@ class Container extends \OMV\System\Storage\StorageDevice {
         $process = new Process($cmd);
         $process->setRedirect2to1();
         $process->execute($output, $exitStatus);
+        // Wait for udev to finish processing the new device-mapper
+        // device (symlinks, blkid probing) before anything uses it.
+        if ($exitStatus === 0) {
+            $settle = new Process("udevadm settle --timeout=30");
+            $settle->setQuiet(true);
+            $settle->execute();
+        }
         $this->refresh();
         return $exitStatus === 0;
     }

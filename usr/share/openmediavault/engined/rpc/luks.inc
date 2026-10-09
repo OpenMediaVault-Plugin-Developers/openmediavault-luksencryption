@@ -372,7 +372,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                     // If the fs has fewer than one device (an error
                     // of some kind occurred), skip mounting
                     if($totalDevices < 1)
-                        continue;
+                        return;
                     unset($cmd, $output, $result);
                     // Find out how many are online
                     $cmd = sprintf("export LANG=C; btrfs filesystem ".
@@ -383,7 +383,7 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                     $availableDevices = (int)$output[0];
                     // If not all devices are online, skip mounting
                     if($availableDevices !== $totalDevices)
-                        continue;
+                        return;
                     unset($cmd, $output, $result);
                 case "ext2":
                 case "ext3":
@@ -401,7 +401,21 @@ class OMVRpcServiceLuksMgmt extends \OMV\Rpc\ServiceAbstract {
                     $fsb = $fsbMngr->getBackendById($meObject['fsname']);
                     $fs = $fsb->getImpl($meObject['fsname']);
                     if (FALSE === $fs->isMounted()) {
-                        $fs->mount();
+                        try {
+                            $fs->mount();
+                        } catch (\OMV\ExecException $e) {
+                            // systemd may mount the fstab entry itself
+                            // as soon as the device appears, racing with
+                            // us ("Can't open blockdev"). Only fail if the
+                            // filesystem really didn't get mounted.
+                            $process = new Process("udevadm", ["settle", "--timeout=30"]);
+                            $process->setQuiet(true);
+                            $process->execute();
+                            sleep(1);
+                            if (FALSE === $fs->isMounted()) {
+                                throw $e;
+                            }
+                        }
                     }
                 }
             }
