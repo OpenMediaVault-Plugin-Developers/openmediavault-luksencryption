@@ -1,3 +1,18 @@
+openmediavault-luksencryption (8.1.6) stable; urgency=low
+
+  * Fix mount race with systemd when unlocking a container
+  * Fix mounting filesystems on LVM logical volumes inside a container
+  * Fix LUKS2 key slot detection and allow erasing key slots 8-31
+  * Compare the device UUID when restoring a header and refuse to
+    restore the header of an unlocked container
+  * Refuse to disable auto-unlock when it holds the last key
+  * Erase all key slots and the full LUKS2 header when deleting a container
+  * Only delete uploaded files after an upload
+  * Escape device paths passed to shell commands
+  * Remove unused modifyContainer RPC
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 09 Oct 2026 15:17:54 +0000
+
 openmediavault-luksencryption (8.1.5) stable; urgency=low
 
   * Add tang and/or tpm2 auto-unlock
