@@ -510,7 +510,7 @@ data:
             successNotification: _("Encrypted container has been deleted.")
         confirmationDialogConfig:
           template: confirmation
-          message: _("Are you sure you want to delete to this device?")
+          message: _("Are you sure you want to delete this device?")
         enabledConstraints:
           minSelected: 1
           maxSelected: 1
